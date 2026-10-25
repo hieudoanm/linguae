@@ -1,0 +1,170 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  server:
+    name: App - Server
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packages/app/server
+    steps:
+      - uses: actions/checkout@v7.0.1
+
+      - name: Set up Python
+        uses: actions/setup-python@v7.1.0
+        with:
+          python-version: "3.14.8"
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v10.3.2
+
+      - name: Install dependencies
+        run: |
+          uv sync --frozen
+
+      - name: Run lint
+        run: |
+          uv run ruff check src
+
+      - name: Run tests
+        run: |
+          uv run pytest tests -v
+
+  web:
+    name: App - Web
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packages/app/web
+    steps:
+      - uses: actions/checkout@v7.0.1
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v6.1.0
+        with:
+          version: "12.15.0"
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7.1.0
+        with:
+          node-version: "26.12.1"
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: |
+          pnpm install
+
+      - name: Run lint
+        run: |
+          pnpm run lint
+
+      - name: Run tests
+        run: |
+          pnpm run test:run
+
+  cli:
+    name: CLI - Build
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packages/cli
+    steps:
+      - uses: actions/checkout@v7.0.1
+
+      - name: Set up Python
+        uses: actions/setup-python@v7.1.0
+        with:
+          python-version: "3.14.8"
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v10.3.2
+
+      - name: Install dependencies
+        run: |
+          uv sync --frozen --group dev
+          uv pip install pyinstaller
+
+      - name: Build CLI binary
+        run: |
+          make build
+
+      - name: Zip CLI binary
+        run: |
+          cd dist
+          zip -9 linguae.zip linguae
+          ls -lh linguae.zip
+
+      - name: Upload CLI binary
+        uses: actions/upload-artifact@v7.0.2
+        with:
+          name: linguae-cli
+          path: packages/cli/dist/linguae.zip
+          retention-days: 1
+
+  release:
+    name: CLI - Release (latest)
+    needs: [cli]
+    if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7.0.1
+
+      - name: Download CLI binary
+        uses: actions/download-artifact@v8.0.2
+        with:
+          name: linguae-cli
+          path: release-assets
+
+      - name: Prepare release asset
+        run: |
+          find release-assets -name 'linguae.zip' -exec mv {} linguae.zip \;
+          ls -lh linguae.zip
+          SIZE=$(stat -c%s linguae.zip)
+          echo "zip size: ${SIZE} bytes"
+          if [ "$SIZE" -gt 2147483647 ]; then
+            echo "Splitting into parts..."
+            split -b 1900m linguae.zip linguae.zip.part.
+            rm linguae.zip
+            ls -lh linguae.zip.part.*
+            {
+              echo -e "\n\n---\n\n## Download\n\nThe CLI binary is too large for a single GitHub release asset. Download all parts and reassemble:\n"
+              echo -e "\`\`\`bash\ncat linguae.zip.part.* > linguae.zip\nunzip linguae.zip\n./linguae\n\`\`\`"
+            } > /tmp/release_notes.txt
+            cat README.md /tmp/release_notes.txt > release_notes_final.md
+          else
+            cp README.md release_notes_final.md
+          fi
+
+      - name: Create release if not exists
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release view latest >/dev/null 2>&1 || gh release create latest --title "Linguae CLI (latest)" --notes-file release_notes_final.md --prerelease=false
+
+      - name: Upload asset to release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if [ -f linguae.zip ]; then
+            gh release upload latest linguae.zip --clobber
+          else
+            gh release upload latest linguae.zip.part.* --clobber
+          fi
+
+      - name: Update release notes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release edit latest --notes-file release_notes_final.md --title "Linguae CLI (latest)"
