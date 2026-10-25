@@ -99,7 +99,7 @@ jobs:
 
       - name: Zip CLI binary
         run: |
-          cd packages/cli/dist
+          cd dist
           zip -9 linguae.zip linguae
           ls -lh linguae.zip
 
