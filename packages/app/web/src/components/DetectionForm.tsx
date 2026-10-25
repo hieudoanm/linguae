@@ -83,7 +83,7 @@ export default function DetectionForm() {
                 <ul className="space-y-1">
                   {result.top_k.map((item, idx) => (
                     <li key={idx} className="text-gray-600">
-                      {item.language}: {((item.confidence ?? item.score) * 100).toFixed(2)}%
+                      {item.language}: {(item.confidence * 100).toFixed(2)}%
                     </li>
                   ))}
                 </ul>

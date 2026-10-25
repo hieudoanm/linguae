@@ -1,6 +1,7 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { render, screen, fireEvent, act } from '@testing-library/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ThemeProvider } from '../ThemeProvider';
 import DetectionForm from '../DetectionForm';
 
 const createTestQueryClient = () =>
@@ -11,11 +12,17 @@ const createTestQueryClient = () =>
     },
   });
 
-describe('DetectionForm', () => {
-  let queryClient: QueryClient;
+function renderWithProviders(ui: React.ReactElement) {
+  const queryClient = createTestQueryClient();
+  return render(
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider>{ui}</ThemeProvider>
+    </QueryClientProvider>
+  );
+}
 
+describe('DetectionForm', () => {
   beforeEach(() => {
-    queryClient = createTestQueryClient();
     vi.stubGlobal('fetch', vi.fn());
   });
 
@@ -24,11 +31,7 @@ describe('DetectionForm', () => {
   });
 
   it('renders the textarea and submit button', () => {
-    render(
-      <QueryClientProvider client={queryClient}>
-        <DetectionForm />
-      </QueryClientProvider>
-    );
+    renderWithProviders(<DetectionForm />);
     expect(screen.getByPlaceholderText('Enter text to detect language...')).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Submit' })).toBeInTheDocument();
   });
@@ -44,11 +47,7 @@ describe('DetectionForm', () => {
           })
       )
     );
-    render(
-      <QueryClientProvider client={queryClient}>
-        <DetectionForm />
-      </QueryClientProvider>
-    );
+    renderWithProviders(<DetectionForm />);
     const textarea = screen.getByPlaceholderText('Enter text to detect language...');
     fireEvent.change(textarea, { target: { value: 'Bonjour' } });
     act(() => {
@@ -69,8 +68,8 @@ describe('DetectionForm', () => {
         language_name: 'French',
         confidence: 0.95,
         top_k: [
-          { language: 'fra', score: 0.95 },
-          { language: 'eng', score: 0.03 },
+          { language: 'fra', confidence: 0.95 },
+          { language: 'eng', confidence: 0.03 },
         ],
       }),
     } as unknown as Response;
@@ -78,11 +77,7 @@ describe('DetectionForm', () => {
       'fetch',
       vi.fn(() => Promise.resolve(response))
     );
-    render(
-      <QueryClientProvider client={queryClient}>
-        <DetectionForm />
-      </QueryClientProvider>
-    );
+    renderWithProviders(<DetectionForm />);
     const textarea = screen.getByPlaceholderText('Enter text to detect language...');
     fireEvent.change(textarea, { target: { value: 'Bonjour' } });
     act(() => {
@@ -99,11 +94,7 @@ describe('DetectionForm', () => {
       'fetch',
       vi.fn(() => Promise.resolve({ ok: false } as Response))
     );
-    render(
-      <QueryClientProvider client={queryClient}>
-        <DetectionForm />
-      </QueryClientProvider>
-    );
+    renderWithProviders(<DetectionForm />);
     const textarea = screen.getByPlaceholderText('Enter text to detect language...');
     fireEvent.change(textarea, { target: { value: 'Hello' } });
     act(() => {

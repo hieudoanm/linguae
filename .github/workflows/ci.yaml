@@ -11,7 +11,7 @@ concurrency:
 
 jobs:
   server:
-    name: Server Lint / Test
+    name: Server
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -40,7 +40,7 @@ jobs:
           uv run pytest tests -v
 
   web:
-    name: Web Lint / Test
+    name: Web
     runs-on: ubuntu-latest
     defaults:
       run:
