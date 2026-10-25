@@ -71,8 +71,8 @@ jobs:
         run: |
           pnpm run test:run
 
-  build-cli:
-    name: Build CLI Binary
+  cli:
+    name: CLI
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -106,7 +106,7 @@ jobs:
 
   release:
     name: Release (latest)
-    needs: [server, web, build-cli]
+    needs: [cli]
     if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     permissions:
