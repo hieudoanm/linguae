@@ -97,11 +97,17 @@ jobs:
         run: |
           make build
 
+      - name: Zip CLI binary
+        run: |
+          cd packages/cli/dist
+          zip -9 linguae.zip linguae
+          ls -lh linguae.zip
+
       - name: Upload CLI binary
         uses: actions/upload-artifact@v4.6.2
         with:
           name: linguae-cli
-          path: packages/cli/dist/linguae
+          path: packages/cli/dist/linguae.zip
           retention-days: 1
 
   release:
@@ -118,6 +124,13 @@ jobs:
           name: linguae-cli
           path: dist
 
+      - name: Unzip CLI binary
+        run: |
+          cd dist
+          unzip -o linguae.zip
+          rm -f linguae.zip
+          ls -lh linguae
+
       - name: Create/Update GitHub Release
         uses: softprops/action-gh-release@v3.0.3
         with:
@@ -125,7 +138,8 @@ jobs:
           name: Latest Release
           body: |
             Automated release from commit ${{ github.sha }}
-          files: dist/linguae
+          files: |
+            dist/linguae.zip
           draft: false
           prerelease: false
         env:
