@@ -1,0 +1,54 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "tasks": {
+    "format": {
+      "cache": true,
+      "dependsOn": ["^format"],
+      "inputs": ["$TURBO_DEFAULT$", "!docs/**", "!images/**"],
+      "outputs": []
+    },
+    "build": {
+      "cache": true,
+      "dependsOn": ["^build"],
+      "inputs": ["$TURBO_DEFAULT$", "!docs/**", "!images/**"],
+      "outputs": [
+        "dist/**",
+        ".next/**",
+        "!.next/cache/**",
+        "docs/**",
+        "pkg/**",
+        "build/**"
+      ]
+    },
+    "typecheck": {
+      "cache": true,
+      "dependsOn": ["^typecheck"],
+      "inputs": ["$TURBO_DEFAULT$", "!docs/**", "!images/**"],
+      "outputs": []
+    },
+    "lint": {
+      "cache": true,
+      "dependsOn": ["^lint"],
+      "inputs": ["$TURBO_DEFAULT$", "!docs/**", "!images/**"],
+      "outputs": []
+    },
+    "test": {
+      "cache": true,
+      "dependsOn": ["^test"],
+      "inputs": ["$TURBO_DEFAULT$", "!docs/**", "!images/**"],
+      "outputs": []
+    },
+    "test:coverage": {
+      "cache": true,
+      "dependsOn": ["^test:coverage"],
+      "inputs": ["$TURBO_DEFAULT$", "!docs/**", "!images/**"],
+      "outputs": []
+    },
+    "dev": {
+      "cache": true,
+      "dependsOn": ["^dev"],
+      "inputs": ["$TURBO_DEFAULT$", "!docs/**", "!images/**"],
+      "outputs": []
+    }
+  }
+}

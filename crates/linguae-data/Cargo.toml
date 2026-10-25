@@ -1,0 +1,27 @@
+[package]
+name = "linguae-data"
+description = "Data preparation pipeline for the Linguae language detector"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[[bin]]
+name = "linguae-data"
+path = "src/main.rs"
+
+[dependencies]
+clap = { version = "=4.6.7", features = ["derive", "env"] }
+csv = "=1.4.0"
+env_logger = "=0.11.11"
+log = "=0.4.35"
+sha2 = "=0.11.1"
+thiserror.workspace = true
+unicode-normalization.workspace = true
+unicode-segmentation = "=1.13.3"
+
+[dev-dependencies]
+assert_cmd = "=2.2.2"
+predicates = "=3.1.4"
+tempfile = "=3.27.0"

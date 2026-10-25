@@ -1,0 +1,262 @@
+Bonjour tout le monde, comment allez-vous aujourd'hui dans ce beau monde
+Hello world, this is a longer English text to test language detection
+Привет, мир, это более длинный русский текст
+Hola mundo, esto es un texto en español más largo
+Hallo Welt, dies ist ein längerer deutscher Text
+Ciao mondo, questo è un testo italiano più lungo
+Olá mundo, este é um texto em português mais longo
+こんにちは世界、これは日本語のテストテキストです
+你好世界，这是一个中文测试文本
+안녕하세요 세계, 이것은 한국어 테스트 텍스트입니다
+مرحبا بالعالم، هذا نص عربي لاختبار الكشف عن اللغة
+Γειά σου κόσμε, αυτό είναι ένα ελληνικό κείμενο δοκιμής
+Merhaba dünya, bu daha uzun bir Türkçe metin testidir
+Witaj świecie, to jest dłuższy polski tekst testowy
+Hej världen, detta är en längre svensk testtext
+Hej verden, dette er en længere dansk testtekst
+Hei maailma, tämä on pidempi suomenkielinen testiteksti
+Hallo wereld, dit is een langere Nederlandse testtekst
+Ahoj světe, toto je delší český testovací text
+Helló világ, ez egy hosszabb magyar tesztszöveg
+Bună ziua lume, acesta este un text de test mai lung în română
+Sveiki pasaulē, šis ir garāks latviešu testa teksts
+Sveiki pasaulis, tai yra ilgesnis lietuvių kalbos testo tekstas
+Tere maailm, see on pikem eesti testtekst
+Halo dunia, ini adalah teks uji bahasa Indonesia yang lebih panjang
+Xin chào thế giới, đây là văn bản kiểm tra tiếng Việt dài hơn
+Salut lume, acesta este un text de test în română
+Bonjour
+Hello
+Привет
+Hola
+Hallo
+Ciao
+Olá
+こんにちは
+你好
+안녕하세요
+مرحبا
+Γειά
+Merhaba
+Witaj
+Hej
+Tere
+Halo
+Xin chào
+Sveiki
+Bună
+Ahoj
+Helló
+Salam
+Namaste
+Sawubona
+Zdravo
+Dobrý den
+Bok
+Labas
+Sveiki
+Tervetuloa
+Welkom
+Vítejte
+Üdvözöllek
+Bun venit
+Sveiki atvykę
+Tervetuloa
+Selamat datang
+Chào mừng
+Välkommen
+Velkommen
+Tervetuloa
+Vítejte
+Üdvözöllek
+Bun venit
+Sveiki atvykę
+Tervetuloa
+Selamat datang
+Chào mừng
+The quick brown fox jumps over the lazy dog
+Le renard brun rapide saute par-dessus le chien paresseux
+Der schnelle braune Fuchs springt über den faulen Hund
+El rápido zorro marrón salta sobre el perro perezoso
+Il veloce volpe marrone salta sopra il cane pigro
+A rápida raposa marrom salta sobre o cão preguiçoso
+Быстрая коричневая лиса прыгает через ленивую собаку
+速い茶色の狐が怠けた犬を飛び越える
+敏捷的棕色狐狸跳过懒狗
+빠른 갈색 여우가 게으른 개를 뛰어넘는다
+الثعلب البني السريع يقفز فوق الكلب الكسول
+Η γρήγορη καφέ αλεπού πηδά πάνω από τον τεμπέλη σκύλο
+Hızlı kahverengi tilki tembel köpeğin üzerinden atlar
+Szybki brązowy lis przeskakuje nad leniwym psem
+Snabb brun räv hoppar över den lata hunden
+Hurtig brun ræv springer over den dovne hund
+Nopea ruskea kettu hyppää laiskan koiran yli
+Snelle bruine vos springt over de luie hond
+Rychlá hnědá liška přeskakuje líného psa
+Gyors barna róka átugrik a lusta kutyán
+Iepurele maro rapid sare peste câinele leneș
+Ātrā brūnā lapsa pārlēc pāri slinkajam sunim
+Greitai rudoji lapė peršoka tingų šunį
+Kiire pruun rebane hüppab üle laisa koera
+Cepat coklat rubah melompati anjing malas
+Nhanh nhẹn cáo nâu nhảy qua con chó lười
+Snabb röd räv hoppar över den lata hunden
+Schnelle rote Füchse springen über faule Hunde
+Fast red foxes jump over lazy dogs
+Les renards rouges rapides sautent par-dessus les chiens paresseux
+Los zorros rojos rápidos saltan sobre los perros perezosos
+I volpi rosse veloci saltano sopra i cani pigri
+As raposas vermelhas rápidas pulam sobre os cães preguiçosos
+Быстрые красные лисы прыгают через ленивых собак
+速い赤い狐が怠けた犬を飛び越える
+빠른 빨간 여우가 게으른 개를 뛰어넘는다
+الثعالب الحمراء السريعة تقفز فوق الكلاب الكسولة
+Οι γρήγορες κόκκινες αλεπούδες πηδούν πάνω από τους τεμπέληδες σκύλους
+Hızlı kırmızı tilkiler tembel köpeklerin üzerinden atlar
+Szybkie czerwone lisy przeskakują nad leniwymi psami
+Snabba röda rävar hoppar över lata hundar
+Hurtige røde ræve springer over dovne hunde
+Nopeat punaiset ketut hyppäävät laiskojen koirien yli
+Snelle rode vossen springen over luie honden
+Rychlé červené lišky přeskakují líné psy
+Gyors vörös rókák átugranak a lusta kutyákon
+Vulpi roșii rapide săriră peste câinii lenți
+Ātrās sarkanās lapsas pārlēc pāri slinkajiem suņiem
+Greitos rudosios lapės peršoka tingius šunis
+Kiired punased rebased hüppavad üle laisade koerte
+Cepat rubah merah melompati anjing malas
+Nhanh nhẹn cáo đỏ nhảy qua những con chó lười
+This is a sentence in English with some numbers 12345 and punctuation!
+Ceci est une phrase en français avec des nombres 12345 et de la ponctuation !
+Dies ist ein Satz auf Deutsch mit Zahlen 12345 und Interpunktion!
+Esta es una oración en español con números 12345 y puntuación!
+Questo è un testo in italiano con numeri 12345 e punteggiatura!
+Este é um texto em português com números 12345 e pontuação!
+Это предложение на русском языке с числами 12345 и пунктуацией!
+これは数字 12345 と句読点を含む日本語の文です
+这是一个包含数字 12345 和标点符号的中文句子
+이것은 숫자 12345와 구두점을 포함한 한국어 문장입니다
+هذا جملة باللغة العربية مع أرقام 12345 وعلامات ترقيم
+Αυτή είναι μια πρόταση στα ελληνικά με αριθμούς 12345 και σημεία στίξης
+Bu sayılar 12345 ve noktalama işaretleri içeren Türkçe bir cümledir
+To jest zdanie po polsku z liczbami 12345 i znakami interpunkcyjnymi
+Detta är en mening på svenska med siffror 12345 och skiljetecken
+Dette er en setning på dansk med tall 12345 og tegnsetting
+Tämä on lause suomeksi numeroilla 12345 ja välimerkeillä
+Dit is een zin in het Nederlands met cijfers 12345 en leestekens
+Toto je věta v češtině s čísly 12345 a interpunkcí
+Ez egy mondat magyarul számokkal 12345 és írásjelekkel
+Aceasta este o propoziție în română cu numere 12345 și semne de punctuație
+Šī ir teikums latviešu valodā ar skaitļiem 12345 un pieturzīmēm
+Tai yra sakinys lietuvių kalba su skaičiais 12345 ir skyrybos ženklais
+See on lause eesti keeles numbritega 12345 ja kirjavahemärkidega
+Ini adalah kalimat dalam bahasa Indonesia dengan angka 12345 dan tanda baca
+Đây là câu tiếng Việt với số 12345 và dấu câu
+Jabuka je crvena i slatka
+El gato duerme en el sofá
+Le chat dort sur le canapé
+Die Katze schläft auf dem Sofa
+The cat sleeps on the sofa
+Il gatto dorme sul divano
+O gato dorme no sofá
+Кот спит на диване
+猫がソファで寝ている
+猫在沙发上睡觉
+고양이가 소파에서 자고 있다
+القطة تنام على الأريكة
+Η γάτα κοιμάται στον καναπέ
+Kedi kanepede uyuyor
+Kot śpi na kanapie
+Katten sover på sofan
+Katten sover på sofaen
+Kissa nukkuu sohvalla
+De kat slaapt op de bank
+Kočka spí na pohovce
+A macska a kanapén alszik
+Pisica doarme pe canapea
+Kaķis guļ uz dīvāna
+Katė miega ant sofos
+Kass magab diivanil
+Kucing tidur di sofa
+Mèo ngủ trên ghế sofa
+Katten sover på sofan
+Die Katze ist sehr süß und spielt gerne
+The cat is very cute and likes to play
+Le chat est très mignon et aime jouer
+El gato es muy lindo y le gusta jugar
+Il gatto è molto carino e gli piace giocare
+O gato é muito fofo e gosta de brincar
+Кот очень милый и любит играть
+猫はとても可愛くて遊ぶのが好きです
+猫非常可爱，喜欢玩耍
+고양이는 매우 귀엽고 노는 것을 좋아합니다
+القطة لطيفة جدا وتحب اللعب
+Η γάτα είναι πολύ χαριτωμένη και της αρέσει να παίζει
+Kedi çok sevimli ve oynamayı sever
+Kot jest bardzo uroczy i lubi się bawić
+Katten är mycket söt och gillar att leka
+Katten er meget sød og kan lide at lege
+Kissa on hyvin söpö ja tykkää leikkiä
+De kat is erg schattig en speelt graag
+Kočka je velmi roztomilá a ráda si hraje
+A macska nagyon aranyos és szeret játszani
+Pisica este foarte drăguță și îi place să se joace
+Kaķis ir ļoti jauks un patīk spēlēties
+Katė yra labai miela ir mėgsta žaisti
+Kass on väga armas ja meeldib mängida
+Kucing sangat lucu dan suka bermain
+Mèo rất dễ thương và thích chơi
+Katten är mycket söt och gillar att leka
+Ich liebe diese Stadt sehr
+I love this city very much
+J'aime beaucoup cette ville
+Me encanta esta ciudad
+Mi piace molto questa città
+Eu amo muito esta cidade
+Я очень люблю этот город
+この街がとても好きです
+我非常喜欢这座城市
+이 도시를 매우 사랑합니다
+أحب هذه المدينة كثيرا
+Αγαπώ πολύ αυτή την πόλη
+Bu şehri çok seviyorum
+Bardzo kocham to miasto
+Jag älskar den här staden väldigt mycket
+Jeg elsker denne byen veldig mye
+Rakastan tätä kaupunkia kovasti
+Ik hou erg veel van deze stad
+Moc miluji toto město
+Nagyon szeretem ezt a várost
+Iubesc foarte mult acest oraș
+Es ļoti mīlu šo pilsētu
+Aš labai myliu šį miestą
+Ma armastan seda linna väga
+Saya sangat mencintai kota ini
+Tôi yêu thành phố này rất nhiều
+Jag älskar den här staden
+Ich liebe diese Stadt
+I love this city
+J'aime cette ville
+Me encanta esta ciudad
+Mi piace questa città
+Eu amo esta cidade
+Я люблю этот город
+この街が好きです
+我爱这座城市
+이 도시를 사랑합니다
+أحب هذه المدينة
+Αγαπώ αυτή την πόλη
+Bu şehri seviyorum
+Kocham to miasto
+Jag älskar staden
+Jeg elsker byen
+Rakastan kaupunkia
+Ik hou van de stad
+Miluji město
+Szeretem a várost
+Iubesc orașul
+Es mīlu pilsētu
+Aš myliu miestą
+Ma armastan linna
+Saya cinta kota ini
+Tôi yêu thành phố này

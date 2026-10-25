@@ -1,0 +1,29 @@
+[package]
+name = "linguae"
+description = "Command-line language detection powered by the Linguae character-level model"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[[bin]]
+name = "linguae"
+path = "src/main.rs"
+
+[dependencies]
+linguae-core = { path = "../linguae-core" }
+clap = { version = "=4.6.7", features = ["derive", "env"] }
+serde.workspace = true
+serde_json.workspace = true
+thiserror.workspace = true
+
+[features]
+default = []
+cuda = ["linguae-core/cuda"]
+metal = ["linguae-core/metal"]
+
+[dev-dependencies]
+assert_cmd = "=2.2.2"
+predicates = "=3.1.4"
+tempfile = "=3.27.0"

@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+
+# Crawl-delay for polite crawling (optional, remove to allow full speed)
+# Crawl-delay: 1
+
+# Disallow internal/admin paths if they exist in the future
+# Disallow: /admin/
+# Disallow: /api/
+
+# Sitemap location
+Sitemap: /sitemap.xml

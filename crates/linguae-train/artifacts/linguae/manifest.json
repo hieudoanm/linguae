@@ -1,0 +1,90 @@
+{
+  "artifact_schema": "linguae.language-detector/2",
+  "created_at": "2026-11-04T17:08:49.029745Z",
+  "dataset_rows": 2476508,
+  "datasets": [
+    {
+      "format": "csv",
+      "label_column": "language",
+      "name": "wili-2018",
+      "path": "/Users/hieudoan/git/github.com/hieudoanm/linguae/crates/linguae-data/data/csv/wili-2018.csv",
+      "role": "long",
+      "rows_used": 228828,
+      "sha256": "63f490825bbda39db55d59327678342a2ea278867ad9ba3c9ba723e9572a82fb",
+      "text_column": "text"
+    },
+    {
+      "format": "tsv",
+      "label_column": "language",
+      "name": "tatoeba",
+      "path": "/Users/hieudoan/git/github.com/hieudoanm/linguae/crates/linguae-data/data/csv/tatoeba.tsv",
+      "role": "short",
+      "rows_used": 189858,
+      "sha256": "c2a2cca42d00c84d8eeaccd2e4eeafb6e0866a6ca880534e1cfed92b50c9b1d9",
+      "text_column": "text"
+    },
+    {
+      "format": "csv",
+      "label_column": "language",
+      "name": "wili-words",
+      "path": "/Users/hieudoan/git/github.com/hieudoanm/linguae/crates/linguae-data/data/csv/wili-2018-words.csv",
+      "role": "words",
+      "rows_used": 2057822,
+      "sha256": "1d200285b3bd8cfa691c599da9d5e04e60da22187d532b7a52ac14d431351359",
+      "text_column": "text"
+    }
+  ],
+  "environment": {
+    "candle": "0.11.1",
+    "linguae_train": "0.1.0",
+    "platform": "macos"
+  },
+  "files": {
+    "config.json": "5e869c77164d1a6f6e9d6f24cdd7868d5965bfcb5aec7a693bd3751fabe6d62f",
+    "confusion_matrix.csv": "66021e0ff775a892a461d53528558164fe073c20f3936e44273a31bac8e6ad5d",
+    "labels.json": "d3acffaba630db5e9784cdb1a8d8b7a2af08dfd1e2efc96334f0de0f9029aa04",
+    "metrics.json": "72df721a4ce3dbd56d5a0bfc6bf7b3b48e6e979ea7ed8c79eb455f8c2efa9c86",
+    "misclassified_examples.csv": "9ea60f0098893d4e0de9b1ac3c04555aedb1d32c9d0b32a0c638cd070ab04362",
+    "model.safetensors": "b28e604338337a2901effe3ca27426866f3791d20ed5d4728a32521f665b0fe9",
+    "training_history.csv": "6c4337c2e9643e1d97050fb9c4adfbf67de4029c4d77a09aaaf2c1637c887426",
+    "vocabulary.json": "c7ab05c79bc870718cc1caf93301b4957e35148f38a27cd290aa0c0f0e501443"
+  },
+  "model_version": "1.0.0",
+  "prediction_scope": "single-language classification per string; mixed-language span detection is not supported",
+  "schema_version": 2,
+  "training": {
+    "batch_size": 256,
+    "best_epoch": 10,
+    "device": "cpu",
+    "dropout": 0.30000001192092896,
+    "early_stopping_patience": 2,
+    "embedding_dim": 32,
+    "epochs_configured": 10,
+    "epochs_run": 10,
+    "grad_clip_norm": 5.0,
+    "kernel_sizes": [
+      3,
+      5,
+      7
+    ],
+    "learning_rate": 0.001,
+    "loss": "CrossEntropyLoss",
+    "max_length": 256,
+    "max_rows_per_language": 0,
+    "max_rows_per_language_per_source": 1000,
+    "max_words_per_language": 100000,
+    "min_examples_per_language": 100,
+    "num_filters": [
+      128,
+      128,
+      128
+    ],
+    "optimizer": "AdamW",
+    "seed": 42,
+    "test_fraction": 0.1,
+    "train_fraction": 0.8,
+    "training_seconds": 11124.803821458,
+    "val_fraction": 0.1,
+    "weight_decay": 0.0001
+  }
+}
