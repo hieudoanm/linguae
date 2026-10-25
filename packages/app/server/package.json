@@ -1,0 +1,13 @@
+{
+  "name": "@linguae/server",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "dev": "make dev",
+    "lint": "make lint",
+    "format": "make format"
+  },
+  "dependencies": {
+    "next": "16.4.3"
+  }
+}

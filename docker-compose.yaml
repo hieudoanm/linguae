@@ -1,0 +1,25 @@
+services:
+  server:
+    build:
+      context: .
+      dockerfile: packages/app/server/Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - LINGUAE_SERVER_HOST=0.0.0.0
+      - LINGUAE_SERVER_PORT=8000
+      - LINGUAE_DEVICE=cpu
+      - LINGUAE_ARTIFACT_DIR=/app/packages/models/artifacts/linguae
+    restart: unless-stopped
+
+  web:
+    build:
+      context: .
+      dockerfile: packages/app/web/Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://server:8000
+    depends_on:
+      - server
+    restart: unless-stopped
