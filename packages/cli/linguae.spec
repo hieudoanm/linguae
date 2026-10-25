@@ -7,7 +7,7 @@ a = Analysis(
     pathex=[],
     binaries=[],
     datas=[
-        ('../models/artifacts/linguae', 'artifacts/linguae'),
+        ('../../packages/models/artifacts/linguae', 'artifacts/linguae'),
     ],
     hiddenimports=[
         'torch',

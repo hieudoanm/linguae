@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "artifact_schema": "linguae.language-detector/1",
+  "model_version": "1.0.0",
+  "created_at": "2026-10-25T10:02:46.981530+00:00",
+  "dataset": {
+    "path": "/Users/hieudoan/git/github.com/hieudoanm/linguae/packages/models/data/csv/wili-2018.csv",
+    "sha256": "63f490825bbda39db55d59327678342a2ea278867ad9ba3c9ba723e9572a82fb",
+    "rows_used": 235000,
+    "text_column": "text",
+    "label_column": "language"
+  },
+  "training": {
+    "seed": 42,
+    "train_fraction": 0.8,
+    "val_fraction": 0.1,
+    "test_fraction": 0.1,
+    "max_length": 256,
+    "embedding_dim": 32,
+    "num_filters": [
+      128,
+      128,
+      128
+    ],
+    "kernel_sizes": [
+      3,
+      5,
+      7
+    ],
+    "dropout": 0.3,
+    "batch_size": 256,
+    "epochs_configured": 10,
+    "epochs_run": 10,
+    "best_epoch": 10,
+    "optimizer": "AdamW",
+    "loss": "CrossEntropyLoss",
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "grad_clip_norm": 5.0,
+    "early_stopping_patience": 2,
+    "device": "mps",
+    "max_rows_per_language": 0
+  },
+  "environment": {
+    "python": "3.14.8",
+    "torch": "2.14.1",
+    "numpy": "2.5.4",
+    "pandas": "3.1.0",
+    "platform": "macOS-26.7.1-arm64-arm-64bit-Mach-O"
+  },
+  "files": {
+    "config.json": "b1d88c70f487ead62aa54424fa72d1785561fec31fa88c881e7a569a6d579f6d",
+    "vocabulary.json": "e870dd6f3c3599672d9d9d4521d2fd895e6d54d451b4823ca11160f435ca3459",
+    "labels.json": "5ed47a9148911109547a8862a64623ea45cfa6f7cecce34624f4269261389f91",
+    "model.pt": "f8b8cd500e94de3ac4f5256a6316087aa00baecf38ad5c113f63f372f274bf01",
+    "metrics.json": "6a0e2ab8ab75539744221a0388150b165042db207f06b1ddcae5deb7d9898579",
+    "linguae_inference.py": "5d197601988f2f4ad695e26775440a77326191305191d30f4d8caf3a60ad982c",
+    "example_inference.py": "d5447129db8a22a0714d502c8de195279f800dc05b5ce89ff207051682a793a0",
+    "confusion_matrix.csv": "7abc4108edd7d987f15418c7925bef4151945cd3f1c59a5d389f34d846df97b6",
+    "misclassified_examples.csv": "5cabd32c7c54354541d2149cbe5e34c6683574f737c141de3b7442361724e8b2",
+    "training_history.csv": "e167eeebe44ccbf5251361aa38ca1f2e285f461fded3433a66868d48f4473e6b"
+  },
+  "prediction_scope": "single-language classification per string; mixed-language span detection is not supported"
+}
