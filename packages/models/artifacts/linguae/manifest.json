@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "artifact_schema": "linguae.language-detector/1",
+  "model_version": "1.0.0",
+  "created_at": "2026-10-26T12:48:27.282615+00:00",
+  "datasets": [
+    {
+      "name": "wili-2018",
+      "path": "/Users/hieudoan/git/github.com/hieudoanm/linguae/packages/models/data/csv/wili-2018.csv",
+      "sha256": "63f490825bbda39db55d59327678342a2ea278867ad9ba3c9ba723e9572a82fb",
+      "format": "csv",
+      "role": "long",
+      "text_column": "text",
+      "label_column": "language",
+      "rows_used": 228828
+    },
+    {
+      "name": "tatoeba",
+      "path": "/Users/hieudoan/git/github.com/hieudoanm/linguae/packages/models/data/csv/tatoeba.tsv",
+      "sha256": "c2a2cca42d00c84d8eeaccd2e4eeafb6e0866a6ca880534e1cfed92b50c9b1d9",
+      "format": "tsv",
+      "role": "short",
+      "text_column": "text",
+      "label_column": "language",
+      "rows_used": 189865
+    }
+  ],
+  "dataset_rows": 418693,
+  "training": {
+    "seed": 42,
+    "train_fraction": 0.8,
+    "val_fraction": 0.1,
+    "test_fraction": 0.1,
+    "max_length": 256,
+    "embedding_dim": 32,
+    "num_filters": [
+      128,
+      128,
+      128
+    ],
+    "kernel_sizes": [
+      3,
+      5,
+      7
+    ],
+    "dropout": 0.3,
+    "batch_size": 256,
+    "epochs_configured": 10,
+    "epochs_run": 10,
+    "training_seconds": 842.2,
+    "best_epoch": 10,
+    "optimizer": "AdamW",
+    "loss": "CrossEntropyLoss",
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "grad_clip_norm": 5.0,
+    "early_stopping_patience": 2,
+    "device": "mps",
+    "min_examples_per_language": 100,
+    "max_rows_per_language_per_source": 1000,
+    "max_rows_per_language": 0
+  },
+  "environment": {
+    "python": "3.14.8",
+    "torch": "2.14.1",
+    "numpy": "2.5.4",
+    "pandas": "3.1.0",
+    "platform": "macOS-26.7.1-arm64-arm-64bit-Mach-O"
+  },
+  "files": {
+    "config.json": "1f10a2075f143c8cbc0ad6eb575d6d4b5e1596e4f87db2cfa75466645bb345e1",
+    "vocabulary.json": "09aa131a0ddecb0905c18845ed29d37f58ecef6b08c15f8dbafc4cf1fed46dd7",
+    "labels.json": "01e58a42a550211297f5ff5b4403f064672f7e823998663be9efe64ac11a1a76",
+    "model.pt": "ddb32bb300171d279eec55430b0db2e1f4fa357fcd878ce558510718fec3bb3c",
+    "metrics.json": "9277931fe4816cda68df6e6917ae67e7de39c0c34d0e6892d1a77c94024d400f",
+    "linguae_inference.py": "5d197601988f2f4ad695e26775440a77326191305191d30f4d8caf3a60ad982c",
+    "example_inference.py": "d5447129db8a22a0714d502c8de195279f800dc05b5ce89ff207051682a793a0",
+    "confusion_matrix.csv": "5851d3eaee0ba009195d0f907f06085c6821ed71ab72aebf1ddfd8a0b7c6ace6",
+    "misclassified_examples.csv": "a557d6dd246caafc13430cb2d928e4895824c94958317766a9de7708899bed7f",
+    "training_history.csv": "62b0eb4e19093bee42d549ffc625df0f33b3ffa5e5adbd3f9e7325763ddc9c9c"
+  },
+  "prediction_scope": "single-language classification per string; mixed-language span detection is not supported"
+}
