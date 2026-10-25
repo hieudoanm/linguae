@@ -91,6 +91,7 @@ jobs:
       - name: Install dependencies
         run: |
           uv sync --frozen --group dev
+          uv pip install pyinstaller
 
       - name: Build CLI binary
         run: |
