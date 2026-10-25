@@ -1,0 +1,23 @@
+{
+  "name": "@linguae/workspace",
+  "version": "0.0.1",
+  "description": "Monorepo for Linguae",
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "packageManager": "pnpm@12.16.1",
+  "engines": {
+    "node": "26.13.0"
+  },
+  "scripts": {
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "lint": "turbo lint",
+    "format": "turbo format",
+    "test": "turbo test"
+  },
+  "devDependencies": {
+    "husky": "9.1.7",
+    "turbo": "2.11.10"
+  }
+}

@@ -1,0 +1,758 @@
+[
+  {
+    "text": "Hello world",
+    "language": "bzt",
+    "confidence": 0.148028329,
+    "top_k": [
+      {
+        "language": "bzt",
+        "score": 0.148028329
+      },
+      {
+        "language": "swg",
+        "score": 0.06131557
+      },
+      {
+        "language": "mfa",
+        "score": 0.052971914
+      },
+      {
+        "language": "cym",
+        "score": 0.044508792
+      },
+      {
+        "language": "hrx",
+        "score": 0.042316873
+      }
+    ]
+  },
+  {
+    "text": "Hello world, this is a longer English text to test language detection",
+    "language": "eng",
+    "confidence": 0.61141479,
+    "top_k": [
+      {
+        "language": "eng",
+        "score": 0.61141479
+      },
+      {
+        "language": "pcd",
+        "score": 0.053323839
+      },
+      {
+        "language": "xho",
+        "score": 0.043004662
+      },
+      {
+        "language": "ang",
+        "score": 0.033355605
+      },
+      {
+        "language": "tsn",
+        "score": 0.016048495
+      }
+    ]
+  },
+  {
+    "text": "Bonjour tout le monde, comment allez-vous aujourd'hui dans ce beau monde",
+    "language": "fra",
+    "confidence": 0.971429229,
+    "top_k": [
+      {
+        "language": "fra",
+        "score": 0.971429229
+      },
+      {
+        "language": "pcd",
+        "score": 0.016025411
+      },
+      {
+        "language": "fro",
+        "score": 0.006457021
+      },
+      {
+        "language": "cat",
+        "score": 0.001605447
+      },
+      {
+        "language": "oci",
+        "score": 0.001451034
+      }
+    ]
+  },
+  {
+    "text": "Привет, мир, это более длинный русский текст для проверки определения языка",
+    "language": "nog",
+    "confidence": 0.185635135,
+    "top_k": [
+      {
+        "language": "nog",
+        "score": 0.185635135
+      },
+      {
+        "language": "mhr",
+        "score": 0.163231835
+      },
+      {
+        "language": "tat",
+        "score": 0.158855677
+      },
+      {
+        "language": "koi",
+        "score": 0.117483363
+      },
+      {
+        "language": "myv",
+        "score": 0.115823768
+      }
+    ]
+  },
+  {
+    "text": "Привет, мир",
+    "language": "bul",
+    "confidence": 0.142448753,
+    "top_k": [
+      {
+        "language": "bul",
+        "score": 0.142448753
+      },
+      {
+        "language": "srp",
+        "score": 0.12035735
+      },
+      {
+        "language": "lez",
+        "score": 0.076002002
+      },
+      {
+        "language": "dar",
+        "score": 0.071384892
+      },
+      {
+        "language": "ukr",
+        "score": 0.066546045
+      }
+    ]
+  },
+  {
+    "text": "你好，世界，这是一段用于测试语言检测的较长中文文本。",
+    "language": "zho",
+    "confidence": 0.999973893,
+    "top_k": [
+      {
+        "language": "zho",
+        "score": 0.999973893
+      },
+      {
+        "language": "bod",
+        "score": 1.6894e-05
+      },
+      {
+        "language": "wuu",
+        "score": 8.554e-06
+      },
+      {
+        "language": "hak",
+        "score": 5.1e-07
+      },
+      {
+        "language": "cdo",
+        "score": 1.23e-07
+      }
+    ]
+  },
+  {
+    "text": "こんにちは世界。これは言語検出をテストするための長い日本語のテキストです。",
+    "language": "jpn",
+    "confidence": 1.0,
+    "top_k": [
+      {
+        "language": "jpn",
+        "score": 1.0
+      },
+      {
+        "language": "cdo",
+        "score": 0.0
+      },
+      {
+        "language": "zh-yue",
+        "score": 0.0
+      },
+      {
+        "language": "ibo",
+        "score": 0.0
+      },
+      {
+        "language": "div",
+        "score": 0.0
+      }
+    ]
+  },
+  {
+    "text": "안녕하세요 세계. 이것은 언어 감지를 테스트하기 위한 긴 한국어 텍스트입니다.",
+    "language": "kor",
+    "confidence": 1.0,
+    "top_k": [
+      {
+        "language": "kor",
+        "score": 1.0
+      },
+      {
+        "language": "khm",
+        "score": 1e-09
+      },
+      {
+        "language": "cdo",
+        "score": 0.0
+      },
+      {
+        "language": "wuu",
+        "score": 0.0
+      },
+      {
+        "language": "lrc",
+        "score": 0.0
+      }
+    ]
+  },
+  {
+    "text": "مرحبا بالعالم، هذا نص عربي طويل لاختبار الكشف عن اللغة.",
+    "language": "arz",
+    "confidence": 0.361746311,
+    "top_k": [
+      {
+        "language": "arz",
+        "score": 0.361746311
+      },
+      {
+        "language": "ara",
+        "score": 0.346218586
+      },
+      {
+        "language": "arq",
+        "score": 0.223682031
+      },
+      {
+        "language": "afb",
+        "score": 0.043151975
+      },
+      {
+        "language": "ajp",
+        "score": 0.00832347
+      }
+    ]
+  },
+  {
+    "text": "नमस्ते दुनिया, यह भाषा पहचान का परीक्षण करने के लिए एक लंबा हिंदी पाठ है।",
+    "language": "hin",
+    "confidence": 0.999751747,
+    "top_k": [
+      {
+        "language": "hin",
+        "score": 0.999751747
+      },
+      {
+        "language": "nep",
+        "score": 0.000151661
+      },
+      {
+        "language": "dty",
+        "score": 4.3333e-05
+      },
+      {
+        "language": "awa",
+        "score": 2.5368e-05
+      },
+      {
+        "language": "mai",
+        "score": 1.522e-05
+      }
+    ]
+  },
+  {
+    "text": "Hola mundo, este es un texto más largo en español para probar la detección de idioma.",
+    "language": "spa",
+    "confidence": 0.973207891,
+    "top_k": [
+      {
+        "language": "spa",
+        "score": 0.973207891
+      },
+      {
+        "language": "ast",
+        "score": 0.015695419
+      },
+      {
+        "language": "glg",
+        "score": 0.005114783
+      },
+      {
+        "language": "cbk",
+        "score": 0.002720394
+      },
+      {
+        "language": "nci",
+        "score": 0.001469746
+      }
+    ]
+  },
+  {
+    "text": "Hallo Welt, dies ist ein längerer deutscher Text zum Testen der Spracherkennung.",
+    "language": "deu",
+    "confidence": 0.874708474,
+    "top_k": [
+      {
+        "language": "deu",
+        "score": 0.874708474
+      },
+      {
+        "language": "ltz",
+        "score": 0.087860398
+      },
+      {
+        "language": "pam",
+        "score": 0.034940455
+      },
+      {
+        "language": "bar",
+        "score": 0.001540324
+      },
+      {
+        "language": "hrx",
+        "score": 0.000344943
+      }
+    ]
+  },
+  {
+    "text": "Olá mundo, este é um texto mais longo em português para testar a detecção de idioma.",
+    "language": "por",
+    "confidence": 0.999899149,
+    "top_k": [
+      {
+        "language": "por",
+        "score": 0.999899149
+      },
+      {
+        "language": "tet",
+        "score": 6.6889e-05
+      },
+      {
+        "language": "lin",
+        "score": 3.3408e-05
+      },
+      {
+        "language": "frp",
+        "score": 2.42e-07
+      },
+      {
+        "language": "cbk",
+        "score": 4.8e-08
+      }
+    ]
+  },
+  {
+    "text": "Merhaba dünya, bu dil algılamayı test etmek için daha uzun bir Türkçe metin.",
+    "language": "tur",
+    "confidence": 0.975515723,
+    "top_k": [
+      {
+        "language": "tur",
+        "score": 0.975515723
+      },
+      {
+        "language": "gag",
+        "score": 0.016100368
+      },
+      {
+        "language": "crh",
+        "score": 0.006085912
+      },
+      {
+        "language": "ota",
+        "score": 0.001725691
+      },
+      {
+        "language": "aze",
+        "score": 0.000271551
+      }
+    ]
+  },
+  {
+    "text": "Xin chào thế giới, đây là một văn bản tiếng Việt dài hơn để kiểm tra nhận dạng ngôn ngữ.",
+    "language": "vie",
+    "confidence": 1.0,
+    "top_k": [
+      {
+        "language": "vie",
+        "score": 1.0
+      },
+      {
+        "language": "cdo",
+        "score": 0.0
+      },
+      {
+        "language": "hak",
+        "score": 0.0
+      },
+      {
+        "language": "tel",
+        "score": 0.0
+      },
+      {
+        "language": "kor",
+        "score": 0.0
+      }
+    ]
+  },
+  {
+    "text": "สวัสดีชาวโลก นี่เป็นข้อความภาษาไทยที่ยาวขึ้นเพื่อทดสอบการตรวจจับภาษา",
+    "language": "tha",
+    "confidence": 0.999331355,
+    "top_k": [
+      {
+        "language": "tha",
+        "score": 0.999331355
+      },
+      {
+        "language": "lao",
+        "score": 0.00066855
+      },
+      {
+        "language": "sin",
+        "score": 4.5e-08
+      },
+      {
+        "language": "bod",
+        "score": 2.2e-08
+      },
+      {
+        "language": "ori",
+        "score": 1e-08
+      }
+    ]
+  },
+  {
+    "text": "Γεια σου κόσμε, αυτό είναι ένα μεγαλύτερο ελληνικό κείμενο για δοκιμή ανίχνευσης γλώσσας.",
+    "language": "ell",
+    "confidence": 0.999999881,
+    "top_k": [
+      {
+        "language": "ell",
+        "score": 0.999999881
+      },
+      {
+        "language": "grc",
+        "score": 1.73e-07
+      },
+      {
+        "language": "amh",
+        "score": 0.0
+      },
+      {
+        "language": "nrm",
+        "score": 0.0
+      },
+      {
+        "language": "wuu",
+        "score": 0.0
+      }
+    ]
+  },
+  {
+    "text": "שלום עולם, זהו טקסט עברי ארוך יותר לבדיקת זיהוי שפה.",
+    "language": "heb",
+    "confidence": 0.994738281,
+    "top_k": [
+      {
+        "language": "heb",
+        "score": 0.994738281
+      },
+      {
+        "language": "yid",
+        "score": 0.005127524
+      },
+      {
+        "language": "lad",
+        "score": 7.6456e-05
+      },
+      {
+        "language": "tmr",
+        "score": 3.4819e-05
+      },
+      {
+        "language": "khm",
+        "score": 5.9e-06
+      }
+    ]
+  },
+  {
+    "text": "Halo dunia, ini adalah teks bahasa Indonesia yang lebih panjang untuk menguji deteksi bahasa.",
+    "language": "ind",
+    "confidence": 0.691017985,
+    "top_k": [
+      {
+        "language": "ind",
+        "score": 0.691017985
+      },
+      {
+        "language": "msa",
+        "score": 0.300303519
+      },
+      {
+        "language": "jav",
+        "score": 0.003458162
+      },
+      {
+        "language": "map-bms",
+        "score": 0.003144598
+      },
+      {
+        "language": "tet",
+        "score": 0.001442246
+      }
+    ]
+  },
+  {
+    "text": "Habari dunia, hii ni maandishi marefu zaidi ya Kiswahili kwa ajili ya kujaribu utambuzi wa lugha.",
+    "language": "swa",
+    "confidence": 0.99998796,
+    "top_k": [
+      {
+        "language": "swa",
+        "score": 0.99998796
+      },
+      {
+        "language": "kin",
+        "score": 7.123e-06
+      },
+      {
+        "language": "hau",
+        "score": 4.381e-06
+      },
+      {
+        "language": "tum",
+        "score": 2.29e-07
+      },
+      {
+        "language": "sna",
+        "score": 1.28e-07
+      }
+    ]
+  },
+  {
+    "text": "  Hello\t\tworld\nwith   whitespace  ",
+    "language": "eng",
+    "confidence": 0.452251762,
+    "top_k": [
+      {
+        "language": "eng",
+        "score": 0.452251762
+      },
+      {
+        "language": "bzt",
+        "score": 0.129176468
+      },
+      {
+        "language": "enm",
+        "score": 0.073555782
+      },
+      {
+        "language": "new",
+        "score": 0.031905726
+      },
+      {
+        "language": "cym",
+        "score": 0.027856298
+      }
+    ]
+  },
+  {
+    "text": "élève",
+    "language": "pcd",
+    "confidence": 0.209026799,
+    "top_k": [
+      {
+        "language": "pcd",
+        "score": 0.209026799
+      },
+      {
+        "language": "egl",
+        "score": 0.083168536
+      },
+      {
+        "language": "oci",
+        "score": 0.077402309
+      },
+      {
+        "language": "fra",
+        "score": 0.064100765
+      },
+      {
+        "language": "frp",
+        "score": 0.047081221
+      }
+    ]
+  },
+  {
+    "text": "😀😎📱",
+    "language": "hoc",
+    "confidence": 0.53998524,
+    "top_k": [
+      {
+        "language": "hoc",
+        "score": 0.53998524
+      },
+      {
+        "language": "sun",
+        "score": 0.136981308
+      },
+      {
+        "language": "yid",
+        "score": 0.079875953
+      },
+      {
+        "language": "zho",
+        "score": 0.062410291
+      },
+      {
+        "language": "fin",
+        "score": 0.037449613
+      }
+    ]
+  },
+  {
+    "text": "The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog.",
+    "language": "eng",
+    "confidence": 0.69335109,
+    "top_k": [
+      {
+        "language": "eng",
+        "score": 0.69335109
+      },
+      {
+        "language": "tel",
+        "score": 0.072953485
+      },
+      {
+        "language": "kur",
+        "score": 0.062175836
+      },
+      {
+        "language": "hif",
+        "score": 0.033526924
+      },
+      {
+        "language": "rus",
+        "score": 0.014049166
+      }
+    ]
+  },
+  {
+    "text": "",
+    "language": "nan",
+    "confidence": 0.026900981,
+    "top_k": [
+      {
+        "language": "nan",
+        "score": 0.026900981
+      },
+      {
+        "language": "aze",
+        "score": 0.018197099
+      },
+      {
+        "language": "zho",
+        "score": 0.014642271
+      },
+      {
+        "language": "oss",
+        "score": 0.013806881
+      },
+      {
+        "language": "fas",
+        "score": 0.013110086
+      }
+    ]
+  },
+  {
+    "text": "a",
+    "language": "jbo",
+    "confidence": 0.138858408,
+    "top_k": [
+      {
+        "language": "jbo",
+        "score": 0.138858408
+      },
+      {
+        "language": "sme",
+        "score": 0.053957161
+      },
+      {
+        "language": "hoc",
+        "score": 0.045572523
+      },
+      {
+        "language": "ilo",
+        "score": 0.042212952
+      },
+      {
+        "language": "lij",
+        "score": 0.031686671
+      }
+    ]
+  },
+  {
+    "text": "ﬁ",
+    "language": "tcy",
+    "confidence": 0.055339072,
+    "top_k": [
+      {
+        "language": "tcy",
+        "score": 0.055339072
+      },
+      {
+        "language": "mal",
+        "score": 0.055203453
+      },
+      {
+        "language": "tam",
+        "score": 0.038808834
+      },
+      {
+        "language": "lat",
+        "score": 0.036863107
+      },
+      {
+        "language": "hoc",
+        "score": 0.035124015
+      }
+    ]
+  },
+  {
+    "text": "Hello world again",
+    "language": "bzt",
+    "confidence": 0.137876883,
+    "top_k": [
+      {
+        "language": "bzt",
+        "score": 0.137876883
+      },
+      {
+        "language": "swg",
+        "score": 0.112940334
+      },
+      {
+        "language": "eng",
+        "score": 0.060990702
+      },
+      {
+        "language": "cym",
+        "score": 0.059986144
+      },
+      {
+        "language": "mfa",
+        "score": 0.044596151
+      }
+    ]
+  }
+]

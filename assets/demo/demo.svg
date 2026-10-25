@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560" width="900" height="560">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1e1e2e"/>
+      <stop offset="100%" stop-color="#181825"/>
+    </linearGradient>
+    <linearGradient id="titlebar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#313244"/>
+      <stop offset="100%" stop-color="#45475a"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="0" y="0" width="900" height="560" rx="16" fill="url(#bg)"/>
+
+  <rect x="0" y="0" width="900" height="40" rx="16" fill="url(#titlebar)"/>
+  <rect x="0" y="24" width="900" height="16" fill="url(#titlebar)"/>
+
+  <circle cx="24" cy="20" r="6" fill="#f5c2e0"/>
+  <circle cx="44" cy="20" r="6" fill="#f9e2af"/>
+  <circle cx="64" cy="20" r="6" fill="#a6e3a1"/>
+
+  <text x="90" y="25" fill="#bac2de" font-family="system-ui, sans-serif" font-size="13">terminal — linguae</text>
+
+  <g transform="translate(24, 56)" font-family="SF Mono, Menlo, Consolas, monospace" font-size="14">
+
+    <text x="0" y="22" fill="#a6adc8">$</text>
+    <text x="20" y="22" fill="#cdd6f4">linguae "Bonjour tout le monde, comment allez-vous aujourd'hui ?"</text>
+
+    <text x="0" y="46" fill="#cba6f7">fra</text>
+
+    <text x="0" y="70" fill="#a6adc8">$</text>
+    <text x="20" y="70" fill="#cdd6f4">linguae --confidence "Hello world, this is a longer English text"</text>
+
+    <text x="0" y="94" fill="#a6e3a1">eng	0.9998</text>
+
+    <text x="0" y="118" fill="#a6adc8">$</text>
+    <text x="20" y="118" fill="#cdd6f4">printf 'Привет, мир, это русский текст' | linguae</text>
+
+    <text x="0" y="142" fill="#cba6f7">rus</text>
+
+    <text x="0" y="166" fill="#a6adc8">$</text>
+    <text x="20" y="166" fill="#cdd6f4">linguae --json "Bonjour tout le monde, comment allez-vous ?"</text>
+
+    <text x="0" y="190" fill="#89b4fa">{&quot;text&quot;: &quot;Bonjour tout le monde, comment allez-vous ?&quot;, &quot;language&quot;: &quot;fra&quot;, &quot;confidence&quot;: 0.9998, &quot;top_k&quot;: [...]}</text>
+
+    <text x="0" y="214" fill="#a6adc8">$</text>
+    <text x="20" y="214" fill="#cdd6f4">linguae --file sentences.txt</text>
+
+    <text x="0" y="238" fill="#cba6f7">eng</text>
+    <text x="0" y="262" fill="#cba6f7">fra</text>
+    <text x="0" y="286" fill="#cba6f7">rus</text>
+    <text x="0" y="310" fill="#cba6f7">spa</text>
+    <text x="0" y="334" fill="#7f849c">one language code per non-empty line</text>
+
+    <text x="0" y="370" fill="#a6adc8">$</text>
+    <rect x="16" y="358" width="8" height="16" fill="#cdd6f4">
+      <animate attributeName="opacity" values="1;0" dur="1s" repeatCount="indefinite"/>
+    </rect>
+
+    <text x="0" y="418" fill="#585b70" font-size="12">linguae v0.0.1 · character-level CNN · PyTorch 2.14.1</text>
+  </g>
+</svg>
