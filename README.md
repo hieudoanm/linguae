@@ -9,7 +9,7 @@ string. Everything runs on your own machine.
 
 [Documentation](AGENTS.md) · [🚀 Quick Start](#get-started) · [🔍 See It In Action](#see-it-in-action) · [CLI Usage](packages/cli/README.md) · [Model Training](packages/models/README.md)
 
-![Linguae](assets/og/og.png)
+![Linguae](assets/og/og-light.png)
 
 ## The Problem
 
@@ -115,13 +115,13 @@ Open <http://127.0.0.1:8000/docs> for the interactive API docs.
 
 ### Endpoints
 
-| Method | Path           | Body          | Description                    |
-| ------ | -------------- | ------------- | ------------------------------ |
-| GET    | `/health`      | —             | Health check                   |
-| POST   | `/detect`      | JSON          | Single text detection          |
-| POST   | `/detect/form` | Form-encoded  | Single text (form upload)      |
-| POST   | `/detect/batch`| JSON          | Batch of texts                 |
-| POST   | `/detect/file` | File upload   | Batch from UTF-8 text file     |
+| Method | Path            | Body         | Description                |
+| ------ | --------------- | ------------ | -------------------------- |
+| GET    | `/health`       | —            | Health check               |
+| POST   | `/detect`       | JSON         | Single text detection      |
+| POST   | `/detect/form`  | Form-encoded | Single text (form upload)  |
+| POST   | `/detect/batch` | JSON         | Batch of texts             |
+| POST   | `/detect/file`  | File upload  | Batch from UTF-8 text file |
 
 ### Examples
 
@@ -161,18 +161,18 @@ curl -X POST http://127.0.0.1:8000/detect/file \
 
 All settings are overridable via environment variables (see `packages/server/README.md`):
 
-| Variable                     | Default            | Description                    |
-| ---------------------------- | ------------------ | ------------------------------ |
-| `LINGUAE_SERVER_HOST`        | `0.0.0.0`          | Bind host                      |
-| `LINGUAE_SERVER_PORT`        | `8000`             | Bind port                      |
-| `LINGUAE_ARTIFACT_DIR`       | `../models/artifacts/linguae` | Artifact directory |
-| `LINGUAE_DEVICE`             | `cpu`              | Torch device                   |
-| `LINGUAE_RATE_LIMIT`         | `true`             | Enable rate limiting           |
-| `LINGUAE_RATE_LIMIT_REQUESTS`| `60`               | Max requests per window        |
-| `LINGUAE_RATE_LIMIT_WINDOW`  | `60`               | Window size in seconds         |
-| `LINGUAE_CORS`               | `true`             | Enable CORS                    |
-| `LINGUAE_CORS_ORIGINS`       | `*`                | Comma-separated origins        |
-| `LINGUAE_TIMEOUT`            | `30.0`             | Request timeout in seconds     |
+| Variable                      | Default                       | Description                |
+| ----------------------------- | ----------------------------- | -------------------------- |
+| `LINGUAE_SERVER_HOST`         | `0.0.0.0`                     | Bind host                  |
+| `LINGUAE_SERVER_PORT`         | `8000`                        | Bind port                  |
+| `LINGUAE_ARTIFACT_DIR`        | `../models/artifacts/linguae` | Artifact directory         |
+| `LINGUAE_DEVICE`              | `cpu`                         | Torch device               |
+| `LINGUAE_RATE_LIMIT`          | `true`                        | Enable rate limiting       |
+| `LINGUAE_RATE_LIMIT_REQUESTS` | `60`                          | Max requests per window    |
+| `LINGUAE_RATE_LIMIT_WINDOW`   | `60`                          | Window size in seconds     |
+| `LINGUAE_CORS`                | `true`                        | Enable CORS                |
+| `LINGUAE_CORS_ORIGINS`        | `*`                           | Comma-separated origins    |
+| `LINGUAE_TIMEOUT`             | `30.0`                        | Request timeout in seconds |
 
 ### Middlewares
 
