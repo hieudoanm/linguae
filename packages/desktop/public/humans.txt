@@ -1,0 +1,14 @@
+/* humans.txt */
+Last updated: 2026-10-25
+
+We are humans, not bots.
+
+Website: https://linguae.dev
+Repository: https://github.com/hieudoanm/linguae
+
+Built with care by the Linguae team.
+- Local-first language detection
+- Character-level CNN trained from scratch in PyTorch
+- No cloud, no pretrained weights, no network calls
+
+Contact: hieudoanm@users.noreply.github.com

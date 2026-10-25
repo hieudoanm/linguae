@@ -1,0 +1,43 @@
+{
+  "artifact_schema": "linguae.language-detector/2",
+  "dropout": 0.30000001192092896,
+  "embedding_dim": 32,
+  "framework": "candle",
+  "kernel_sizes": [
+    3,
+    5,
+    7
+  ],
+  "length_bucket_boundaries": [
+    16,
+    32,
+    64,
+    128,
+    256
+  ],
+  "length_embedding": true,
+  "length_embedding_dim": 8,
+  "lowercase": false,
+  "max_length": 256,
+  "mean_pooling": true,
+  "model_type": "character_cnn",
+  "normalisation": "NFC + whitespace collapse",
+  "num_classes": 329,
+  "num_filters": [
+    128,
+    128,
+    128
+  ],
+  "padding_idx": 0,
+  "padding_side": "right",
+  "pooling": "masked_max+masked_mean",
+  "prediction_scope": "single-label-per-string",
+  "schema_version": 1,
+  "special_tokens": [
+    "<pad>",
+    "<unk>"
+  ],
+  "unknown_idx": 1,
+  "vocab_size": 13093,
+  "weights": "model.safetensors"
+}
