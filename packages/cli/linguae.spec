@@ -7,7 +7,7 @@ a = Analysis(
     pathex=[],
     binaries=[],
     datas=[
-        ('/Users/hieudoan/git/github.com/hieudoanm/linguae/packages/models/artifacts/linguae', 'artifacts/linguae'),
+        ('../models/artifacts/linguae', 'artifacts/linguae'),
     ],
     hiddenimports=[
         'torch',
@@ -48,4 +48,5 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
+    onefile=True,
 )

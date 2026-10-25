@@ -10,7 +10,7 @@ test:
 	@echo "No tests configured for CLI package"
 
 build:
-	uv run pyinstaller --onefile --name linguae linguae.spec
+	uv run pyinstaller linguae.spec
 
 run:
 	uv run linguae "Bonjour tout le monde"
