@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 640" width="1280" height="640">
+  <rect width="1280" height="640" rx="32" fill="#ffffff"/>
+
+  <!-- Centered content group at (640, 320) -->
+  <g transform="translate(640, 320)" text-anchor="middle">
+
+    <!-- Logo icon, left of center at (-300, 0) -->
+    <!-- Local center (440, 440) maps to (-300, 0) after scale(0.5) -->
+    <g transform="translate(-520, -220) scale(0.5)">
+      <circle cx="440" cy="440" r="320" fill="none" stroke="#000000" stroke-width="4" opacity="0.25"/>
+      <circle cx="440" cy="440" r="240" fill="none" stroke="#000000" stroke-width="4" opacity="0.35"/>
+      <circle cx="440" cy="440" r="160" fill="none" stroke="#000000" stroke-width="4" opacity="0.45"/>
+      <circle cx="440" cy="440" r="60" fill="#000000" opacity="0.15"/>
+      <circle cx="440" cy="440" r="30" fill="#000000"/>
+      <text x="440" y="140" dominant-baseline="middle" font-family="system-ui, sans-serif" font-size="72" font-weight="700" fill="#000000">A</text>
+      <text x="680" y="440" dominant-baseline="middle" font-family="system-ui, sans-serif" font-size="72" font-weight="700" fill="#000000">Я</text>
+      <text x="440" y="740" dominant-baseline="middle" font-family="system-ui, sans-serif" font-size="72" font-weight="700" fill="#000000">字</text>
+      <text x="200" y="440" dominant-baseline="middle" font-family="system-ui, sans-serif" font-size="72" font-weight="700" fill="#000000">م</text>
+      <line x1="440" y1="440" x2="440" y2="140" stroke="#000000" stroke-width="4" opacity="0.5"/>
+      <line x1="440" y1="440" x2="680" y2="440" stroke="#000000" stroke-width="4" opacity="0.5"/>
+      <line x1="440" y1="440" x2="440" y2="740" stroke="#000000" stroke-width="4" opacity="0.5"/>
+      <line x1="440" y1="440" x2="200" y2="440" stroke="#000000" stroke-width="4" opacity="0.5"/>
+    </g>
+
+    <!-- Text block, right of center at (260, 0) -->
+    <g transform="translate(260, 0)" text-anchor="middle">
+      <text y="-30" font-family="system-ui, -apple-system, sans-serif" font-size="96" font-weight="800" fill="#000000" letter-spacing="-3">Linguae</text>
+      <text y="50" font-family="system-ui, -apple-system, sans-serif" font-size="36" font-weight="400" fill="#000000">Detect language, locally</text>
+      <text y="130" font-family="system-ui, -apple-system, sans-serif" font-size="22" font-weight="400" fill="#000000">Character-level CNN · PyTorch · No cloud</text>
+    </g>
+  </g>
+</svg>
