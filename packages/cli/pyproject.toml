@@ -1,0 +1,29 @@
+[project]
+name = "linguae"
+version = "0.0.1"
+description = "Command-line language detection powered by the Linguae character-level model"
+readme = "README.md"
+requires-python = "==3.14.8"
+dependencies = [
+  "torch==2.14.1",
+  "numpy==2.5.4",
+  "typer==0.27.3",
+]
+
+[project.scripts]
+linguae = "linguae.cli:app"
+
+[build-system]
+requires = ["hatchling==1.32.4"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/linguae"]
+
+[dependency-groups]
+dev = [
+    "pyinstaller==6.22.3",
+    "pytest==9.1.1",
+    "pytest-cov==7.1.0",
+    "pytest-mock==3.17.0",
+]

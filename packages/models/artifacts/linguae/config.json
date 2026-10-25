@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "model_type": "character_cnn",
+  "framework": "pytorch",
+  "torch_version": "2.14.1",
+  "embedding_dim": 32,
+  "num_filters": [
+    128,
+    128,
+    128
+  ],
+  "kernel_sizes": [
+    3,
+    5,
+    7
+  ],
+  "dropout": 0.3,
+  "vocab_size": 11797,
+  "num_classes": 235,
+  "max_length": 256,
+  "padding_idx": 0,
+  "unknown_idx": 1,
+  "special_tokens": [
+    "<pad>",
+    "<unk>"
+  ],
+  "padding_side": "right",
+  "pooling": "masked_max",
+  "normalisation": "NFC + whitespace collapse",
+  "lowercase": false,
+  "prediction_scope": "single-label-per-string"
+}
