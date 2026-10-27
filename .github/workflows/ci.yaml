@@ -111,7 +111,7 @@ jobs:
         if: matrix.os == 'ubuntu-latest'
         run: |
           sudo apt-get update
-          sudo apt-get install -y libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf libglib2.0-dev
+          sudo apt-get install -y libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf libglib2.0-dev rpm
 
       - name: Install dependencies
         working-directory: packages/app/web
@@ -166,7 +166,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          find bundles -type f -exec gh release upload web-latest {} --clobber \;
+          find bundles -type f \( -name '*.AppImage' -o -name '*.deb' -o -name '*.rpm' -o -name '*.dmg' -o -name '*.zip' -o -name '*.msi' -o -name '*.exe' \) -exec gh release upload web-latest {} --clobber \;
 
   cli-build:
     name: CLI - Build
