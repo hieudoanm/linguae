@@ -1,11 +1,11 @@
 import { useMutation } from '@tanstack/react-query';
-import { useState } from 'react';
+import { useState, type FC } from 'react';
 
 import type { Prediction } from './types';
 
 const isTauri = typeof window !== 'undefined' && '__TAURI__' in window;
 
-const DetectionForm = () => {
+const DetectionForm: FC = () => {
   const [text, setText] = useState('');
   const [result, setResult] = useState<Prediction | null>(null);
 
@@ -40,11 +40,17 @@ const DetectionForm = () => {
   };
 
   return (
-    <section id="detect" className="py-12 bg-white dark:bg-gray-900">
-      <div className="max-w-2xl mx-auto px-4">
-        <div className="text-center mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Try It</h2>
-          <p className="text-gray-600 dark:text-gray-300">Enter text to detect its language.</p>
+    <section
+      id="detect"
+      className="flex h-full items-center justify-center bg-white py-12 dark:bg-gray-900">
+      <div className="mx-auto w-full max-w-4xl px-4">
+        <div className="mb-8 text-center">
+          <h2 className="mb-2 text-2xl font-bold text-gray-900 dark:text-white">
+            Try It
+          </h2>
+          <p className="text-gray-600 dark:text-gray-300">
+            Enter text to detect its language.
+          </p>
         </div>
 
         <form onSubmit={handleSubmit} className="mb-6">
@@ -52,27 +58,28 @@ const DetectionForm = () => {
             value={text}
             onChange={(e) => setText(e.target.value)}
             placeholder="Enter text to detect language..."
-            className="w-full h-32 p-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900 dark:text-white"
+            className="h-32 w-full rounded-lg border border-gray-300 p-3 text-gray-900 focus:ring-2 focus:ring-blue-500 focus:outline-none dark:border-gray-600 dark:text-white"
             required
           />
           <button
             type="submit"
             disabled={mutation.isPending || !text.trim()}
-            className="mt-3 w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed"
-          >
+            className="mt-3 w-full rounded-lg bg-blue-600 px-4 py-2 text-white hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-gray-400">
             {mutation.isPending ? 'Detecting...' : 'Submit'}
           </button>
         </form>
 
         {mutation.isError && (
-          <div className="p-4 bg-red-50 border border-red-200 rounded-lg text-red-700 mb-4">
+          <div className="mb-4 rounded-lg border border-red-200 bg-red-50 p-4 text-red-700">
             Error detecting language. Make sure the server is running.
           </div>
         )}
 
         {result && (
-          <div className="p-4 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm">
-            <h2 className="text-xl font-semibold mb-3 text-gray-900 dark:text-white">Result</h2>
+          <div className="rounded-lg border border-gray-200 p-4 shadow-sm dark:border-gray-700">
+            <h2 className="mb-3 text-xl font-semibold text-gray-900 dark:text-white">
+              Result
+            </h2>
             <p className="mb-2 text-gray-700">
               <span className="font-medium">Language:</span>{' '}
               {result.language_name
@@ -85,8 +92,10 @@ const DetectionForm = () => {
             </p>
             {result.top_k && result.top_k.length > 0 && (
               <div>
-                <p className="font-medium mb-2 text-gray-700">Top alternatives:</p>
-                <ul className="space-y-1 list-disc list-inside">
+                <p className="mb-2 font-medium text-gray-700">
+                  Top alternatives:
+                </p>
+                <ul className="list-inside list-disc space-y-1">
                   {result.top_k.map((item, idx) => (
                     <li key={idx} className="text-gray-600 dark:text-gray-300">
                       {item.language}: {(item.score * 100).toFixed(2)}%
@@ -100,6 +109,6 @@ const DetectionForm = () => {
       </div>
     </section>
   );
-}
+};
 
 export default DetectionForm;

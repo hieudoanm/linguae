@@ -15,10 +15,12 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: 'Linguae - Language Detection',
-  description: 'Detect the language of text with a local-first, character-level CNN',
+  description:
+    'Detect the language of text with a local-first, character-level CNN',
   openGraph: {
     title: 'Linguae - Language Detection',
-    description: 'Detect the language of text with a local-first, character-level CNN',
+    description:
+      'Detect the language of text with a local-first, character-level CNN',
     url: 'https://linguae.dev',
     siteName: 'Linguae',
     type: 'website',
@@ -35,7 +37,8 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Linguae - Language Detection',
-    description: 'Detect the language of text with a local-first, character-level CNN',
+    description:
+      'Detect the language of text with a local-first, character-level CNN',
     images: ['/og-image.svg'],
   },
   icons: {
@@ -58,13 +61,12 @@ const RootLayout = ({ children }: LayoutProps<'/'>) => {
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-      suppressHydrationWarning
-    >
-      <body className="min-h-full flex flex-col">
+      suppressHydrationWarning>
+      <body className="flex min-h-full flex-col">
         <Providers>{children}</Providers>
       </body>
     </html>
   );
-}
+};
 
 export default RootLayout;

@@ -7,7 +7,9 @@ describe('HeroSection', () => {
     render(<HeroSection />);
     expect(screen.getByText('Language Detection')).toBeInTheDocument();
     expect(
-      screen.getByText('Detect the language of any text with a local character-level model.')
+      screen.getByText(
+        'Detect the language of any text with a local character-level model.'
+      )
     ).toBeInTheDocument();
   });
 });

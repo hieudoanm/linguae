@@ -13,7 +13,9 @@ describe('FeaturesSection', () => {
   it('renders feature descriptions', () => {
     render(<FeaturesSection />);
     expect(
-      screen.getByText('Runs entirely on your machine — no network calls or pretrained weights.')
+      screen.getByText(
+        'Runs entirely on your machine — no network calls or pretrained weights.'
+      )
     ).toBeInTheDocument();
     expect(
       screen.getByText(
@@ -21,7 +23,9 @@ describe('FeaturesSection', () => {
       )
     ).toBeInTheDocument();
     expect(
-      screen.getByText('Supports detection across 235 languages with top-k alternatives.')
+      screen.getByText(
+        'Supports detection across 235 languages with top-k alternatives.'
+      )
     ).toBeInTheDocument();
   });
 });

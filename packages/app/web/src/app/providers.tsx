@@ -12,6 +12,6 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
       <ThemeProvider>{children}</ThemeProvider>
     </QueryClientProvider>
   );
-}
+};
 
 export default Providers;

@@ -12,14 +12,14 @@ const createTestQueryClient = () =>
     },
   });
 
-const renderWithProviders = (ui: React.ReactElement)  => {
+const renderWithProviders = (ui: React.ReactElement) => {
   const queryClient = createTestQueryClient();
   return render(
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>{ui}</ThemeProvider>
     </QueryClientProvider>
   );
-}
+};
 
 describe('DetectionForm', () => {
   beforeEach(() => {
@@ -32,7 +32,9 @@ describe('DetectionForm', () => {
 
   it('renders the textarea and submit button', () => {
     renderWithProviders(<DetectionForm />);
-    expect(screen.getByPlaceholderText('Enter text to detect language...')).toBeInTheDocument();
+    expect(
+      screen.getByPlaceholderText('Enter text to detect language...')
+    ).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Submit' })).toBeInTheDocument();
   });
 
@@ -48,7 +50,9 @@ describe('DetectionForm', () => {
       )
     );
     renderWithProviders(<DetectionForm />);
-    const textarea = screen.getByPlaceholderText('Enter text to detect language...');
+    const textarea = screen.getByPlaceholderText(
+      'Enter text to detect language...'
+    );
     fireEvent.change(textarea, { target: { value: 'Bonjour' } });
     act(() => {
       fireEvent.click(screen.getByRole('button', { name: 'Submit' }));
@@ -56,7 +60,12 @@ describe('DetectionForm', () => {
     await vi.waitFor(() => {
       expect(screen.getByText('Detecting...')).toBeInTheDocument();
     });
-    resolveFetch(new Response(JSON.stringify({ ok: true }), { status: 200, statusText: 'OK' }));
+    resolveFetch(
+      new Response(JSON.stringify({ ok: true }), {
+        status: 200,
+        statusText: 'OK',
+      })
+    );
   });
 
   it('displays the detected language and confidence on success', async () => {
@@ -78,7 +87,9 @@ describe('DetectionForm', () => {
       vi.fn(() => Promise.resolve(response))
     );
     renderWithProviders(<DetectionForm />);
-    const textarea = screen.getByPlaceholderText('Enter text to detect language...');
+    const textarea = screen.getByPlaceholderText(
+      'Enter text to detect language...'
+    );
     fireEvent.change(textarea, { target: { value: 'Bonjour' } });
     act(() => {
       fireEvent.click(screen.getByRole('button', { name: 'Submit' }));
@@ -95,14 +106,18 @@ describe('DetectionForm', () => {
       vi.fn(() => Promise.resolve({ ok: false } as Response))
     );
     renderWithProviders(<DetectionForm />);
-    const textarea = screen.getByPlaceholderText('Enter text to detect language...');
+    const textarea = screen.getByPlaceholderText(
+      'Enter text to detect language...'
+    );
     fireEvent.change(textarea, { target: { value: 'Hello' } });
     act(() => {
       fireEvent.click(screen.getByRole('button', { name: 'Submit' }));
     });
     await vi.waitFor(() => {
       expect(
-        screen.getByText('Error detecting language. Make sure the server is running.')
+        screen.getByText(
+          'Error detecting language. Make sure the server is running.'
+        )
       ).toBeInTheDocument();
     });
   });

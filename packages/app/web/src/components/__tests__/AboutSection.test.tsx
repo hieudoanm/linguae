@@ -7,7 +7,9 @@ describe('AboutSection', () => {
     render(<AboutSection />);
     expect(screen.getByText('About Linguae')).toBeInTheDocument();
     expect(
-      screen.getByText(/Linguae is a local-first language identification project/)
+      screen.getByText(
+        /Linguae is a local-first language identification project/
+      )
     ).toBeInTheDocument();
   });
 });

@@ -11,7 +11,7 @@ export default defineConfig({
     coverage: {
       enabled: true,
       reporter: ['text', 'json', 'html'],
-      include: ['src/components/**/*.tsx', 'src/components/**/*.ts'],
+      include: ['src/components/**/*.tsx', 'src/components/**/*.ts', 'src/app/**/page.tsx'],
       thresholds: {
         lines: 80,
         branches: 80,

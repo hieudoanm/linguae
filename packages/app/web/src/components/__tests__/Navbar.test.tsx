@@ -17,16 +17,7 @@ describe('Navbar', () => {
   it('renders the logo and navigation links', () => {
     renderWithProviders(<Navbar scrollTo={() => {}} />);
     expect(screen.getByText('Linguae')).toBeInTheDocument();
-    expect(screen.getByText('Features')).toBeInTheDocument();
-    expect(screen.getByText('Detect')).toBeInTheDocument();
     expect(screen.getByText('About')).toBeInTheDocument();
-  });
-
-  it('calls scrollTo when a link is clicked', () => {
-    const scrollTo = vi.fn();
-    renderWithProviders(<Navbar scrollTo={scrollTo} />);
-    fireEvent.click(screen.getByText('Features'));
-    expect(scrollTo).toHaveBeenCalledWith('features');
   });
 
   it('calls scrollTo with #hero when the logo is clicked', () => {

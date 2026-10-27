@@ -87,6 +87,8 @@ describe('ThemeProvider', () => {
       useTheme();
       return null;
     };
-    expect(() => render(<Thrower />)).toThrow('useTheme must be used within a ThemeProvider');
+    expect(() => render(<Thrower />)).toThrow(
+      'useTheme must be used within a ThemeProvider'
+    );
   });
 });

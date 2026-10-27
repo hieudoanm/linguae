@@ -11,8 +11,4 @@ export interface NavLink {
   label: string;
 }
 
-export const NAV_LINKS: NavLink[] = [
-  { href: '#features', label: 'Features' },
-  { href: '#detect', label: 'Detect' },
-  { href: '#about', label: 'About' },
-];
+export const NAV_LINKS: NavLink[] = [{ href: '/about', label: 'About' }];

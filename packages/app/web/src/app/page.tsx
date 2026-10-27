@@ -1,13 +1,10 @@
 'use client';
 
-import Navbar from '@/components/Navbar';
-import HeroSection from '@/components/HeroSection';
-import FeaturesSection from '@/components/FeaturesSection';
 import DetectionForm from '@/components/DetectionForm';
-import AboutSection from '@/components/AboutSection';
-import Footer from '@/components/Footer';
+import Navbar from '@/components/Navbar';
+import { NextPage } from 'next';
 
-const Home = () => {
+const Home: NextPage = () => {
   const scrollTo = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
@@ -16,15 +13,11 @@ const Home = () => {
   };
 
   return (
-    <main className="min-h-screen bg-gray-50 dark:bg-gray-950 py-8 px-4">
+    <main className="h-screen bg-white px-4 py-8 dark:bg-black">
       <Navbar scrollTo={scrollTo} />
-      <HeroSection />
-      <FeaturesSection />
       <DetectionForm />
-      <AboutSection />
-      <Footer />
     </main>
   );
-}
+};
 
 export default Home;
