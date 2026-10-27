@@ -3,12 +3,18 @@ import { useState } from 'react';
 
 import type { Prediction } from './types';
 
+const isTauri = typeof window !== 'undefined' && '__TAURI__' in window;
+
 const DetectionForm = () => {
   const [text, setText] = useState('');
   const [result, setResult] = useState<Prediction | null>(null);
 
   const mutation = useMutation({
     mutationFn: async (inputText: string) => {
+      if (isTauri) {
+        const { invoke } = await import('@tauri-apps/api/core');
+        return invoke<Prediction>('detect', { text: inputText, topK: 3 });
+      }
       const response = await fetch('http://localhost:8000/detect', {
         method: 'POST',
         headers: {
