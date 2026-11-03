@@ -8,6 +8,6 @@
     "format": "make format"
   },
   "dependencies": {
-    "next": "16.4.3"
+    "next": "16.4.4"
   }
 }
