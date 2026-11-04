@@ -173,13 +173,7 @@ importers:
         specifier: 2.11.10
         version: 2.11.10
 
-  packages/app/server:
-    dependencies:
-      next:
-        specifier: 16.4.5
-        version: 16.4.5(@babel/core@7.29.7(supports-color@7.2.0))(@types/node@26.6.6)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
-
-  packages/app/web:
+  packages/desktop:
     dependencies:
       '@tauri-apps/api':
         specifier: 2.12.4

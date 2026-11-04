@@ -34,14 +34,6 @@
       "icons/icon.png",
       "icons/icon.ico",
       "icons/icon.icns"
-    ],
-    "resources": {
-      "tauri_bridge.py": "tauri_bridge.py",
-      "inference.py": "inference.py",
-      "config.json": "config.json",
-      "vocabulary.json": "vocabulary.json",
-      "labels.json": "labels.json",
-      "model.safetensors": "model.safetensors"
-    }
+    ]
   }
 }

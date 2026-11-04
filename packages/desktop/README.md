@@ -29,7 +29,7 @@ Download the bundle matching your OS from the `latest` GitHub Release.
 ### Install and Run
 
 ```bash
-cd packages/app/web
+cd packages/desktop
 pnpm install
 pnpm run tauri          # dev mode
 pnpm run tauri:build    # production build
@@ -38,7 +38,7 @@ pnpm run tauri:build    # production build
 ### Build Web Only
 
 ```bash
-cd packages/app/web
+cd packages/desktop
 pnpm install
 pnpm run build          # outputs static export to out/
 ```

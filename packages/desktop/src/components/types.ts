@@ -1,7 +1,6 @@
 export interface Prediction {
   text: string;
   language: string;
-  language_name: string | null;
   confidence: number;
   top_k?: Array<{ language: string; score: number }>;
 }

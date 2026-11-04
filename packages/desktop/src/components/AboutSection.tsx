@@ -10,7 +10,8 @@ const AboutSection: FC = () => {
         <p className="mx-auto max-w-lg text-gray-600 dark:text-gray-300">
           Linguae is a local-first language identification project that trains a
           character-level CNN from scratch and ships a standalone CLI binary and
-          HTTP API for detecting the language of text.
+          a Tauri desktop app for detecting the language of text. All inference
+          runs locally with Candle — no network calls, no cloud APIs.
         </p>
       </div>
     </section>

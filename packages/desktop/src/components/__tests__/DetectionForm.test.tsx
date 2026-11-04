@@ -23,11 +23,12 @@ const renderWithProviders = (ui: React.ReactElement) => {
 
 describe('DetectionForm', () => {
   beforeEach(() => {
-    vi.stubGlobal('fetch', vi.fn());
+    vi.resetModules();
   });
 
   afterEach(() => {
     vi.unstubAllGlobals();
+    vi.restoreAllMocks();
   });
 
   it('renders the textarea and submit button', () => {
@@ -39,17 +40,17 @@ describe('DetectionForm', () => {
   });
 
   it('shows Detecting... while the mutation is pending', async () => {
-    let resolveFetch: (value: Response) => void = () => {};
-    vi.stubGlobal(
-      'fetch',
-      vi.fn(
-        () =>
-          new Promise<Response>((resolve) => {
-            resolveFetch = resolve;
-          })
-      )
+    let resolveInvoke: (value: unknown) => void = () => {};
+    const invokeMock = vi.fn(
+      () =>
+        new Promise<unknown>((resolve) => {
+          resolveInvoke = resolve;
+        })
     );
-    renderWithProviders(<DetectionForm />);
+    vi.doMock('@tauri-apps/api/core', () => ({ invoke: invokeMock }));
+    const { default: DetectionFormComponent } = await import('../DetectionForm');
+
+    renderWithProviders(<DetectionFormComponent />);
     const textarea = screen.getByPlaceholderText(
       'Enter text to detect language...'
     );
@@ -60,33 +61,31 @@ describe('DetectionForm', () => {
     await vi.waitFor(() => {
       expect(screen.getByText('Detecting...')).toBeInTheDocument();
     });
-    resolveFetch(
-      new Response(JSON.stringify({ ok: true }), {
-        status: 200,
-        statusText: 'OK',
-      })
-    );
+    resolveInvoke({
+      text: 'Bonjour',
+      language: 'fra',
+      confidence: 0.95,
+      top_k: [{ language: 'fra', score: 0.95 }],
+    });
   });
 
   it('displays the detected language and confidence on success', async () => {
-    const response = {
-      ok: true,
-      json: async () => ({
-        text: 'Bonjour',
-        language: 'fra',
-        language_name: 'French',
-        confidence: 0.95,
-        top_k: [
-          { language: 'fra', confidence: 0.95 },
-          { language: 'eng', confidence: 0.03 },
-        ],
-      }),
-    } as unknown as Response;
-    vi.stubGlobal(
-      'fetch',
-      vi.fn(() => Promise.resolve(response))
+    const invokeMock = vi.fn(
+      () =>
+        Promise.resolve({
+          text: 'Bonjour',
+          language: 'fra',
+          confidence: 0.95,
+          top_k: [
+            { language: 'fra', score: 0.95 },
+            { language: 'eng', score: 0.03 },
+          ],
+        })
     );
-    renderWithProviders(<DetectionForm />);
+    vi.doMock('@tauri-apps/api/core', () => ({ invoke: invokeMock }));
+    const { default: DetectionFormComponent } = await import('../DetectionForm');
+
+    renderWithProviders(<DetectionFormComponent />);
     const textarea = screen.getByPlaceholderText(
       'Enter text to detect language...'
     );
@@ -95,17 +94,17 @@ describe('DetectionForm', () => {
       fireEvent.click(screen.getByRole('button', { name: 'Submit' }));
     });
     await vi.waitFor(() => {
-      expect(screen.getByText('fra (French)')).toBeInTheDocument();
+      expect(screen.getByText('fra')).toBeInTheDocument();
     });
     expect(screen.getByText('95.00%')).toBeInTheDocument();
   });
 
   it('shows an error message when the request fails', async () => {
-    vi.stubGlobal(
-      'fetch',
-      vi.fn(() => Promise.resolve({ ok: false } as Response))
-    );
-    renderWithProviders(<DetectionForm />);
+    const invokeMock = vi.fn(() => Promise.reject(new Error('boom')));
+    vi.doMock('@tauri-apps/api/core', () => ({ invoke: invokeMock }));
+    const { default: DetectionFormComponent } = await import('../DetectionForm');
+
+    renderWithProviders(<DetectionFormComponent />);
     const textarea = screen.getByPlaceholderText(
       'Enter text to detect language...'
     );
@@ -116,7 +115,7 @@ describe('DetectionForm', () => {
     await vi.waitFor(() => {
       expect(
         screen.getByText(
-          'Error detecting language. Make sure the server is running.'
+          'Error detecting language. Make sure the Tauri runtime is available.'
         )
       ).toBeInTheDocument();
     });
