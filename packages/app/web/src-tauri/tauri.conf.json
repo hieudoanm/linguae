@@ -37,11 +37,11 @@
     ],
     "resources": {
       "tauri_bridge.py": "tauri_bridge.py",
-      "linguae_inference.py": "linguae_inference.py",
+      "inference.py": "inference.py",
       "config.json": "config.json",
       "vocabulary.json": "vocabulary.json",
       "labels.json": "labels.json",
-      "model.pt": "model.pt"
+      "model.safetensors": "model.safetensors"
     }
   }
 }

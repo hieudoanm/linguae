@@ -1,25 +1,33 @@
 # Linguae Rust Workspace
 
-Rust implementation of the `linguae` command and the data-preparation pipeline.
-The CLI loads the trained artifact in `packages/models/artifacts/linguae` and
-prints one prediction per input string.
+Rust implementation of the `linguae` command, the data-preparation pipeline, and
+the training pipeline. The CLI loads the trained artifact in
+`crates/linguae-train/artifacts/linguae` and prints one prediction per input
+string.
 
-The workspace contains three crates:
+The workspace contains four crates:
 
 ```
 crates/
 ├── linguae-core/   # artifact loading, text preprocessing, CharCNN forward pass
 ├── linguae-cli/    # `linguae` binary (clap)
-└── linguae-data/   # dataset conversion + word extraction (`linguae-data`)
+├── linguae-data/   # dataset conversion + word extraction (`linguae-data`)
+└── linguae-train/  # training, evaluation, plots, export (`linguae-train`)
 ```
 
 `linguae-core` reads the artifact directly (`config.json`, `vocabulary.json`,
-`labels.json`, `model.pt`) with [Candle](https://github.com/huggingface/candle),
-so the CLI does not need Python, PyTorch, or `linguae_inference.py` at runtime.
+`labels.json`, `model.safetensors`) with [Candle](https://github.com/huggingface/candle),
+so the CLI does not need Python or PyTorch at runtime. Legacy `model.pt`
+artifacts are also accepted.
 
 `linguae-data` converts the raw WiLI-2018 split files and the Tatoeba TSV into
 the CSVs consumed by training, and extracts the most frequent words per language
 from WiLI for short-string detection.
+
+`linguae-train` ports the former Python trainer to Rust: it cleans and splits
+the sources, builds the vocabulary, trains the CharCNN, evaluates it, renders
+SVG plots, and exports the safetensors artifact. See
+[`linguae-train/README.md`](linguae-train/README.md).
 
 ## Build
 
@@ -57,7 +65,7 @@ line so it pipes cleanly into `jq`.
 | --- | --- |
 | `TEXT` | Text to classify. When omitted, stdin is read. |
 | `--file, -f PATH` | Classify each non-empty line of a UTF-8 file. |
-| `--artifact, -a PATH` | Artifact directory. Defaults to `packages/models/artifacts/linguae`. |
+| `--artifact, -a PATH` | Artifact directory. Defaults to `crates/linguae-train/artifacts/linguae`. |
 | `--device TEXT` | Inference device: `cpu` (default), `cuda`, or `metal` (`mps` is an alias for `metal`). |
 | `--top-k, -k INT` | Number of alternatives included in JSON output (1–20, default 3). |
 | `--confidence, -c` | Append the confidence score in plain-text output. |
@@ -107,6 +115,23 @@ Every subcommand honours `LINGUAE_DATA_DIR`, `LINGUAE_WILI_DIR`,
 `LINGUAE_WILI_WORDS_CSV`. Outputs are written atomically, and the reported
 SHA-256 covers the completed file.
 
+## Training
+
+`linguae-train` ports the Python trainer to Rust. It reads the prepared CSVs,
+trains the CharCNN, evaluates it, writes SVG plots, and exports
+`model.safetensors` plus the metadata files:
+
+```bash
+cd crates
+cargo run --release -p linguae-train -- train
+cargo run --release -p linguae-train -- verify --device cpu
+```
+
+`train` is the default subcommand; `convert` migrates a legacy `model.pt`
+artifact and `verify` loads an artifact and prints sample predictions. See
+[`linguae-train/README.md`](linguae-train/README.md) for all options and
+environment variables.
+
 ## Test
 
 ```bash
@@ -126,11 +151,11 @@ The CLI searches for the artifact in this order:
 
 1. Explicit `--artifact PATH` or `LINGUAE_ARTIFACT_DIR`.
 2. The current directory and its parents:
-   `<root>/packages/models/artifacts/linguae`, then `<root>/artifacts/linguae`.
+   `<root>/crates/linguae-train/artifacts/linguae`, then `<root>/artifacts/linguae`.
 3. The executable's directory and its parents (up to four levels).
 
 The artifact must contain `config.json`, `vocabulary.json`, `labels.json`, and
-`model.pt`.
+either `model.safetensors` (preferred) or a legacy `model.pt`.
 
 ## Note on text length
 

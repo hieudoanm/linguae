@@ -18,8 +18,8 @@ class Settings:
             "LINGUAE_ARTIFACT_DIR",
             str(
                 Path(__file__).resolve().parents[5]
-                / "packages"
-                / "models"
+                / "crates"
+                / "linguae-train"
                 / "artifacts"
                 / "linguae"
             ),
@@ -30,12 +30,11 @@ class Settings:
             "LINGUAE_LABELS_PATH",
             str(
                 Path(__file__).resolve().parents[5]
-                / "packages"
-                / "models"
+                / "crates"
+                / "linguae-data"
                 / "data"
-                / "txt"
-                / "wili-2018"
-                / "labels.csv"
+                / "csv"
+                / "languages.csv"
             ),
         )
     )

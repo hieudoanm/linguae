@@ -3,33 +3,21 @@
 from __future__ import annotations
 
 import csv
-import sys
 from pathlib import Path
 from typing import Any, Self
 
 from .config import settings
-
-# Allow the artifact's standalone inference module to be imported.
-_ARTIFACT_DIR = Path(settings.artifact_dir)
-if str(_ARTIFACT_DIR) not in sys.path:
-    sys.path.insert(0, str(_ARTIFACT_DIR))
-
-try:
-    from linguae_inference import load_artifact, predict_batch, predict_text  # type: ignore
-except Exception:  # pragma: no cover - artifact not present at import time  # noqa: BLE001
-    load_artifact = None  # type: ignore
-    predict_batch = None  # type: ignore
-    predict_text = None  # type: ignore
+from .inference import load_artifact, predict_batch, predict_text
 
 # Map language codes (e.g. "eng") to English names (e.g. "English").
 _CODE_TO_NAME: dict[str, str] = {}
 _LABELS_PATH = Path(settings.labels_path)
 if _LABELS_PATH.is_file():
     with _LABELS_PATH.open(encoding="utf-8") as _handle:
-        _reader = csv.DictReader(_handle, delimiter=";")
+        _reader = csv.DictReader(_handle)
         for _row in _reader:
-            _code = (_row.get("Label") or "").strip()
-            _name = (_row.get("English") or "").strip()
+            _code = (_row.get("label") or "").strip()
+            _name = (_row.get("name") or "").strip()
             if _code:
                 _CODE_TO_NAME[_code] = _name
 
@@ -55,11 +43,9 @@ class Detector:
     def get(cls) -> dict[str, Any]:
         """Load (or return cached) the artifact."""
         if cls._artifact is None:
-            if load_artifact is None:
-                raise RuntimeError(
-                    "linguae_inference module not available in artifact directory"
-                )
-            cls._artifact = load_artifact(str(_ARTIFACT_DIR), device=settings.device)
+            cls._artifact = load_artifact(
+                str(settings.artifact_dir), device=settings.device
+            )
         return cls._artifact
 
     @classmethod

@@ -3,15 +3,17 @@ use candle_nn::{conv1d, embedding, linear, Conv1d, Conv1dConfig, Embedding, Line
 
 use crate::config::Config;
 
-/// Character-level CNN matching the exported PyTorch `CharCNN` module.
+/// Character-level CNN matching the exported `CharCNN` module.
 pub struct CharCnn {
     embedding: Embedding,
     convolutions: Vec<Conv1d>,
     classifier: Linear,
+    length_embedding: Option<Embedding>,
+    mean_pooling: bool,
 }
 
 impl CharCnn {
-    /// Build the model from an exported `model.pt` state dict.
+    /// Build the model from an exported safetensors or legacy `model.pt` state dict.
     pub fn load(config: &Config, vb: VarBuilder) -> Result<Self> {
         let embedding = embedding(config.vocab_size, config.embedding_dim, vb.pp("embedding"))?;
 
@@ -39,15 +41,31 @@ impl CharCnn {
         }
 
         let classifier = linear(
-            config.num_filters.iter().sum(),
+            config.num_filters.iter().sum::<usize>() * if config.mean_pooling { 2 } else { 1 }
+                + if config.length_embedding {
+                    config.length_embedding_dim
+                } else {
+                    0
+                },
             config.num_classes,
             vb.pp("classifier"),
         )?;
+        let length_embedding = if config.length_embedding {
+            Some(candle_nn::embedding(
+                6,
+                config.length_embedding_dim,
+                vb.pp("length_embedding"),
+            )?)
+        } else {
+            None
+        };
 
         Ok(Self {
             embedding,
             convolutions,
             classifier,
+            length_embedding,
+            mean_pooling: config.mean_pooling,
         })
     }
 
@@ -59,13 +77,44 @@ impl CharCnn {
     /// through ReLU (so real values are non-negative), zeroing padding before
     /// the max is numerically identical.
     pub fn forward(&self, input_ids: &Tensor, mask: &Tensor) -> Result<Tensor> {
-        let embedded = self.embedding.forward(input_ids)?.transpose(1, 2)?;
+        let embedded = self
+            .embedding
+            .forward(input_ids)?
+            .transpose(1, 2)?
+            .broadcast_mul(mask)?;
+        let lengths = mask.sum(2)?.squeeze(1)?;
         let mut pooled = Vec::with_capacity(self.convolutions.len());
 
         for convolution in &self.convolutions {
             let features = convolution.forward(&embedded)?.relu()?;
-            let masked = features.broadcast_mul(mask)?;
+            let valid = mask.broadcast_as(features.dims())?;
+            let masked = features.broadcast_mul(&valid)?;
             pooled.push(masked.max(2)?);
+            if self.mean_pooling {
+                let sum = masked.sum(2)?;
+                let count = valid.sum(2)?.clamp(1.0, f64::INFINITY)?;
+                pooled.push(sum.broadcast_div(&count)?);
+            }
+        }
+
+        if let Some(length_embedding) = &self.length_embedding {
+            let categories = lengths
+                .to_vec1::<f32>()?
+                .into_iter()
+                .map(|length| match length as usize {
+                    0..=10 => 0u32,
+                    11..=25 => 1,
+                    26..=50 => 2,
+                    51..=100 => 3,
+                    101..=160 => 4,
+                    _ => 5,
+                })
+                .collect::<Vec<_>>();
+            pooled.push(length_embedding.forward(&Tensor::from_vec(
+                categories,
+                lengths.dims(),
+                lengths.device(),
+            )?)?);
         }
 
         let representation = Tensor::cat(&pooled, 1)?;

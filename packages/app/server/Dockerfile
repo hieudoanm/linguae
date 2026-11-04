@@ -6,7 +6,7 @@ WORKDIR /app
 
 COPY packages/app/server/pyproject.toml packages/app/server/uv.lock ./packages/app/server/
 COPY packages/app/server/src ./packages/app/server/src
-COPY packages/models/artifacts ./packages/models/artifacts
+COPY crates/linguae-train/artifacts ./crates/linguae-train/artifacts
 
 WORKDIR /app/packages/app/server
 

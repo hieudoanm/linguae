@@ -10,7 +10,7 @@ const FRENCH: &str = "Bonjour tout le monde, comment allez-vous aujourd'hui dans
 
 fn artifact_directory() -> PathBuf {
     PathBuf::from(env!("CARGO_MANIFEST_DIR"))
-        .join("../../packages/models/artifacts/linguae")
+        .join("../linguae-train/artifacts/linguae")
         .canonicalize()
         .expect("the repository artifact must exist")
 }

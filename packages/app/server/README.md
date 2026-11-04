@@ -48,7 +48,7 @@ All settings are overridable via environment variables:
 | ---------------------------- | ------------------ | ------------------------------ |
 | `LINGUAE_SERVER_HOST`        | `0.0.0.0`          | Bind host                      |
 | `LINGUAE_SERVER_PORT`        | `8000`             | Bind port                      |
-| `LINGUAE_ARTIFACT_DIR`       | `../models/artifacts/linguae` | Artifact directory |
+| `LINGUAE_ARTIFACT_DIR`       | `crates/linguae-train/artifacts/linguae` | Artifact directory |
 | `LINGUAE_DEVICE`             | `cpu`              | Torch device                   |
 | `LINGUAE_RATE_LIMIT`         | `true`             | Enable rate limiting           |
 | `LINGUAE_RATE_LIMIT_REQUESTS`| `60`               | Max requests per window        |

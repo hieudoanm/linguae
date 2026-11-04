@@ -1,0 +1,38 @@
+[package]
+name = "linguae-train"
+description = "Training pipeline for the Linguae character-level language detector"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[[bin]]
+name = "linguae-train"
+path = "src/main.rs"
+
+[dependencies]
+linguae-core = { path = "../linguae-core" }
+candle-core.workspace = true
+candle-nn.workspace = true
+chrono.workspace = true
+clap.workspace = true
+csv.workspace = true
+env_logger.workspace = true
+log.workspace = true
+plotters.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+sha2.workspace = true
+thiserror.workspace = true
+unicode-normalization.workspace = true
+
+[features]
+default = []
+cuda = ["candle-core/cuda", "candle-nn/cuda", "linguae-core/cuda"]
+metal = ["candle-core/metal", "candle-nn/metal", "linguae-core/metal"]
+
+[dev-dependencies]
+assert_cmd = "2"
+predicates = "3"
+tempfile = "3"

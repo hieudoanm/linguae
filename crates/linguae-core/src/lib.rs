@@ -1,8 +1,9 @@
 //! Inference for the Linguae character-level language detector.
 //!
 //! The crate loads the exported artifact directory (`config.json`,
-//! `vocabulary.json`, `labels.json`, `model.pt`) and predicts exactly one
-//! language label per input string. It does not detect mixed-language spans.
+//! `vocabulary.json`, `labels.json`, `model.safetensors`) and predicts exactly
+//! one language label per input string. Legacy `model.pt` artifacts are also
+//! supported. It does not detect mixed-language spans.
 
 pub mod artifact;
 pub mod config;
@@ -10,7 +11,9 @@ pub mod error;
 pub mod model;
 pub mod text;
 
-pub use artifact::{candidates, parse_device, resolve, Artifact, DEFAULT_ARTIFACT, REQUIRED_FILES};
+pub use artifact::{
+    candidates, parse_device, resolve, Artifact, DEFAULT_ARTIFACT, REQUIRED_FILES, WEIGHT_FILES,
+};
 pub use config::Config;
 pub use error::{Error, Result};
 pub use model::CharCnn;

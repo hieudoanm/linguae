@@ -1,32 +1,33 @@
 {
-  "schema_version": 1,
-  "model_type": "character_cnn",
-  "framework": "pytorch",
-  "torch_version": "2.14.1",
+  "artifact_schema": "linguae.language-detector/2",
+  "dropout": 0.3,
   "embedding_dim": 32,
-  "num_filters": [
-    128,
-    128,
-    128
-  ],
+  "framework": "candle",
   "kernel_sizes": [
     3,
     5,
     7
   ],
-  "dropout": 0.3,
-  "vocab_size": 12702,
-  "num_classes": 329,
+  "lowercase": false,
   "max_length": 256,
+  "model_type": "character_cnn",
+  "normalisation": "NFC + whitespace collapse",
+  "num_classes": 329,
+  "num_filters": [
+    128,
+    128,
+    128
+  ],
   "padding_idx": 0,
-  "unknown_idx": 1,
+  "padding_side": "right",
+  "pooling": "masked_max",
+  "prediction_scope": "single-label-per-string",
+  "schema_version": 1,
   "special_tokens": [
     "<pad>",
     "<unk>"
   ],
-  "padding_side": "right",
-  "pooling": "masked_max",
-  "normalisation": "NFC + whitespace collapse",
-  "lowercase": false,
-  "prediction_scope": "single-label-per-string"
+  "unknown_idx": 1,
+  "vocab_size": 12702,
+  "weights": "model.safetensors"
 }

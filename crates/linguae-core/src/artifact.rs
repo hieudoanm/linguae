@@ -10,11 +10,14 @@ use crate::error::{Error, Result};
 use crate::model::CharCnn;
 
 /// Default artifact location, relative to a repository root.
-pub const DEFAULT_ARTIFACT: &str = "packages/models/artifacts/linguae";
+pub const DEFAULT_ARTIFACT: &str = "crates/linguae-train/artifacts/linguae";
 
-/// Files the Rust CLI needs. `linguae_inference.py` is intentionally not
-/// required: it exists for Python consumers, not for this binary.
-pub const REQUIRED_FILES: [&str; 4] = ["config.json", "vocabulary.json", "labels.json", "model.pt"];
+/// Files the Rust CLI needs. `model.safetensors` (or a legacy `model.pt`) is
+/// checked separately because either weight format is accepted.
+pub const REQUIRED_FILES: [&str; 3] = ["config.json", "vocabulary.json", "labels.json"];
+
+/// Supported weight file names, preferred first.
+pub const WEIGHT_FILES: [&str; 2] = ["model.safetensors", "model.pt"];
 
 #[derive(Debug, Deserialize)]
 struct LabelsFile {
@@ -70,7 +73,25 @@ impl Artifact {
         }
 
         let device = parse_device(device)?;
-        let vb = VarBuilder::from_pth(directory.join("model.pt"), DType::F32, &device)?;
+        let weights = WEIGHT_FILES
+            .iter()
+            .map(|name| directory.join(name))
+            .find(|path| path.is_file())
+            .ok_or_else(|| {
+                Error::MissingArtifactFiles(
+                    directory.to_path_buf(),
+                    vec!["model.safetensors or model.pt"],
+                )
+            })?;
+        let vb = if weights.extension().and_then(|value| value.to_str()) == Some("safetensors") {
+            let data = std::fs::read(&weights).map_err(|source| Error::Read {
+                path: weights.clone(),
+                source,
+            })?;
+            VarBuilder::from_buffered_safetensors(data, DType::F32, &device)?
+        } else {
+            VarBuilder::from_pth(&weights, DType::F32, &device)?
+        };
         let model = CharCnn::load(&config, vb)?;
 
         Ok(Self {
@@ -120,11 +141,18 @@ fn read_json<T: for<'de> Deserialize<'de>>(path: &Path) -> Result<T> {
 }
 
 fn missing_files(directory: &Path) -> Vec<&'static str> {
-    REQUIRED_FILES
+    let mut missing: Vec<&'static str> = REQUIRED_FILES
         .iter()
         .copied()
         .filter(|name| !directory.join(name).is_file())
-        .collect()
+        .collect();
+    if !WEIGHT_FILES
+        .iter()
+        .any(|name| directory.join(name).is_file())
+    {
+        missing.push("model.safetensors or model.pt");
+    }
+    missing
 }
 
 fn validate_directory(directory: &Path) -> Result<()> {
@@ -264,6 +292,6 @@ mod tests {
     fn missing_files_lists_every_required_file_for_an_empty_directory() {
         let directory = std::env::temp_dir().join("linguae-empty-artifact");
         let _ = std::fs::create_dir_all(&directory);
-        assert_eq!(missing_files(&directory).len(), REQUIRED_FILES.len());
+        assert_eq!(missing_files(&directory).len(), REQUIRED_FILES.len() + 1);
     }
 }

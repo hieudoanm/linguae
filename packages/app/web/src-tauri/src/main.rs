@@ -10,8 +10,8 @@ fn python_command() -> Command {
     Command::new(interpreter)
 }
 
-fn artifact_dir() -> &'static str {
-    ARTIFACT_DIR.get().map(String::as_str).unwrap_or("packages/models/artifacts/linguae")
+fn artifact_dir() -> Option<&'static str> {
+    ARTIFACT_DIR.get().map(String::as_str)
 }
 
 #[tauri::command]
@@ -32,12 +32,17 @@ fn detect(text: String, top_k: Option<u32>) -> String {
         .and_then(|p| p.parent().map(|d| d.join("tauri_bridge.py")))
         .unwrap_or_else(|| std::path::PathBuf::from("tauri_bridge.py"));
 
-    let mut child = python_command()
+    let mut command = python_command();
+    command
         .arg(&bridge)
-        .env("LINGUAE_ARTIFACT_DIR", artifact_dir())
         .stdin(Stdio::piped())
         .stdout(Stdio::piped())
-        .stderr(Stdio::piped())
+        .stderr(Stdio::piped());
+    if let Some(directory) = artifact_dir() {
+        command.env("LINGUAE_ARTIFACT_DIR", directory);
+    }
+
+    let mut child = command
         .spawn()
         .expect("failed to spawn python bridge");
 
@@ -57,9 +62,9 @@ fn detect(text: String, top_k: Option<u32>) -> String {
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
-    let artifact_dir = std::env::var("LINGUAE_ARTIFACT_DIR")
-        .unwrap_or_else(|_| "packages/models/artifacts/linguae".to_string());
-    let _ = ARTIFACT_DIR.set(artifact_dir);
+    if let Ok(artifact_dir) = std::env::var("LINGUAE_ARTIFACT_DIR") {
+        let _ = ARTIFACT_DIR.set(artifact_dir);
+    }
 
     let python_bin = std::env::var("LINGUAE_PYTHON_BIN")
         .or_else(|_| std::env::var("PYTHON"))

@@ -51,10 +51,10 @@ data/txt/wili-2018/*.txt
   → data/csv/wili-2018-words.csv      (words: text, language, count)
 
 data/csv/wili-2018.csv + data/csv/tatoeba.tsv + data/csv/wili-2018-words.csv
-  → scripts/train_language_detector.py
+  → crates/linguae-train (cargo run -p linguae-train -- train)
   → data/processed/labels.json
-  → artifacts/images/*.png
-  → artifacts/linguae/
+  → crates/linguae-train/artifacts/images/*.svg
+  → crates/linguae-train/artifacts/linguae/
 ```
 
 ### Steps
@@ -67,17 +67,18 @@ data/csv/wili-2018.csv + data/csv/tatoeba.tsv + data/csv/wili-2018-words.csv
    labels.
 3. **Extract words** — `cargo run -p linguae-data -- words` tokenises the WiLI
    splits and writes the most frequent words per language with their counts.
-4. **Load the sources** — the training script reads the WiLI CSV, the Tatoeba
+4. **Load the sources** — the Rust trainer reads the WiLI CSV, the Tatoeba
    TSV, and (when present) the word CSV, validating each source separately.
    `tatoeba.csv` is available for tooling that prefers CSV.
 5. **Normalise and combine** — labels are aliased where Tatoeba uses a variant
    code, contradictory labels and duplicate `(text, language)` pairs are
    dropped, and each source is subsampled per language. The word source uses
    its own per-language cap.
-6. **Train** — `scripts/train_language_detector.py` splits the combined frame
-   per language and trains the character-level CNN, writing plots and
-   `labels.json`.
-7. **Export** — a self-contained artifact is written to `artifacts/linguae/`.
+6. **Train** — `cargo run -p linguae-train -- train` splits the combined frame
+   per language and trains the character-level CNN with Candle, writing
+   `labels.json`, SVG plots, and the exported artifact.
+7. **Export** — a self-contained safetensors artifact is written to
+   `crates/linguae-train/artifacts/linguae/`.
 
 ## Datasets
 
@@ -118,17 +119,16 @@ does not list Tatoeba-only labels.
 ## Regenerating Data
 
 ```bash
-cd packages/models
-uv sync
-make csv      # build the WiLI, Tatoeba and word CSVs with linguae-data
-make train    # run scripts/train_language_detector.py
+cd crates
+cargo run --release -p linguae-data -- all   # build the WiLI, Tatoeba and word CSVs
+cargo run --release -p linguae-train -- train
 ```
 
-`make csv` requires the raw WiLI-2018 files and `csv/tatoeba.tsv`. It runs
-the Rust pipeline from `crates/linguae-data`; `make wili`, `make tatoeba`, and
-`make words` build the datasets individually. `make notebook` is an alias for
-`make csv`; `make train-notebook` executes the Jupyter training notebook
-instead.
+The data targets require the raw WiLI-2018 files and `csv/tatoeba.tsv`. Run
+`wili`, `tatoeba`, and `words` individually to build one dataset at a time.
+`make csv` and `make train` in `crates/linguae-train` wrap the same commands.
+See `crates/linguae-train/README.md` for training options and environment
+variables.
 
 ## Key Files
 
@@ -139,14 +139,11 @@ instead.
 | `csv/tatoeba.tsv`                               | Short-text dataset: headerless `id`, `language`, `text`     |
 | `csv/tatoeba.csv`                               | Converted short-text dataset: `id`, `language`, `text`      |
 | `csv/wili-2018-words.csv`                       | Frequent words per language: `text`, `language`, `count`    |
-| `processed/labels.json`                         | Label index map consumed by the model                       |
-| `artifacts/images/network_architecture.png`     | VisualTorch flow view of the character-level CNN            |
-| `artifacts/images/layer_dimensions.png`         | Per-layer input/output shapes and parameter counts          |
-| `artifacts/images/training_curves.png`          | Training/validation loss and accuracy over epochs           |
-| `artifacts/images/confusion_matrix.png`         | Per-class confusion matrix heatmap                          |
-| `artifacts/images/prediction_probabilities.png` | Top-k softmax scores for sample inputs                      |
-| `artifacts/images/dataset_quality.png`          | Per-source length distribution and class balance            |
-| `artifacts/images/accuracy_by_length.png`       | Accuracy stratified by text length                          |
+| `processed/labels.json`                         | Label index map written by the trainer                      |
+| `crates/linguae-train/artifacts/images/training_curves.svg` | Training/validation loss and accuracy over epochs  |
+| `crates/linguae-train/artifacts/images/confusion_matrix.svg` | Per-class confusion matrix heatmap                |
+| `crates/linguae-train/artifacts/images/dataset_quality.svg` | Per-source length distribution and class balance   |
+| `crates/linguae-train/artifacts/images/accuracy_by_length.svg` | Accuracy stratified by text length             |
 
 ## Notes
 

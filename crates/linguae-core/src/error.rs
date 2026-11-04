@@ -3,7 +3,7 @@ use std::path::PathBuf;
 /// Errors raised while resolving or loading a Linguae artifact.
 #[derive(Debug, thiserror::Error)]
 pub enum Error {
-    #[error("could not find the Linguae artifact. Pass --artifact PATH or set LINGUAE_ARTIFACT_DIR. Expected files: config.json, vocabulary.json, labels.json, model.pt")]
+    #[error("could not find the Linguae artifact. Pass --artifact PATH or set LINGUAE_ARTIFACT_DIR. Expected files: config.json, vocabulary.json, labels.json, model.safetensors (or model.pt)")]
     ArtifactNotFound,
 
     #[error("artifact directory not found: {}", .0.display())]

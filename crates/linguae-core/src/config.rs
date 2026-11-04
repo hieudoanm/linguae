@@ -17,10 +17,19 @@ pub struct Config {
     pub unknown_idx: u32,
     #[serde(default)]
     pub lowercase: bool,
+    #[serde(default)]
+    pub length_embedding: bool,
+    #[serde(default = "default_length_embedding_dim")]
+    pub length_embedding_dim: usize,
+    #[serde(default)]
+    pub mean_pooling: bool,
 }
 
 fn default_unknown_idx() -> u32 {
     1
+}
+fn default_length_embedding_dim() -> usize {
+    8
 }
 
 impl Config {

@@ -23,7 +23,7 @@ struct Cli {
     #[arg(short = 'f', long = "file", value_name = "PATH")]
     input_file: Option<PathBuf>,
 
-    /// Artifact directory (default: packages/models/artifacts/linguae).
+    /// Artifact directory (default: crates/linguae-train/artifacts/linguae).
     #[arg(
         short = 'a',
         long = "artifact",

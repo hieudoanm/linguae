@@ -1,17 +1,8 @@
-"""Standalone inference utilities for the exported Linguae language detector.
+"""Standalone inference for the exported Linguae language detector.
 
-The artifact directory contains this module next to ``model.pt``, ``config.json``,
-``vocabulary.json`` and ``labels.json`` so that inference needs neither the
-training notebook nor the training data.
-
-Typical use::
-
-    from linguae_inference import load_artifact, predict_text
-
-    artifact = load_artifact("./artifacts/linguae")
-    print(predict_text("Bonjour tout le monde", artifact))
-
-The model predicts exactly one language for a whole string. It does not perform
+The artifact directory contains ``model.safetensors`` (or a legacy
+``model.pt``), ``config.json``, ``vocabulary.json`` and ``labels.json``. The
+model predicts exactly one language for a whole string; it does not perform
 mixed-language span detection.
 """
 
@@ -21,8 +12,10 @@ import json
 import re
 import unicodedata
 from pathlib import Path
+from typing import Any
 
 import torch
+from safetensors.torch import load_file
 from torch import nn
 
 PAD_TOKEN = "<pad>"
@@ -47,7 +40,9 @@ def encode_text(text: str, vocabulary: dict[str, int], max_length: int) -> list[
     return [vocabulary.get(character, UNK_ID) for character in characters]
 
 
-def pad_sequences(sequences: list[list[int]], max_length: int | None = None) -> torch.Tensor:
+def pad_sequences(
+    sequences: list[list[int]], max_length: int | None = None
+) -> torch.Tensor:
     """Right-pad ID sequences with ``PAD_ID`` and return a long tensor ``[batch, length]``."""
     if not sequences:
         return torch.empty((0, 0), dtype=torch.long)
@@ -104,7 +99,7 @@ class CharCNN(nn.Module):
         return self.classifier(representation)
 
 
-def build_model(config: dict, device: str = "cpu") -> CharCNN:
+def build_model(config: dict[str, Any], device: str = "cpu") -> CharCNN:
     """Construct a :class:`CharCNN` from an exported ``config.json`` mapping."""
     model = CharCNN(
         vocab_size=int(config["vocab_size"]),
@@ -118,14 +113,21 @@ def build_model(config: dict, device: str = "cpu") -> CharCNN:
     return model.to(device)
 
 
-def load_artifact(directory: str | Path, device: str = "cpu") -> dict:
+def load_artifact(directory: str | Path, device: str = "cpu") -> dict[str, Any]:
     """Load config, vocabulary, labels and weights from an artifact directory."""
     directory = Path(directory)
     config = json.loads((directory / "config.json").read_text(encoding="utf-8"))
     vocabulary = json.loads((directory / "vocabulary.json").read_text(encoding="utf-8"))
     labels = json.loads((directory / "labels.json").read_text(encoding="utf-8"))
     model = build_model(config, device=device)
-    state_dict = torch.load(directory / "model.pt", map_location="cpu", weights_only=True)
+
+    safetensors_path = directory / "model.safetensors"
+    if safetensors_path.is_file():
+        state_dict = load_file(str(safetensors_path), device=device)
+    else:
+        state_dict = torch.load(
+            directory / "model.pt", map_location=device, weights_only=True
+        )
     model.load_state_dict(state_dict)
     model.eval()
     return {
@@ -139,7 +141,7 @@ def load_artifact(directory: str | Path, device: str = "cpu") -> dict:
     }
 
 
-def predict_text(text: str, artifact: dict, top_k: int = 3) -> dict:
+def predict_text(text: str, artifact: dict[str, Any], top_k: int = 3) -> dict[str, Any]:
     """Predict one language label for a whole string and return top-k scores."""
     model = artifact["model"]
     max_length = int(artifact["config"]["max_length"])
@@ -161,7 +163,9 @@ def predict_text(text: str, artifact: dict, top_k: int = 3) -> dict:
     }
 
 
-def predict_batch(texts: list[str], artifact: dict, batch_size: int = 256) -> list[dict]:
+def predict_batch(
+    texts: list[str], artifact: dict[str, Any], batch_size: int = 256
+) -> list[dict[str, Any]]:
     """Predict one language label per string in a list."""
     model = artifact["model"]
     max_length = int(artifact["config"]["max_length"])

@@ -1,8 +1,8 @@
 """JSON bridge for Tauri desktop invocation.
 
-Reads a JSON request from stdin, runs inference using the Linguae artifact,
-and writes a JSON response to stdout. This lets the Tauri Rust backend call
-into the existing Python inference code without embedding CPython.
+Reads a JSON request from stdin, runs inference using the bundled Linguae
+artifact, and writes a JSON response to stdout. This lets the Tauri Rust backend
+call into the Python inference code without embedding CPython.
 """
 
 from __future__ import annotations
@@ -12,11 +12,17 @@ import os
 import sys
 from pathlib import Path
 
-# Ensure the artifact directory is importable when running from a frozen binary.
-_ARTIFACT_DIR = Path(os.environ.get("LINGUAE_ARTIFACT_DIR", "packages/models/artifacts/linguae"))
-sys.path.insert(0, str(_ARTIFACT_DIR))
+# In development this file lives next to ``inference.py`` in ``src-tauri``; in a
+# bundle Tauri copies both files into the same resource directory.
+_SCRIPT_DIR = Path(__file__).resolve().parent
+if str(_SCRIPT_DIR) not in sys.path:
+    sys.path.insert(0, str(_SCRIPT_DIR))
 
-from linguae_inference import load_artifact, predict_text  # noqa: E402
+_ARTIFACT_DIR = Path(
+    os.environ.get("LINGUAE_ARTIFACT_DIR", str(_SCRIPT_DIR))
+)
+
+from inference import load_artifact, predict_text  # noqa: E402
 
 
 def main() -> int:

@@ -3,12 +3,12 @@
 **Detect the language of text with a local character-level model — no cloud, no pretrained weights, no network calls.**
 
 Linguae is a local-first language identification project. It trains a
-character-level CNN from scratch in PyTorch on the Tatoeba (short sentences),
+character-level CNN from scratch with Candle on the Tatoeba (short sentences),
 WiLI-2018 (long paragraphs), and per-language WiLI word datasets and ships a
 standalone command-line tool that predicts exactly one language per input
 string. Everything runs on your own machine.
 
-[Documentation](AGENTS.md) · [🚀 Quick Start](#get-started) · [🔍 See It In Action](#see-it-in-action) · [CLI Usage](crates/README.md) · [Model Training](packages/models/README.md)
+[Documentation](AGENTS.md) · [🚀 Quick Start](#get-started) · [🔍 See It In Action](#see-it-in-action) · [CLI Usage](crates/README.md) · [Model Training](crates/linguae-train/README.md)
 
 ![Linguae](assets/og/og-light.png)
 
@@ -21,10 +21,11 @@ backports that are hard to inspect or shrink.
 
 ## The Solution
 
-Linguae trains a small character-level CNN from scratch in PyTorch and ships
-a small Rust CLI binary that runs inference with [Candle](https://github.com/huggingface/candle).
-The model performs **single-label classification per string**; it does not
-detect mixed-language spans.
+Linguae trains a small character-level CNN from scratch with
+[Candle](https://github.com/huggingface/candle) and ships a small Rust CLI
+binary that runs inference with the same runtime. The model performs
+**single-label classification per string**; it does not detect mixed-language
+spans.
 
 - **Local-first & private** — Inference runs entirely on your machine. Your text never leaves your environment.
 - **From text to language in one command** — `linguae "Bonjour tout le monde"` prints `fra`.
@@ -66,8 +67,8 @@ linguae --json "Bonjour tout le monde, comment allez-vous ?"
 
 ### Prerequisites
 
-- [Rust](https://www.rust-lang.org/) 1.85+ (CLI)
-- [Python](https://www.python.org/) 3.14.8 and [uv](https://github.com/astral-sh/uv) (training only)
+- [Rust](https://www.rust-lang.org/) 1.85+ (CLI, data pipeline, training)
+- [Python](https://www.python.org/) 3.14.8 and [uv](https://github.com/astral-sh/uv) (HTTP server only)
 
 ### Install the CLI
 
@@ -79,11 +80,13 @@ cargo build --release -p linguae
 ### Train the model (optional)
 
 ```bash
-cd packages/models
-uv sync
-make csv                      # build the WiLI, Tatoeba and word CSVs
-make train                    # run scripts/train_language_detector.py
+cd crates
+cargo run --release -p linguae-data -- all   # build the WiLI, Tatoeba and word CSVs
+cargo run --release -p linguae-train -- train
 ```
+
+The trainer writes the artifact to `crates/linguae-train/artifacts/linguae` and
+SVG plots to `crates/linguae-train/artifacts/images`.
 
 ### Run
 
@@ -166,7 +169,7 @@ All settings are overridable via environment variables (see `packages/app/server
 | ----------------------------- | ----------------------------- | -------------------------- |
 | `LINGUAE_SERVER_HOST`         | `0.0.0.0`                     | Bind host                  |
 | `LINGUAE_SERVER_PORT`         | `8000`                        | Bind port                  |
-| `LINGUAE_ARTIFACT_DIR`        | `../models/artifacts/linguae` | Artifact directory         |
+| `LINGUAE_ARTIFACT_DIR`        | `crates/linguae-train/artifacts/linguae` | Artifact directory |
 | `LINGUAE_DEVICE`              | `cpu`                         | Torch device               |
 | `LINGUAE_RATE_LIMIT`          | `true`                        | Enable rate limiting       |
 | `LINGUAE_RATE_LIMIT_REQUESTS` | `60`                          | Max requests per window    |
@@ -195,36 +198,40 @@ All settings are overridable via environment variables (see `packages/app/server
 - **Focused scope** — Does one thing well: predict one language per string from a character-level CNN. No AutoML bloat, no pretrained weights.
 - **Transparent** — Clear training pipeline, per-metric explanations, and reproducibility metadata.
 - **Local-first** — Runs entirely on your machine; no vendor lock-in or external dependencies.
-- **Production-minded demo** — Real PyTorch training + Rust/Candle inference implementation with CI, linting, and GitHub Releases.
+- **Production-minded demo** — Real Rust/Candle training and inference implementation with CI, linting, and GitHub Releases.
 
 ## Training Visualisations
 
 The model is trained end-to-end on Tatoeba (short sentences) and WiLI-2018
 (long paragraphs). The following visualisations are produced in
-`packages/models/artifacts/images/`:
+`crates/linguae-train/artifacts/images/`:
 
-![Network architecture](packages/models/artifacts/images/network_architecture.png)
+![Network architecture](crates/linguae-train/artifacts/images/network_architecture.png)
 
-![Layer dimensions](packages/models/artifacts/images/layer_dimensions.png)
+![Layer dimensions](crates/linguae-train/artifacts/images/layer_dimensions.png)
 
-![Training curves](packages/models/artifacts/images/training_curves.png)
+![Training curves](crates/linguae-train/artifacts/images/training_curves.png)
 
-![Confusion matrix](packages/models/artifacts/images/confusion_matrix.png)
+![Confusion matrix](crates/linguae-train/artifacts/images/confusion_matrix.png)
 
-![Prediction probabilities](packages/models/artifacts/images/prediction_probabilities.png)
+![Prediction probabilities](crates/linguae-train/artifacts/images/prediction_probabilities.png)
 
-![Dataset quality](packages/models/artifacts/images/dataset_quality.png)
+![Dataset quality](crates/linguae-train/artifacts/images/dataset_quality.png)
 
-![Accuracy by length](packages/models/artifacts/images/accuracy_by_length.png)
+![Accuracy by length](crates/linguae-train/artifacts/images/accuracy_by_length.png)
 
+The Rust trainer regenerates the dataset-quality, training-curve, confusion
+matrix, and accuracy-by-length figures as SVG. The architecture and layer
+diagrams above were produced by the legacy PyTorch pipeline and are retained for
+reference.
 
 ## Project Status and Trust
 
 - **Maturity:** Software demonstration (not intended for production safety-critical use).
 - **Dataset:** Tatoeba short sentences plus WiLI-2018 long paragraphs, combined into one label space (235,000 WiLI examples before filtering).
-- **Architecture:** Character-level CNN trained from scratch in PyTorch, exported as a small Rust CLI binary that runs inference with Candle.
+- **Architecture:** Character-level CNN trained from scratch with Candle, exported as a small Rust CLI binary that runs inference with the same runtime.
 - **License:** [MIT License](LICENSE) — see the `LICENSE` file for full terms.
-- **Tech stack:** Rust 1.85+ (CLI, Candle, clap), Python 3.14.8 (training), PyTorch 2.14.1, NumPy 2.5.4, pandas 3.1.0, uv, ruff.
+- **Tech stack:** Rust 1.85+ (CLI, training, Candle, clap, plotters), Python 3.14.8 (HTTP server), PyTorch 2.15.0 (server inference only), safetensors, uv, ruff.
 - **Note on text length:** The model is trained on both short Tatoeba sentences and long WiLI paragraphs, and it truncates inputs to its first 256 characters. Very short texts can still produce low-confidence or incorrect predictions.
 
 ## Community and Contributions
@@ -233,7 +240,7 @@ Contributions, bug reports, and feature suggestions are welcome. See:
 
 - [AGENTS.md](AGENTS.md) — architecture, pipeline, dependencies, build/test commands
 - [crates/README.md](crates/README.md) — Rust CLI usage, artifact resolution, parity tests
-- [packages/models/AGENTS.md](packages/models/AGENTS.md) — training pipeline and data
+- [crates/linguae-train/README.md](crates/linguae-train/README.md) — training pipeline, configuration, and exports
 
 To report issues or propose changes, open an issue or pull request in this repository.
 
