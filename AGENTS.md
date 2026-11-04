@@ -9,9 +9,9 @@ other ML frameworks are used.
 
 **Problem:** Reliable language identification should run locally without
 network calls or pretrained weights.
-**Solution:** A character-level CNN trained on Tatoeba (short sentences) and
-WiLI-2018 (long paragraphs), served by a small Rust CLI binary that runs
-inference with Candle.
+**Solution:** A character-level CNN trained on Tatoeba (short sentences),
+WiLI-2018 (long paragraphs), and a per-language WiLI word dataset, served by a
+small Rust CLI binary that runs inference with Candle.
 
 ## Architecture
 
@@ -20,12 +20,9 @@ inference with Candle.
 ```
 linguae/
 ├── packages/
-│   ├── models/                 # Model training + data
-│   │   ├── notebooks/          # wili_2018_txt_to_csv.py/.ipynb, train_language_detector.py/.ipynb
-│   │   ├── data/               # Raw and processed datasets
-│   │   │   ├── csv/tatoeba.tsv        # Short sentences (id, language, text)
-│   │   │   ├── csv/wili-2018.csv      # Long texts (text, language)
-│   │   │   └── processed/labels.json, plots/*.png
+│   ├── models/                 # Model training + artifacts
+│   │   ├── notebooks/          # Training notebooks
+│   │   ├── scripts/            # Headless training script
 │   │   ├── models/             # language_detector.pt
 │   │   ├── artifacts/linguae/  # CLI artifact (config.json, vocabulary.json, labels.json, model.pt, linguae_inference.py)
 │   │   ├── pyproject.toml
@@ -33,9 +30,15 @@ linguae/
 │   └── app/                    # FastAPI server + Next.js/Tauri app
 │       ├── server/
 │       └── web/
-├── crates/                     # Rust CLI workspace
+├── crates/                     # Rust workspace
 │   ├── linguae-core/           # Artifact loading, preprocessing, CharCNN (Candle)
-│   └── linguae-cli/            # `linguae` binary (clap)
+│   ├── linguae-cli/            # `linguae` binary (clap)
+│   └── linguae-data/           # Dataset conversion + word extraction
+│       └── data/               # Raw and processed datasets
+│           ├── csv/tatoeba.tsv        # Short sentences (id, language, text)
+│           ├── csv/wili-2018.csv      # Long texts (text, language)
+│           ├── csv/wili-2018-words.csv # Frequent words (text, language, count)
+│           └── processed/labels.json
 ├── .github/workflows/ci.yaml   # CI + GitHub release
 ├── AGENTS.md
 ├── LICENSE
@@ -44,8 +47,8 @@ linguae/
 
 ### Pipeline
 
-1. **Data**: `data/txt/wili-2018/*.txt` -> `notebooks/wili_2018_txt_to_csv.py` -> `data/csv/wili-2018.csv` (long texts); `data/csv/tatoeba.tsv` supplies short sentences
-2. **Train**: `notebooks/train_language_detector.py` loads both sources, aliases labels, drops conflicting/duplicate texts, subsamples per source, and writes `data/processed/labels.json` plus `artifacts/images/*.png`
+1. **Data**: `crates/linguae-data` converts `crates/linguae-data/data/txt/wili-2018/*.txt` to `crates/linguae-data/data/csv/wili-2018.csv` (long texts), `crates/linguae-data/data/csv/tatoeba.tsv` to `crates/linguae-data/data/csv/tatoeba.csv` (short sentences), and extracts `crates/linguae-data/data/csv/wili-2018-words.csv` (frequent words per language)
+2. **Train**: `packages/models/scripts/train_language_detector.py` loads the three sources, aliases labels, drops conflicting/duplicate texts, subsamples sentence sources per source and words per language, and writes `crates/linguae-data/data/processed/labels.json` plus `artifacts/images/*.png`
 3. **Export**: Build the CLI artifact directory `packages/models/artifacts/linguae` containing `config.json`, `vocabulary.json`, `labels.json`, `model.pt`, `linguae_inference.py`, `metrics.json`, `manifest.json`
 4. **Serve (HTTP)**: `packages/app/server` exposes a FastAPI API that loads the artifact and predicts one language per string over JSON/form endpoints with rate limiting, CORS, GZip, request ID, and timeout middlewares.
 5. **Serve (CLI)**: `crates/linguae-cli` exposes the `linguae` command (clap) which loads the artifact directly and predicts one language per string.
@@ -59,6 +62,7 @@ linguae/
 
 ## Environment Variables
 
+- `LINGUAE_DATA_DIR`: Dataset directory (default: `crates/linguae-data/data`).
 - `LINGUAE_ARTIFACT_DIR`: Artifact directory (default: `packages/models/artifacts/linguae`).
 - The Rust CLI resolves artifacts relative to `--artifact`, `LINGUAE_ARTIFACT_DIR`, the current directory and its parents, or the executable and its parents.
 
@@ -66,7 +70,7 @@ linguae/
 
 ### Runtime
 
-- **Rust** 1.85+ for the CLI (`cargo`, Candle, clap)
+- **Rust** 1.85+ for the CLI and data pipeline (`cargo`, Candle, clap)
 - **Python** 3.14.8 for training and the HTTP server (`.python-version`, `pyproject.toml: requires-python = "==3.14.8"`)
 - **Virtual env**: `uv` with `.venv`
 
@@ -108,15 +112,16 @@ linguae/
 # Model package
 cd packages/models
 make install      # uv sync
-make csv          # build data/csv/wili-2018.csv from raw txt
+make csv          # build the WiLI, Tatoeba and word CSVs with linguae-data
 make notebook     # alias for csv
-make train        # run notebooks/train_language_detector.py
+make train        # run scripts/train_language_detector.py
 make train-notebook  # execute the Jupyter training notebook instead
 
-# CLI (Rust workspace)
+# Rust workspace (CLI + data pipeline)
 cd crates
 cargo test --workspace
 cargo build --release -p linguae
+cargo run --release -p linguae-data -- all
 ./target/release/linguae "Bonjour tout le monde"
 cargo fmt --all -- --check
 cargo clippy --workspace --all-targets -- -D warnings

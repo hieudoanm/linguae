@@ -1,25 +1,37 @@
-.PHONY: install wili tatoeba run train train-notebook clean
+.PHONY: install wili tatoeba words csv notebook run train train-notebook clean
+
+CARGO ?= cargo
+CRATES_MANIFEST ?= ../../crates/Cargo.toml
+DATA_DIR ?= ../../crates/linguae-data/data
+LINGUAE_DATA ?= $(CARGO) run --quiet --release --manifest-path $(CRATES_MANIFEST) -p linguae-data -- --data-dir $(DATA_DIR)
 
 install:
 	uv sync
 
-wili: scripts/wili_2018_txt_to_csv.py
-	uv run python scripts/wili_2018_txt_to_csv.py
+wili:
+	$(LINGUAE_DATA) wili
 
-tatoeba: scripts/tatoeba_tsv_to_csv.py
-	uv run python scripts/tatoeba_tsv_to_csv.py
+tatoeba:
+	$(LINGUAE_DATA) tatoeba
 
-run: wili tatoeba
+words:
+	$(LINGUAE_DATA) words
+
+csv: wili tatoeba words
+
+notebook: csv
+
+run: csv
 
 # Training regenerates the exported artifacts, so allow replacing a previous
 # run by default. Pass LINGUAE_ALLOW_OVERWRITE=0 to keep the safety check.
 LINGUAE_ALLOW_OVERWRITE ?= 1
 
 train:
-	LINGUAE_ALLOW_OVERWRITE=$(LINGUAE_ALLOW_OVERWRITE) uv run python scripts/train_language_detector.py
+	LINGUAE_DATA_DIR=$(DATA_DIR) LINGUAE_ALLOW_OVERWRITE=$(LINGUAE_ALLOW_OVERWRITE) uv run python scripts/train_language_detector.py
 
 train-notebook:
-	LINGUAE_ALLOW_OVERWRITE=$(LINGUAE_ALLOW_OVERWRITE) uv run jupyter nbconvert --to notebook --execute --inplace notebooks/train_language_detector.ipynb
+	LINGUAE_DATA_DIR=$(DATA_DIR) LINGUAE_ALLOW_OVERWRITE=$(LINGUAE_ALLOW_OVERWRITE) uv run jupyter nbconvert --to notebook --execute --inplace notebooks/train_language_detector.ipynb
 
 clean:
-	rm -f data/csv/wili-2018.csv data/csv/tatoeba.csv
+	rm -f $(DATA_DIR)/csv/wili-2018.csv $(DATA_DIR)/csv/tatoeba.csv $(DATA_DIR)/csv/wili-2018-words.csv

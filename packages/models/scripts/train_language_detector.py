@@ -9,14 +9,17 @@ Usage::
     cd packages/models
     uv run python scripts/train_language_detector.py
 
-Training data comes from both datasets listed in ``CONFIG.sources``:
+Training data comes from the datasets listed in ``CONFIG.sources``, stored under
+``crates/linguae-data/data/csv``:
 
-* ``data/csv/tatoeba.tsv`` - short conversational sentences.
-* ``data/csv/wili-2018.csv`` - long sentences and Wikipedia paragraphs.
+* ``tatoeba.tsv`` - short conversational sentences.
+* ``wili-2018.csv`` - long sentences and Wikipedia paragraphs.
+* ``wili-2018-words.csv`` - frequent single words from WiLI, used to improve
+  detection of very short strings (only added when the file exists).
 
 Each source is normalised, duplicate/contradictory texts are resolved, and the
-combined frame is split per language. Short and long inputs therefore share one
-label space, and metrics are reported per source as well as overall.
+combined frame is split per language. Short, long and word inputs therefore share
+one label space, and metrics are reported per source as well as overall.
 
 Environment overrides (all optional)::
 
@@ -24,11 +27,14 @@ Environment overrides (all optional)::
     LINGUAE_PROGRESS_EVERY        log every N batches (default 200)
     LINGUAE_WILI_CSV              long-form CSV path
     LINGUAE_TATOEBA_TSV           short-form TSV path
+    LINGUAE_WILI_WORDS_CSV        per-language word CSV path
     LINGUAE_DISABLE_WILI          "1" skips the WiLI source
     LINGUAE_DISABLE_TATOEBA       "1" skips the Tatoeba source
-    LINGUAE_DATASET_PATH          single custom CSV instead of the two defaults
+    LINGUAE_DISABLE_WILI_WORDS    "1" skips the word source
+    LINGUAE_DATASET_PATH          single custom CSV instead of the defaults
     LINGUAE_MIN_EXAMPLES_PER_LANGUAGE  drop rarer labels (default 100)
     LINGUAE_MAX_ROWS_PER_LANGUAGE_PER_SOURCE  0 keeps all; default 1000
+    LINGUAE_MAX_WORDS_PER_LANGUAGE  cap for the word source; 0 keeps all; default 100000
     LINGUAE_MAX_ROWS_PER_LANGUAGE 0 keeps all rows; > 0 caps the combined frame
     LINGUAE_MAX_LENGTH            character sequence length (default 256)
     LINGUAE_BATCH_SIZE            batch size (default 256)
@@ -37,7 +43,8 @@ Environment overrides (all optional)::
     LINGUAE_PLOTS_DIR             image output directory (default artifacts/images)
     LINGUAE_ARTIFACT_DIR          export directory (default artifacts/linguae)
     LINGUAE_ALLOW_OVERWRITE       "1" replaces a non-empty artifact directory
-    LINGUAE_PACKAGE_ROOT          override package-root discovery
+    LINGUAE_DATA_DIR              override crates/linguae-data/data discovery
+    LINGUAE_PACKAGE_ROOT          override packages/models discovery
 
 The exported artifact performs single-label language classification per string.
 It does not detect mixed-language spans.
@@ -367,7 +374,7 @@ def find_package_root(start: Path | None = None) -> Path:
     override = os.environ.get("LINGUAE_PACKAGE_ROOT")
     if override:
         root = Path(override).expanduser().resolve()
-        if (root / "pyproject.toml").is_file() and (root / "data").is_dir():
+        if (root / "pyproject.toml").is_file():
             return root
         raise FileNotFoundError(
             f"LINGUAE_PACKAGE_ROOT={override!r} does not look like packages/models."
@@ -379,11 +386,7 @@ def find_package_root(start: Path | None = None) -> Path:
     for origin in origins:
         for candidate in (origin.resolve(), *origin.resolve().parents):
             for option in (candidate, candidate / "packages" / "models"):
-                if (
-                    (option / "pyproject.toml").is_file()
-                    and (option / "data").is_dir()
-                    and (option / "notebooks").is_dir()
-                ):
+                if (option / "pyproject.toml").is_file() and (option / "notebooks").is_dir():
                     return option
     raise FileNotFoundError(
         "Could not locate packages/models. Start Jupyter inside the repository, or set "
@@ -391,7 +394,41 @@ def find_package_root(start: Path | None = None) -> Path:
     )
 
 
+def find_data_root(start: Path | None = None) -> Path:
+    '''Locate crates/linguae-data/data by walking up from the current directory or script.'''
+    override = os.environ.get("LINGUAE_DATA_DIR")
+    if override:
+        root = Path(override).expanduser().resolve()
+        if _is_data_root(root):
+            return root
+        raise FileNotFoundError(
+            f"LINGUAE_DATA_DIR={override!r} is not a Linguae data directory."
+        )
+    origins = [Path(start)] if start else [Path.cwd()]
+    script_file = globals().get("__file__")
+    if script_file:
+        origins.append(Path(str(script_file)).resolve().parent)
+    for origin in origins:
+        for candidate in (origin.resolve(), *origin.resolve().parents):
+            for option in (
+                candidate / "crates" / "linguae-data" / "data",
+                candidate / "data",
+                candidate,
+            ):
+                if _is_data_root(option):
+                    return option
+    raise FileNotFoundError(
+        "Could not locate crates/linguae-data/data. Start from the repository, or set "
+        "LINGUAE_DATA_DIR=/absolute/path/to/crates/linguae-data/data."
+    )
+
+
+def _is_data_root(path: Path) -> bool:
+    return path.is_dir() and ((path / "csv").is_dir() or (path / "txt").is_dir())
+
+
 PACKAGE_ROOT = find_package_root()
+DATA_ROOT = find_data_root()
 
 # Tatoeba uses individual ISO 639-3 codes while WiLI-2018 uses a few older or
 # macro-language codes. Merge the known equivalents so short Tatoeba sentences
@@ -425,11 +462,11 @@ class DatasetSource:
     label_column: str = "language"
     format: str = "csv"  # "csv" (header row) or "tsv" (explicit columns)
     columns: tuple[str, ...] | None = None  # names to assign when there is no header
-    role: str = "mixed"  # "short", "long" or "mixed"; used for reporting only
+    role: str = "mixed"  # "short", "long", "words" or "mixed"; used for reporting only
 
 
 def build_sources() -> tuple[DatasetSource, ...]:
-    '''Resolve the default two-source layout, allowing environment overrides.'''
+    '''Resolve the default source layout, allowing environment overrides.'''
     legacy = os.environ.get("LINGUAE_DATASET_PATH")
     if legacy:
         return (DatasetSource(name="custom", path=Path(legacy).expanduser()),)
@@ -442,7 +479,7 @@ def build_sources() -> tuple[DatasetSource, ...]:
                 path=Path(
                     os.environ.get(
                         "LINGUAE_WILI_CSV",
-                        str(PACKAGE_ROOT / "data" / "csv" / "wili-2018.csv"),
+                        str(DATA_ROOT / "csv" / "wili-2018.csv"),
                     )
                 ).expanduser(),
                 role="long",
@@ -455,7 +492,7 @@ def build_sources() -> tuple[DatasetSource, ...]:
                 path=Path(
                     os.environ.get(
                         "LINGUAE_TATOEBA_TSV",
-                        str(PACKAGE_ROOT / "data" / "csv" / "tatoeba.tsv"),
+                        str(DATA_ROOT / "csv" / "tatoeba.tsv"),
                     )
                 ).expanduser(),
                 format="tsv",
@@ -463,6 +500,23 @@ def build_sources() -> tuple[DatasetSource, ...]:
                 role="short",
             )
         )
+    if os.environ.get("LINGUAE_DISABLE_WILI_WORDS", "0") != "1":
+        words_path = Path(
+            os.environ.get(
+                "LINGUAE_WILI_WORDS_CSV",
+                str(DATA_ROOT / "csv" / "wili-2018-words.csv"),
+            )
+        ).expanduser()
+        # The word dataset is optional: it only exists after running the
+        # linguae-data extraction step.
+        if words_path.is_file():
+            sources.append(
+                DatasetSource(
+                    name="wili-words",
+                    path=words_path,
+                    role="words",
+                )
+            )
     return tuple(sources)
 
 
@@ -470,14 +524,15 @@ def build_sources() -> tuple[DatasetSource, ...]:
 class Config:
     '''Single configuration object for data, model, training and export.'''
 
-    # Data sources: short Tatoeba sentences plus long WiLI paragraphs.
+    # Data sources: short Tatoeba sentences, long WiLI paragraphs and words.
     sources: tuple[DatasetSource, ...] = build_sources()
     min_examples_per_language: int = 100  # drop labels too rare to evaluate
     max_rows_per_language_per_source: int = 1000  # 0 keeps every row per source
+    max_words_per_language: int = 100_000  # 0 keeps every word per language
     max_rows_per_language: int = 0  # 0 keeps every row; > 0 caps the combined frame
 
     # Output locations
-    processed_dir: Path = PACKAGE_ROOT / "data" / "processed"
+    processed_dir: Path = DATA_ROOT / "processed"
     plots_dir: Path = PACKAGE_ROOT / "artifacts" / "images"
 
     # Deterministic splitting
@@ -520,6 +575,9 @@ CONFIG = Config(
     max_rows_per_language_per_source=int(
         os.environ.get("LINGUAE_MAX_ROWS_PER_LANGUAGE_PER_SOURCE", "1000")
     ),
+    max_words_per_language=int(
+        os.environ.get("LINGUAE_MAX_WORDS_PER_LANGUAGE", "100000")
+    ),
     max_rows_per_language=int(os.environ.get("LINGUAE_MAX_ROWS_PER_LANGUAGE", "0")),
     processed_dir=Path(
         os.environ.get("LINGUAE_PROCESSED_DIR", str(Config.processed_dir))
@@ -550,6 +608,7 @@ def seed_everything(seed: int) -> None:
 seed_everything(CONFIG.seed)
 
 logger.info(f"package root  : {PACKAGE_ROOT}")
+logger.info(f"data root     : {DATA_ROOT}")
 logger.info(
     "sources       : "
     + ", ".join(f"{source.name} ({source.role}: {source.path})" for source in CONFIG.sources)
@@ -838,8 +897,10 @@ def load_sources(sources: tuple[DatasetSource, ...]) -> pd.DataFrame:
         frames.append(read_dataset_source(source))
     if not frames:
         raise FileNotFoundError(
-            "No dataset sources found. Expected data/csv/wili-2018.csv and "
-            "data/csv/tatoeba.tsv, or set LINGUAE_DATASET_PATH to a custom CSV."
+            "No dataset sources found. Expected "
+            f"{DATA_ROOT / 'csv' / 'wili-2018.csv'} and "
+            f"{DATA_ROOT / 'csv' / 'tatoeba.tsv'}, or set "
+            "LINGUAE_DATASET_PATH to a custom CSV."
         )
     combined = pd.concat(frames, ignore_index=True)
     logger.info(
@@ -1026,13 +1087,35 @@ def drop_rare_languages(frame: pd.DataFrame, minimum: int) -> pd.DataFrame:
 
 clean_df = drop_conflicting_and_duplicate_texts(clean_df)
 clean_df = drop_rare_languages(clean_df, CONFIG.min_examples_per_language)
-clean_df = subsample_by_group(
-    clean_df,
-    ("language", "source"),
-    CONFIG.max_rows_per_language_per_source,
-    CONFIG.seed,
-    "per-source cap",
-)
+
+# Word rows are unique per language, so they use their own cap instead of the
+# sentence-oriented per-source cap. Keep every row when the word cap is 0.
+word_sources = {source.name for source in CONFIG.sources if source.role == "words"}
+word_mask = clean_df["source"].isin(word_sources)
+capped_frames = []
+sentence_df = clean_df.loc[~word_mask]
+if not sentence_df.empty:
+    capped_frames.append(
+        subsample_by_group(
+            sentence_df,
+            ("language", "source"),
+            CONFIG.max_rows_per_language_per_source,
+            CONFIG.seed,
+            "per-source cap",
+        )
+    )
+words_df = clean_df.loc[word_mask]
+if not words_df.empty:
+    capped_frames.append(
+        subsample_by_group(
+            words_df,
+            ("language", "source"),
+            CONFIG.max_words_per_language,
+            CONFIG.seed,
+            "word cap",
+        )
+    )
+clean_df = pd.concat(capped_frames).sort_index()
 if CONFIG.max_rows_per_language > 0:
     clean_df = subsample_by_group(
         clean_df,
@@ -2239,6 +2322,7 @@ manifest = {
         "device": str(DEVICE),
         "min_examples_per_language": CONFIG.min_examples_per_language,
         "max_rows_per_language_per_source": CONFIG.max_rows_per_language_per_source,
+        "max_words_per_language": CONFIG.max_words_per_language,
         "max_rows_per_language": CONFIG.max_rows_per_language,
     },
     "environment": {

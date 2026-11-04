@@ -6,7 +6,7 @@
   "datasets": [
     {
       "name": "wili-2018",
-      "path": "/Users/hieudoan/git/github.com/hieudoanm/linguae/packages/models/data/csv/wili-2018.csv",
+      "path": "/Users/hieudoan/git/github.com/hieudoanm/linguae/crates/linguae-data/data/csv/wili-2018.csv",
       "sha256": "63f490825bbda39db55d59327678342a2ea278867ad9ba3c9ba723e9572a82fb",
       "format": "csv",
       "role": "long",
@@ -16,7 +16,7 @@
     },
     {
       "name": "tatoeba",
-      "path": "/Users/hieudoan/git/github.com/hieudoanm/linguae/packages/models/data/csv/tatoeba.tsv",
+      "path": "/Users/hieudoan/git/github.com/hieudoanm/linguae/crates/linguae-data/data/csv/tatoeba.tsv",
       "sha256": "c2a2cca42d00c84d8eeaccd2e4eeafb6e0866a6ca880534e1cfed92b50c9b1d9",
       "format": "tsv",
       "role": "short",
@@ -72,7 +72,7 @@
     "vocabulary.json": "09aa131a0ddecb0905c18845ed29d37f58ecef6b08c15f8dbafc4cf1fed46dd7",
     "labels.json": "01e58a42a550211297f5ff5b4403f064672f7e823998663be9efe64ac11a1a76",
     "model.pt": "ddb32bb300171d279eec55430b0db2e1f4fa357fcd878ce558510718fec3bb3c",
-    "metrics.json": "9277931fe4816cda68df6e6917ae67e7de39c0c34d0e6892d1a77c94024d400f",
+    "metrics.json": "4101db5aa339cdf0f905fcd38f5b8151f186439119b7e3a531400edfb292b71b",
     "linguae_inference.py": "5d197601988f2f4ad695e26775440a77326191305191d30f4d8caf3a60ad982c",
     "example_inference.py": "d5447129db8a22a0714d502c8de195279f800dc05b5ce89ff207051682a793a0",
     "confusion_matrix.csv": "5851d3eaee0ba009195d0f907f06085c6821ed71ab72aebf1ddfd8a0b7c6ace6",

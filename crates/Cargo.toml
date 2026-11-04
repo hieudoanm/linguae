@@ -1,6 +1,6 @@
 [workspace]
 resolver = "2"
-members = ["linguae-core", "linguae-cli"]
+members = ["linguae-core", "linguae-cli", "linguae-data"]
 
 [workspace.package]
 version = "0.1.0"

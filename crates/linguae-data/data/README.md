@@ -2,10 +2,12 @@
 
 Data pipeline and artifacts for the Linguae character-level language detector.
 
-Training combines two datasets:
+Training combines three datasets:
 
 - **Tatoeba** — short conversational sentences (`csv/tatoeba.tsv`).
 - **WiLI-2018** — long sentences and Wikipedia paragraphs (`csv/wili-2018.csv`).
+- **WiLI words** — the most frequent words per language
+  (`csv/wili-2018-words.csv`), for one- to few-word strings.
 
 This directory also holds the raw WiLI-2018 dataset, processed training outputs,
 and derived plots. The `csv/`, `processed/`, and `txt/` directories are
@@ -19,7 +21,8 @@ data/
 ├── csv/
 │   ├── languages.csv          # ISO 639-3 code → name + family lookup (WiLI)
 │   ├── tatoeba.tsv            # Short sentences: id, language, text (headerless)
-│   └── wili-2018.csv          # Long text: text, language (header row)
+│   ├── wili-2018.csv          # Long text: text, language (header row)
+│   └── wili-2018-words.csv    # Frequent words: text, language, count
 ├── processed/
 │   └── labels.json            # Label → index mapping for the model
 └── txt/wili-2018/             # Raw WiLI-2018 dataset
@@ -36,13 +39,19 @@ data/
 
 ```
 data/txt/wili-2018/*.txt
-  → notebooks/wili_2018_txt_to_csv.py
+  → crates/linguae-data wili
   → data/csv/wili-2018.csv            (long: text, language)
 
-data/csv/tatoeba.tsv                  (short: id, language, text, source file)
+data/csv/tatoeba.tsv
+  → crates/linguae-data tatoeba
+  → data/csv/tatoeba.csv              (converted: id, language, text)
 
-data/csv/wili-2018.csv + data/csv/tatoeba.tsv
-  → notebooks/train_language_detector.py
+data/txt/wili-2018/*.txt
+  → crates/linguae-data words
+  → data/csv/wili-2018-words.csv      (words: text, language, count)
+
+data/csv/wili-2018.csv + data/csv/tatoeba.tsv + data/csv/wili-2018-words.csv
+  → scripts/train_language_detector.py
   → data/processed/labels.json
   → artifacts/images/*.png
   → artifacts/linguae/
@@ -50,19 +59,25 @@ data/csv/wili-2018.csv + data/csv/tatoeba.tsv
 
 ### Steps
 
-1. **Raw text → CSV** — `notebooks/wili_2018_txt_to_csv.py` reads the raw
+1. **Raw text → CSV** — `cargo run -p linguae-data -- wili` reads the raw
    `x_train.txt`/`y_train.txt`/`x_test.txt`/`y_test.txt` pairs and produces a
    single CSV with columns `text, language`.
-2. **Load both sources** — the training script reads the WiLI CSV and the
-   headerless Tatoeba TSV (`id`, `language`, `text`), validating each source
-   separately.
-3. **Normalise and combine** — labels are aliased where Tatoeba uses a variant
+2. **Tatoeba → CSV** — `cargo run -p linguae-data -- tatoeba` converts the
+   headerless `id`, `language`, `text` TSV and drops rows with empty or `\N`
+   labels.
+3. **Extract words** — `cargo run -p linguae-data -- words` tokenises the WiLI
+   splits and writes the most frequent words per language with their counts.
+4. **Load the sources** — the training script reads the WiLI CSV, the Tatoeba
+   TSV, and (when present) the word CSV, validating each source separately.
+   `tatoeba.csv` is available for tooling that prefers CSV.
+5. **Normalise and combine** — labels are aliased where Tatoeba uses a variant
    code, contradictory labels and duplicate `(text, language)` pairs are
-   dropped, and each source is subsampled per language.
-4. **Train** — `notebooks/train_language_detector.py` splits the combined frame
+   dropped, and each source is subsampled per language. The word source uses
+   its own per-language cap.
+6. **Train** — `scripts/train_language_detector.py` splits the combined frame
    per language and trains the character-level CNN, writing plots and
    `labels.json`.
-5. **Export** — a self-contained artifact is written to `artifacts/linguae/`.
+7. **Export** — a self-contained artifact is written to `artifacts/linguae/`.
 
 ## Datasets
 
@@ -80,6 +95,17 @@ CSV with a header and columns `text, language`, generated from the raw
 WiLI's texts are longer than the model's 256-character input window (median ~271
 characters), so long inputs are classified from their first 256 characters.
 
+### WiLI words (`csv/wili-2018-words.csv`)
+
+CSV with a header and columns `text, language, count`, generated from the WiLI
+train and test splits. It keeps up to 100,000 of the most frequent words per
+language, ordered by language, descending frequency, then word. Tokens are
+NFC-normalised, lowercased Unicode words; numbers, punctuation, and tokens
+longer than 64 characters are dropped, and scripts without spaces (for example
+Chinese and Japanese) are split into characters. This source improves detection
+of one- to few-word strings and is optional: the trainer adds it only when the
+file exists.
+
 ### Label mapping
 
 Tatoeba and WiLI use different ISO 639-3 conventions. The trainer applies a
@@ -94,12 +120,15 @@ does not list Tatoeba-only labels.
 ```bash
 cd packages/models
 uv sync
-make csv      # build data/csv/wili-2018.csv from raw txt files
-make train    # run notebooks/train_language_detector.py
+make csv      # build the WiLI, Tatoeba and word CSVs with linguae-data
+make train    # run scripts/train_language_detector.py
 ```
 
-`make notebook` is an alias for `make csv`; `make train-notebook` executes the
-Jupyter training notebook instead.
+`make csv` requires the raw WiLI-2018 files and `csv/tatoeba.tsv`. It runs
+the Rust pipeline from `crates/linguae-data`; `make wili`, `make tatoeba`, and
+`make words` build the datasets individually. `make notebook` is an alias for
+`make csv`; `make train-notebook` executes the Jupyter training notebook
+instead.
 
 ## Key Files
 
@@ -108,6 +137,8 @@ Jupyter training notebook instead.
 | `csv/languages.csv`                             | WiLI ISO 639-3 code → language name + family lookup         |
 | `csv/wili-2018.csv`                             | Long-text dataset: one row per text with its language label |
 | `csv/tatoeba.tsv`                               | Short-text dataset: headerless `id`, `language`, `text`     |
+| `csv/tatoeba.csv`                               | Converted short-text dataset: `id`, `language`, `text`      |
+| `csv/wili-2018-words.csv`                       | Frequent words per language: `text`, `language`, `count`    |
 | `processed/labels.json`                         | Label index map consumed by the model                       |
 | `artifacts/images/network_architecture.png`     | VisualTorch flow view of the character-level CNN            |
 | `artifacts/images/layer_dimensions.png`         | Per-layer input/output shapes and parameter counts          |
@@ -127,5 +158,7 @@ Jupyter training notebook instead.
 - `labels.json` maps language codes to integer indices for the model's output
   layer; it is regenerated during training.
 - Default filtering keeps labels with at least 100 examples and at most 1000
-  rows per source. Override with `LINGUAE_MIN_EXAMPLES_PER_LANGUAGE` and
-  `LINGUAE_MAX_ROWS_PER_LANGUAGE_PER_SOURCE`.
+  rows per sentence source. Override with `LINGUAE_MIN_EXAMPLES_PER_LANGUAGE`
+  and `LINGUAE_MAX_ROWS_PER_LANGUAGE_PER_SOURCE`.
+- The word source is capped separately by `LINGUAE_MAX_WORDS_PER_LANGUAGE`
+  (default 100,000 per language). Disable it with `LINGUAE_DISABLE_WILI_WORDS=1`.

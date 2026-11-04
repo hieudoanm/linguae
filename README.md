@@ -3,10 +3,10 @@
 **Detect the language of text with a local character-level model — no cloud, no pretrained weights, no network calls.**
 
 Linguae is a local-first language identification project. It trains a
-character-level CNN from scratch in PyTorch on the Tatoeba (short sentences) and
-WiLI-2018 (long paragraphs) datasets and ships a standalone command-line tool
-that predicts exactly one language per input string. Everything runs on your own
-machine.
+character-level CNN from scratch in PyTorch on the Tatoeba (short sentences),
+WiLI-2018 (long paragraphs), and per-language WiLI word datasets and ships a
+standalone command-line tool that predicts exactly one language per input
+string. Everything runs on your own machine.
 
 [Documentation](AGENTS.md) · [🚀 Quick Start](#get-started) · [🔍 See It In Action](#see-it-in-action) · [CLI Usage](crates/README.md) · [Model Training](packages/models/README.md)
 
@@ -30,8 +30,8 @@ detect mixed-language spans.
 - **From text to language in one command** — `linguae "Bonjour tout le monde"` prints `fra`.
 - **Honest, task-aware model** — One language label per string, with optional confidence scores and top-k alternatives.
 - **Reproducible by design** — Fixed random seed, pinned dependency versions, and a deterministic train/val/test split that groups exact duplicate texts within a single split.
-- **No pretrained models** — The character-level CNN is trained from scratch on the Tatoeba and WiLI-2018 datasets.
-- **Short and long input** — Tatoeba supplies short conversational sentences; WiLI-2018 supplies long sentences and paragraphs, all sharing one label space.
+- **No pretrained models** — The character-level CNN is trained from scratch on the Tatoeba, WiLI-2018, and WiLI word datasets.
+- **Short and long input** — Tatoeba supplies short conversational sentences; WiLI-2018 supplies long sentences and paragraphs; the WiLI word dataset covers one- to few-word strings, all sharing one label space.
 
 ## Features
 
@@ -81,8 +81,8 @@ cargo build --release -p linguae
 ```bash
 cd packages/models
 uv sync
-make csv                      # build data/csv/wili-2018.csv from raw txt
-make train                    # run notebooks/train_language_detector.py
+make csv                      # build the WiLI, Tatoeba and word CSVs
+make train                    # run scripts/train_language_detector.py
 ```
 
 ### Run

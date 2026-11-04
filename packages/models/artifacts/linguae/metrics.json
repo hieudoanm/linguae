@@ -4,14 +4,14 @@
   "datasets": [
     {
       "name": "wili-2018",
-      "path": "/Users/hieudoan/git/github.com/hieudoanm/linguae/packages/models/data/csv/wili-2018.csv",
+      "path": "/Users/hieudoan/git/github.com/hieudoanm/linguae/crates/linguae-data/data/csv/wili-2018.csv",
       "format": "csv",
       "role": "long",
       "rows_used": 228828
     },
     {
       "name": "tatoeba",
-      "path": "/Users/hieudoan/git/github.com/hieudoanm/linguae/packages/models/data/csv/tatoeba.tsv",
+      "path": "/Users/hieudoan/git/github.com/hieudoanm/linguae/crates/linguae-data/data/csv/tatoeba.tsv",
       "format": "tsv",
       "role": "short",
       "rows_used": 189865
