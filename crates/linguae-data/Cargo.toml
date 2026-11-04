@@ -16,7 +16,7 @@ clap = { version = "4.5", features = ["derive", "env"] }
 csv = "1"
 env_logger = "0.11"
 log = "0.4"
-sha2 = "0.10"
+sha2 = "0.11"
 thiserror.workspace = true
 unicode-normalization.workspace = true
 unicode-segmentation = "1"
