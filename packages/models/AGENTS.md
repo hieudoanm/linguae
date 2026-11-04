@@ -4,8 +4,8 @@
 
 `models` is the training package for Linguae. It combines the Tatoeba short-
 sentence corpus with the WiLI-2018 long-text corpus, trains the character-level
-CNN, and exports the CLI artifact consumed by `packages/cli` and
-`packages/server`.
+CNN, and exports the artifact consumed by the Rust CLI (`crates/`) and the
+FastAPI server (`packages/app/server`).
 
 ## Architecture
 

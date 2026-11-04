@@ -1,8 +1,8 @@
 # Linguae Artifacts
 
 This directory holds the exported **Linguae language detector artifact** that is
-consumed by the CLI (`packages/cli`), the FastAPI server (`packages/app/server`),
-and any downstream integrations.
+consumed by the Rust CLI (`crates/`), the FastAPI server
+(`packages/app/server`), and any downstream integrations.
 
 The artifact is a self-contained directory: it bundles the model weights, the
 vocabulary, the label mapping, the architecture definition, and the inference

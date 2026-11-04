@@ -8,7 +8,7 @@ WiLI-2018 (long paragraphs) datasets and ships a standalone command-line tool
 that predicts exactly one language per input string. Everything runs on your own
 machine.
 
-[Documentation](AGENTS.md) · [🚀 Quick Start](#get-started) · [🔍 See It In Action](#see-it-in-action) · [CLI Usage](packages/cli/README.md) · [Model Training](packages/models/README.md)
+[Documentation](AGENTS.md) · [🚀 Quick Start](#get-started) · [🔍 See It In Action](#see-it-in-action) · [CLI Usage](crates/README.md) · [Model Training](packages/models/README.md)
 
 ![Linguae](assets/og/og-light.png)
 
@@ -21,10 +21,10 @@ backports that are hard to inspect or shrink.
 
 ## The Solution
 
-Linguae trains a small character-level CNN from scratch in PyTorch and exports
-a single-file CLI binary built with PyInstaller. The model performs
-**single-label classification per string**; it does not detect mixed-language
-spans.
+Linguae trains a small character-level CNN from scratch in PyTorch and ships
+a small Rust CLI binary that runs inference with [Candle](https://github.com/huggingface/candle).
+The model performs **single-label classification per string**; it does not
+detect mixed-language spans.
 
 - **Local-first & private** — Inference runs entirely on your machine. Your text never leaves your environment.
 - **From text to language in one command** — `linguae "Bonjour tout le monde"` prints `fra`.
@@ -35,12 +35,12 @@ spans.
 
 ## Features
 
-- **Character-level CNN** — Embedding, 1D convolutions (kernel sizes 3, 4, 5), masked max-pooling that ignores padding, and a fully connected classification head.
-- **Single-label prediction** — One ISO 639-1 language code per input string.
+- **Character-level CNN** — Embedding, 1D convolutions (kernel sizes 3, 5, 7), masked max-pooling that ignores padding, and a fully connected classification head.
+- **Single-label prediction** — One ISO 639-3 language code per input string.
 - **Confidence & top-k** — `--confidence` appends a softmax score; `--json` emits JSON Lines with text, language, confidence, and alternatives.
 - **Batch mode** — `--file PATH` classifies each non-empty line of a UTF-8 file.
-- **Device selection** — `--device cpu`, `mps`, or `cuda`.
-- **Standalone binary** — PyInstaller one-file build distributed via GitHub Releases tagged `latest`.
+- **Device selection** — `--device cpu`, `cuda`, or `metal` (`mps` is an alias for `metal`).
+- **Standalone binary** — A small Rust binary distributed via GitHub Releases tagged `latest`; no Python runtime required.
 
 ## See It in Action
 
@@ -53,27 +53,27 @@ linguae "Bonjour tout le monde, comment allez-vous aujourd'hui dans ce beau mond
 # fra
 
 linguae --confidence "Hello world, this is a longer English text to test language detection"
-# eng	0.9998
+# eng	0.6114
 
-printf 'Привет, мир, это более длинный русский текст для проверки определения языка' | linguae
+printf 'Привет, мир, это более длинный русский текст' | linguae
 # rus
 
 linguae --json "Bonjour tout le monde, comment allez-vous ?"
-# {"text": "Bonjour tout le monde, comment allez-vous ?", "language": "fra", "confidence": 0.9998, ...}
+# {"text": "Bonjour tout le monde, comment allez-vous ?", "language": "fra", "confidence": 0.826987, ...}
 ```
 
 ## Get Started
 
 ### Prerequisites
 
-- [Python](https://www.python.org/) 3.14.8
-- [uv](https://github.com/astral-sh/uv)
+- [Rust](https://www.rust-lang.org/) 1.85+ (CLI)
+- [Python](https://www.python.org/) 3.14.8 and [uv](https://github.com/astral-sh/uv) (training only)
 
 ### Install the CLI
 
 ```bash
-cd packages/cli
-uv sync
+cd crates
+cargo build --release -p linguae
 ```
 
 ### Train the model (optional)
@@ -88,8 +88,7 @@ make train                    # run notebooks/train_language_detector.py
 ### Run
 
 ```bash
-cd packages/cli
-linguae "Bonjour tout le monde"
+crates/target/release/linguae "Bonjour tout le monde"
 ```
 
 ## HTTP Server and Web App
@@ -161,7 +160,7 @@ curl -X POST http://127.0.0.1:8000/detect/file \
 
 ### Configuration
 
-All settings are overridable via environment variables (see `packages/server/README.md`):
+All settings are overridable via environment variables (see `packages/app/server/README.md`):
 
 | Variable                      | Default                       | Description                |
 | ----------------------------- | ----------------------------- | -------------------------- |
@@ -196,7 +195,7 @@ All settings are overridable via environment variables (see `packages/server/REA
 - **Focused scope** — Does one thing well: predict one language per string from a character-level CNN. No AutoML bloat, no pretrained weights.
 - **Transparent** — Clear training pipeline, per-metric explanations, and reproducibility metadata.
 - **Local-first** — Runs entirely on your machine; no vendor lock-in or external dependencies.
-- **Production-minded demo** — Real PyTorch + Typer + PyInstaller implementation with CI, linting, and GitHub Releases.
+- **Production-minded demo** — Real PyTorch training + Rust/Candle inference implementation with CI, linting, and GitHub Releases.
 
 ## Training Visualisations
 
@@ -223,9 +222,9 @@ The model is trained end-to-end on Tatoeba (short sentences) and WiLI-2018
 
 - **Maturity:** Software demonstration (not intended for production safety-critical use).
 - **Dataset:** Tatoeba short sentences plus WiLI-2018 long paragraphs, combined into one label space (235,000 WiLI examples before filtering).
-- **Architecture:** Character-level CNN trained from scratch in PyTorch, exported as a PyInstaller one-file binary.
+- **Architecture:** Character-level CNN trained from scratch in PyTorch, exported as a small Rust CLI binary that runs inference with Candle.
 - **License:** [MIT License](LICENSE) — see the `LICENSE` file for full terms.
-- **Tech stack:** Python 3.14.8, PyTorch 2.14.1, NumPy 2.5.4, pandas 3.1.0, Typer 0.27.3, PyInstaller, uv, ruff.
+- **Tech stack:** Rust 1.85+ (CLI, Candle, clap), Python 3.14.8 (training), PyTorch 2.14.1, NumPy 2.5.4, pandas 3.1.0, uv, ruff.
 - **Note on text length:** The model is trained on both short Tatoeba sentences and long WiLI paragraphs, and it truncates inputs to its first 256 characters. Very short texts can still produce low-confidence or incorrect predictions.
 
 ## Community and Contributions
@@ -233,7 +232,7 @@ The model is trained end-to-end on Tatoeba (short sentences) and WiLI-2018
 Contributions, bug reports, and feature suggestions are welcome. See:
 
 - [AGENTS.md](AGENTS.md) — architecture, pipeline, dependencies, build/test commands
-- [packages/cli/AGENTS.md](packages/cli/AGENTS.md) — CLI internals and artifact resolution
+- [crates/README.md](crates/README.md) — Rust CLI usage, artifact resolution, parity tests
 - [packages/models/AGENTS.md](packages/models/AGENTS.md) — training pipeline and data
 
 To report issues or propose changes, open an issue or pull request in this repository.

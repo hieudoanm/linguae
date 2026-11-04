@@ -26,7 +26,7 @@ uploads and returns one language prediction per string.
 ## Install
 
 ```bash
-cd packages/server
+cd packages/app/server
 uv sync
 ```
 

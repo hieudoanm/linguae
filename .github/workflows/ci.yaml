@@ -191,29 +191,40 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: packages/cli
+        working-directory: crates
     steps:
       - uses: actions/checkout@v7.0.1
 
-      - name: Set up Python
-        uses: actions/setup-python@v7.1.0
+      - name: Set up Rust
+        uses: dtolnay/rust-toolchain@stable
         with:
-          python-version: "3.14.8"
+          components: clippy, rustfmt
 
-      - name: Install uv
-        uses: astral-sh/setup-uv@v10.3.3
+      - name: Cache cargo
+        uses: actions/cache@v6.1.0
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            crates/target
+          key: ${{ runner.os }}-cargo-${{ hashFiles('crates/Cargo.lock') }}
+          restore-keys: ${{ runner.os }}-cargo-
 
-      - name: Install dependencies
+      - name: Lint
         run: |
-          uv sync --frozen --group dev
-          uv pip install pyinstaller
+          cargo fmt --all -- --check
+          cargo clippy --workspace --all-targets -- -D warnings
+
+      - name: Test
+        run: cargo test --workspace
 
       - name: Build CLI binary
-        run: |
-          make build
+        run: cargo build --release -p linguae
 
       - name: Zip CLI binary
         run: |
+          mkdir -p dist
+          cp target/release/linguae dist/linguae
           cd dist
           zip -9 linguae.zip linguae
           ls -lh linguae.zip
@@ -222,7 +233,7 @@ jobs:
         uses: actions/upload-artifact@v7.0.2
         with:
           name: linguae-cli
-          path: packages/cli/dist/linguae.zip
+          path: crates/dist/linguae.zip
           retention-days: 1
 
   cli-release:

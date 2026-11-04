@@ -11,7 +11,7 @@ set of production middlewares (request ID, rate limiting, CORS, GZip, timeout).
 ### Source Structure
 
 ```
-packages/server/
+packages/app/server/
 ├── src/linguae_server/
 │   ├── __init__.py     # Public API, exports __version__
 │   ├── app.py          # FastAPI app + routes
@@ -92,7 +92,7 @@ CI workflow runs on push/PR to master/main:
 
 1. **Lint**: `ruff check src`
 2. **Test**: `pytest`
-3. **Build**: `pyinstaller --onefile --name linguae linguae.spec`
+3. **Build**: the Rust CLI is built with `cargo build --release -p linguae` in `crates/` (this server is run from source)
 
 ## Code Style
 
