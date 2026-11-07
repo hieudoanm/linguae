@@ -9,7 +9,6 @@ description = "A local-first language detection desktop app built with Tauri"
 tauri = { version = "=2.12.5", features = [] }
 tauri-plugin-opener = "=2.7.2"
 serde = { version = "=1.0.229", features = ["derive"] }
-serde_json = "=1.0.154"
 linguae-core = { path = "../../../crates/linguae-core" }
 
 [features]

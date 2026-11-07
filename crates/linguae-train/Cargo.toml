@@ -25,7 +25,6 @@ serde.workspace = true
 serde_json.workspace = true
 sha2.workspace = true
 thiserror.workspace = true
-unicode-normalization.workspace = true
 
 [features]
 default = []
@@ -33,6 +32,4 @@ cuda = ["candle-core/cuda", "candle-nn/cuda", "linguae-core/cuda"]
 metal = ["candle-core/metal", "candle-nn/metal", "linguae-core/metal"]
 
 [dev-dependencies]
-assert_cmd = "=2.2.2"
-predicates = "=3.1.4"
 tempfile = "=3.27.0"

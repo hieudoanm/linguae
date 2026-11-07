@@ -1,25 +1,10 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { render, screen, fireEvent, act } from '@testing-library/react';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ThemeProvider } from '../ThemeProvider';
 import DetectionForm from '../DetectionForm';
 
-const createTestQueryClient = () =>
-  new QueryClient({
-    defaultOptions: {
-      queries: { retry: false },
-      mutations: { retry: false },
-    },
-  });
-
-const renderWithProviders = (ui: React.ReactElement) => {
-  const queryClient = createTestQueryClient();
-  return render(
-    <QueryClientProvider client={queryClient}>
-      <ThemeProvider>{ui}</ThemeProvider>
-    </QueryClientProvider>
-  );
-};
+const renderWithProviders = (ui: React.ReactElement) =>
+  render(<ThemeProvider>{ui}</ThemeProvider>);
 
 describe('DetectionForm', () => {
   beforeEach(() => {
@@ -48,7 +33,8 @@ describe('DetectionForm', () => {
         })
     );
     vi.doMock('@tauri-apps/api/core', () => ({ invoke: invokeMock }));
-    const { default: DetectionFormComponent } = await import('../DetectionForm');
+    const { default: DetectionFormComponent } =
+      await import('../DetectionForm');
 
     renderWithProviders(<DetectionFormComponent />);
     const textarea = screen.getByPlaceholderText(
@@ -70,20 +56,20 @@ describe('DetectionForm', () => {
   });
 
   it('displays the detected language and confidence on success', async () => {
-    const invokeMock = vi.fn(
-      () =>
-        Promise.resolve({
-          text: 'Bonjour',
-          language: 'fra',
-          confidence: 0.95,
-          top_k: [
-            { language: 'fra', score: 0.95 },
-            { language: 'eng', score: 0.03 },
-          ],
-        })
+    const invokeMock = vi.fn(() =>
+      Promise.resolve({
+        text: 'Bonjour',
+        language: 'fra',
+        confidence: 0.95,
+        top_k: [
+          { language: 'fra', score: 0.95 },
+          { language: 'eng', score: 0.03 },
+        ],
+      })
     );
     vi.doMock('@tauri-apps/api/core', () => ({ invoke: invokeMock }));
-    const { default: DetectionFormComponent } = await import('../DetectionForm');
+    const { default: DetectionFormComponent } =
+      await import('../DetectionForm');
 
     renderWithProviders(<DetectionFormComponent />);
     const textarea = screen.getByPlaceholderText(
@@ -102,7 +88,8 @@ describe('DetectionForm', () => {
   it('shows an error message when the request fails', async () => {
     const invokeMock = vi.fn(() => Promise.reject(new Error('boom')));
     vi.doMock('@tauri-apps/api/core', () => ({ invoke: invokeMock }));
-    const { default: DetectionFormComponent } = await import('../DetectionForm');
+    const { default: DetectionFormComponent } =
+      await import('../DetectionForm');
 
     renderWithProviders(<DetectionFormComponent />);
     const textarea = screen.getByPlaceholderText(

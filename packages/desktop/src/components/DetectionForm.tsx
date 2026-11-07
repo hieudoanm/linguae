@@ -1,4 +1,3 @@
-import { useMutation } from '@tanstack/react-query';
 import { useState, type FC } from 'react';
 
 import type { Prediction } from './types';
@@ -6,29 +5,35 @@ import type { Prediction } from './types';
 const DetectionForm: FC = () => {
   const [text, setText] = useState('');
   const [result, setResult] = useState<Prediction | null>(null);
+  const [isPending, setIsPending] = useState(false);
+  const [isError, setIsError] = useState(false);
 
-  const mutation = useMutation({
-    mutationFn: async (inputText: string) => {
-      const { invoke } = await import('@tauri-apps/api/core');
-      return invoke<Prediction>('detect', { text: inputText, topK: 3 });
-    },
-    onSuccess: (data) => {
-      setResult(data);
-    },
-  });
-
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (text.trim()) {
-      mutation.mutate(text);
+    const input = text.trim();
+    if (!input || isPending) {
+      return;
+    }
+    setIsPending(true);
+    setIsError(false);
+    try {
+      const { invoke } = await import('@tauri-apps/api/core');
+      const data = await invoke<Prediction>('detect', {
+        text: input,
+        topK: 3,
+      });
+      setResult(data);
+    } catch {
+      setIsError(true);
+    } finally {
+      setIsPending(false);
     }
   };
 
   return (
     <section
       id="detect"
-      className="flex h-full items-center justify-center bg-white py-12 dark:bg-gray-900"
-    >
+      className="flex h-full items-center justify-center bg-white py-12 dark:bg-gray-900">
       <div className="mx-auto w-full max-w-4xl px-4">
         <div className="mb-8 text-center">
           <h2 className="mb-2 text-2xl font-bold text-gray-900 dark:text-white">
@@ -49,14 +54,13 @@ const DetectionForm: FC = () => {
           />
           <button
             type="submit"
-            disabled={mutation.isPending || !text.trim()}
-            className="mt-3 w-full rounded-lg bg-blue-600 px-4 py-2 text-white hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-gray-400"
-          >
-            {mutation.isPending ? 'Detecting...' : 'Submit'}
+            disabled={isPending || !text.trim()}
+            className="mt-3 w-full rounded-lg bg-blue-600 px-4 py-2 text-white hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-gray-400">
+            {isPending ? 'Detecting...' : 'Submit'}
           </button>
         </form>
 
-        {mutation.isError && (
+        {isError && (
           <div className="mb-4 rounded-lg border border-red-200 bg-red-50 p-4 text-red-700">
             Error detecting language. Make sure the Tauri runtime is available.
           </div>
@@ -68,8 +72,7 @@ const DetectionForm: FC = () => {
               Result
             </h2>
             <p className="mb-2 text-gray-700">
-              <span className="font-medium">Language:</span>{' '}
-              {result.language}
+              <span className="font-medium">Language:</span> {result.language}
             </p>
             <p className="mb-3 text-gray-700">
               <span className="font-medium">Confidence:</span>{' '}

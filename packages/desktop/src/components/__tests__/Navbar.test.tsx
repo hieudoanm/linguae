@@ -1,17 +1,10 @@
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ThemeProvider } from '../ThemeProvider';
 import Navbar from '../Navbar';
 
-const renderWithProviders = (ui: React.ReactElement) => {
-  const queryClient = new QueryClient();
-  return render(
-    <QueryClientProvider client={queryClient}>
-      <ThemeProvider>{ui}</ThemeProvider>
-    </QueryClientProvider>
-  );
-};
+const renderWithProviders = (ui: React.ReactElement) =>
+  render(<ThemeProvider>{ui}</ThemeProvider>);
 
 describe('Navbar', () => {
   it('renders the logo and navigation links', () => {
