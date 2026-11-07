@@ -1221,7 +1221,6 @@ dependencies = [
  "serde",
  "serde_json",
  "tempfile",
- "thiserror 2.0.21",
 ]
 
 [[package]]
@@ -1257,7 +1256,6 @@ dependencies = [
 name = "linguae-train"
 version = "0.1.0"
 dependencies = [
- "assert_cmd",
  "candle-core",
  "candle-nn",
  "chrono",
@@ -1267,13 +1265,11 @@ dependencies = [
  "linguae-core",
  "log",
  "plotters",
- "predicates",
  "serde",
  "serde_json",
  "sha2 0.11.1",
  "tempfile",
  "thiserror 2.0.21",
- "unicode-normalization",
 ]
 
 [[package]]

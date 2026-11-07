@@ -2,7 +2,7 @@
 use std::path::PathBuf;
 use std::sync::OnceLock;
 
-use linguae_core::{Artifact, Prediction};
+use linguae_core::Artifact;
 use serde::Serialize;
 
 /// Artifact directory resolved at startup. Defaults to the repository's

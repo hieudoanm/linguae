@@ -4,7 +4,11 @@ import Providers from '../providers';
 
 describe('Providers', () => {
   it('renders children', () => {
-    const { container } = render(<Providers><div>child</div></Providers>);
+    const { container } = render(
+      <Providers>
+        <div>child</div>
+      </Providers>
+    );
     expect(container.textContent).toContain('child');
   });
 });
