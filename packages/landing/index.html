@@ -41,6 +41,7 @@
   <main id="top">
     <section class="hero">
       <div class="container hero-inner">
+        <div class="hero-content">
         <h1>Detect the language of any text, entirely offline.</h1>
         <p class="lede">
           Linguae trains a character-level CNN from scratch with Candle and
@@ -56,6 +57,17 @@
           <div><dt>200+</dt><dd>languages</dd></div>
           <div><dt>0</dt><dd>network calls</dd></div>
         </dl>
+        </div>
+        <figure class="terminal hero-demo">
+          <figcaption>Detect a language</figcaption>
+          <pre><code><span class="prompt">$</span> linguae "Bonjour tout le monde"
+<span class="out">fra</span>
+<span class="prompt">$</span> linguae --format json "Это тест"
+{
+  <span class="str">"language"</span>: <span class="str">"rus"</span>,
+  <span class="str">"confidence"</span>: <span class="num">0.98</span>
+}</code></pre>
+        </figure>
       </div>
     </section>
 
