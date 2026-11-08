@@ -1,38 +1,54 @@
 /* Linguae landing — dependency-free design system.
-   Palette follows the brand: warm grays, ink text, teal accent.
-   Light theme only; terminals stay dark. No JavaScript required. */
+   White theme matching the llm.rs / neo.bank / transcribers landings:
+   white surfaces, near-black text, subtle borders and shadows, teal accent.
+   Terminals stay dark. No JavaScript required. */
 
 :root {
-  --bg: #f4f4f1;
-  --bg-alt: #e9e9e5;
-  --card: #fafaf8;
-  --border: #d9d9d3;
-  --text: #2c2b27;
-  --text-muted: #6f6d65;
+  --bg: #ffffff;
+  --bg-alt: #f9fafb;
+  --card: #ffffff;
+  --border: #e5e7eb;
+  --border-strong: #d1d5db;
+  --border-light: #f3f4f6;
+  --text: #111827;
+  --text-muted: #6b7280;
+  --text-tertiary: #9ca3af;
+
   --accent: #0f766e;
-  --accent-ink: #f0f7f6;
-  --accent-soft: color-mix(in srgb, var(--accent) 12%, transparent);
+  --accent-hover: #115e59;
+  --accent-active: #134e4a;
+  --accent-soft: #f0fdfa;
+  --accent-bright: #5eead4;
 
   --radius: 14px;
-  --radius-sm: 8px;
+  --radius-sm: 10px;
+  --radius-inner: 8px;
+
+  --shadow-card:
+    0 1px 2px rgb(17 24 39 / 0.06), 0 4px 16px rgb(17 24 39 / 0.06);
+  --shadow-frame: 0 12px 40px rgb(17 24 39 / 0.14);
 
   --font:
-    system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial,
-    sans-serif;
+    Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
+    Arial, sans-serif;
   --mono:
     ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, "Liberation Mono",
     monospace;
 
-  --terminal-bg: #232329;
-  --terminal-fg: #e6e6e0;
-  --terminal-dim: #8f8f86;
-  --terminal-ok: #8fd6ab;
+  --terminal-bg: #111827;
+  --terminal-bar: #0b1220;
+  --terminal-line: #262626;
+  --terminal-fg: #e8e8e8;
+  --terminal-dim: #8b93a3;
+  --terminal-ok: #86efac;
   --terminal-key: #9ecbff;
   --terminal-str: #f0c987;
   --terminal-num: #c9b8ff;
 
   --space-section: clamp(56px, 9vw, 104px);
   --container: 1080px;
+
+  color-scheme: light;
 }
 
 *,
@@ -59,13 +75,24 @@ body {
 
 ::selection {
   background: var(--accent);
-  color: var(--accent-ink);
+  color: #ffffff;
 }
 
 :focus-visible {
   outline: 2px solid var(--accent);
-  outline-offset: 2px;
+  outline-offset: 3px;
   border-radius: 4px;
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.2;
+  text-wrap: balance;
+}
+
+img {
+  display: block;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -91,9 +118,9 @@ body {
   position: sticky;
   top: 0;
   z-index: 10;
-  background: color-mix(in srgb, var(--bg) 82%, transparent);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: color-mix(in srgb, var(--bg) 85%, transparent);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--border);
 }
 
@@ -101,7 +128,7 @@ body {
   display: flex;
   align-items: center;
   gap: 1.5rem;
-  padding-block: 0.7rem;
+  height: 4rem;
   flex-wrap: wrap;
 }
 
@@ -114,22 +141,23 @@ body {
 }
 
 .brand-name {
-  font-weight: 650;
-  font-size: 1.05rem;
-  letter-spacing: -0.01em;
+  font-weight: 700;
+  font-size: 1.125rem;
+  letter-spacing: -0.02em;
 }
 
 .nav-links {
   display: flex;
-  gap: 1.25rem;
+  gap: 1.5rem;
   margin-inline: auto;
 }
 
 .nav-links a {
   color: var(--text-muted);
   text-decoration: none;
-  font-size: 0.9rem;
-  transition: color 0.15s ease;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  transition: color 120ms ease;
 }
 
 .nav-links a:hover {
@@ -143,9 +171,9 @@ body {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  padding: 0.65rem 1.2rem;
-  border: 0;
-  border-radius: var(--radius-sm);
+  padding: 0.7rem 1.35rem;
+  border: 1px solid transparent;
+  border-radius: 12px;
   font-family: var(--font);
   font-size: 0.95rem;
   font-weight: 600;
@@ -153,30 +181,37 @@ body {
   text-decoration: none;
   cursor: pointer;
   transition:
-    background-color 0.15s ease,
-    color 0.15s ease,
-    transform 0.1s ease;
+    background-color 120ms ease,
+    border-color 120ms ease,
+    color 120ms ease,
+    transform 120ms ease;
 }
 
-.btn:active {
-  transform: translateY(1px);
+.btn:hover {
+  transform: translateY(-1px);
 }
 
 .btn-primary {
   background: var(--accent);
-  color: var(--accent-ink);
+  color: #ffffff;
 }
 
 .btn-primary:hover {
-  background: color-mix(in srgb, var(--accent) 85%, var(--text));
+  background: var(--accent-hover);
+}
+
+.btn-primary:active {
+  background: var(--accent-active);
 }
 
 .btn-ghost {
   color: var(--text);
+  background: var(--bg);
+  border-color: var(--border-strong);
 }
 
 .btn-ghost:hover {
-  background: var(--bg-alt);
+  border-color: var(--text-tertiary);
 }
 
 .btn-sm {
@@ -187,30 +222,27 @@ body {
 /* ---------- Hero ---------- */
 
 .hero {
-  padding-block: clamp(72px, 12vw, 128px) clamp(56px, 9vw, 96px);
-  text-align: center;
+  padding-block: clamp(64px, 10vw, 112px) clamp(48px, 8vw, 80px);
 }
 
 .hero h1 {
-  margin: 0 auto;
-  max-width: 18ch;
-  font-size: clamp(2.4rem, 6vw, 3.6rem);
+  max-width: 20ch;
+  margin: 0;
+  font-size: clamp(2.4rem, 5.5vw, 3.6rem);
   font-weight: 700;
   letter-spacing: -0.03em;
   line-height: 1.08;
-  text-wrap: balance;
 }
 
 .lede {
-  margin: 1.4rem auto 0;
+  margin: 1.5rem 0 0;
   max-width: 56ch;
   color: var(--text-muted);
-  font-size: 1.1rem;
+  font-size: 1.15rem;
 }
 
 .hero-actions {
   display: flex;
-  justify-content: center;
   gap: 0.75rem;
   margin-top: 2rem;
   flex-wrap: wrap;
@@ -218,7 +250,6 @@ body {
 
 .stats {
   display: flex;
-  justify-content: center;
   gap: clamp(1.5rem, 6vw, 3.5rem);
   margin: 3rem 0 0;
   padding: 0;
@@ -245,8 +276,7 @@ body {
 }
 
 .terminal-card.hero-demo {
-  margin: 3.5rem auto 0;
-  max-width: 760px;
+  margin: 3.5rem 0 0;
 }
 
 /* ---------- Sections ---------- */
@@ -261,10 +291,9 @@ body {
 
 .section h2 {
   margin: 0;
-  font-size: clamp(1.7rem, 3.5vw, 2.3rem);
+  font-size: clamp(1.75rem, 3.5vw, 2.3rem);
   font-weight: 700;
   letter-spacing: -0.02em;
-  text-wrap: balance;
 }
 
 .section-sub {
@@ -277,7 +306,7 @@ body {
 
 .grid {
   display: grid;
-  gap: 1.25rem;
+  gap: 1rem;
   margin-top: 2.75rem;
 }
 
@@ -290,19 +319,20 @@ body {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 1.5rem;
+  box-shadow: var(--shadow-card);
 }
 
 .card h3 {
   margin: 1rem 0 0.4rem;
-  font-size: 1.05rem;
-  font-weight: 650;
+  font-size: 1.0625rem;
+  font-weight: 600;
   letter-spacing: -0.01em;
 }
 
 .card p {
   margin: 0;
   color: var(--text-muted);
-  font-size: 0.95rem;
+  font-size: 0.9375rem;
 }
 
 .icon {
@@ -311,14 +341,14 @@ body {
   justify-content: center;
   width: 2.5rem;
   height: 2.5rem;
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-inner);
   background: var(--accent-soft);
   color: var(--accent);
 }
 
 .icon svg {
-  width: 1.4rem;
-  height: 1.4rem;
+  width: 1.375rem;
+  height: 1.375rem;
 }
 
 /* ---------- Terminal ---------- */
@@ -328,7 +358,9 @@ body {
   flex-direction: column;
   margin: 0;
   background: var(--terminal-bg);
+  border: 1px solid var(--terminal-line);
   border-radius: var(--radius);
+  box-shadow: var(--shadow-frame);
   overflow: hidden;
 }
 
@@ -337,13 +369,14 @@ body {
   align-items: center;
   gap: 0.6rem;
   padding: 0.55rem 0.9rem;
-  background: color-mix(in srgb, var(--terminal-bg) 82%, #ffffff);
-  border-bottom: 1px solid color-mix(in srgb, var(--terminal-bg) 70%, #ffffff);
+  background: var(--terminal-bar);
+  border-bottom: 1px solid var(--terminal-line);
 }
 
 .dots {
   display: inline-flex;
   gap: 0.4rem;
+  flex-shrink: 0;
 }
 
 .dots i {
@@ -353,18 +386,23 @@ body {
 }
 
 .dots i:nth-child(1) {
-  background: #ee6c60;
+  background: #ff5f57;
 }
 
 .dots i:nth-child(2) {
-  background: #e8b44c;
+  background: #febc2e;
 }
 
 .dots i:nth-child(3) {
-  background: #63b96f;
+  background: #28c840;
 }
 
 .terminal-title {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   font-family: var(--mono);
   font-size: 0.75rem;
   color: var(--terminal-dim);
@@ -381,10 +419,7 @@ body {
   text-align: left;
   white-space: pre-wrap;
   overflow-wrap: break-word;
-}
-
-.terminal .prompt {
-  color: var(--terminal-dim);
+  font-variant-numeric: tabular-nums;
 }
 
 .terminal code {
@@ -393,6 +428,10 @@ body {
   border-radius: 0;
   padding: 0;
   font-size: inherit;
+}
+
+.terminal .prompt {
+  color: var(--accent-bright);
 }
 
 .terminal .ok {
@@ -423,6 +462,10 @@ body {
   max-width: 720px;
 }
 
+#install .hero-actions {
+  justify-content: center;
+}
+
 /* ---------- Steps ---------- */
 
 .steps {
@@ -430,7 +473,7 @@ body {
   margin: 2.75rem 0 0;
   padding: 0;
   display: grid;
-  gap: 1.25rem;
+  gap: 1rem;
   grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
 }
 
@@ -450,32 +493,63 @@ body {
 
 .step h3 {
   margin: 0 0 0.4rem;
-  font-size: 1.05rem;
-  font-weight: 650;
+  font-size: 1.0625rem;
+  font-weight: 600;
 }
 
 .step p {
   margin: 0;
   color: var(--text-muted);
-  font-size: 0.95rem;
+  font-size: 0.9375rem;
 }
 
 /* ---------- Inline code ---------- */
 
 code {
   font-family: var(--mono);
-  font-size: 0.88em;
+  font-size: 0.85em;
   background: var(--bg-alt);
   border: 1px solid var(--border);
-  border-radius: 5px;
-  padding: 0.1em 0.35em;
+  border-radius: 6px;
+  padding: 0.05em 0.35em;
+}
+
+/* ---------- CTA band ---------- */
+
+.cta-band {
+  padding-block: var(--space-section);
+  background: var(--accent);
+  color: #ffffff;
+  text-align: center;
+}
+
+.cta-inner h2 {
+  margin: 0;
+  font-size: clamp(1.75rem, 3.5vw, 2.3rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.cta-inner p {
+  margin: 0.75rem auto 0;
+  max-width: 46ch;
+  color: rgb(255 255 255 / 0.85);
+}
+
+.cta-inner .btn {
+  margin-top: 2rem;
+  background: var(--bg);
+  color: var(--accent-active);
+}
+
+.cta-inner .btn:hover {
+  background: var(--bg-alt);
 }
 
 /* ---------- Footer ---------- */
 
 .footer {
   border-top: 1px solid var(--border);
-  background: var(--bg-alt);
   padding-block: 3rem 1.5rem;
 }
 
@@ -499,7 +573,7 @@ code {
 .footer nav h3 {
   margin: 0 0 0.75rem;
   font-size: 0.8rem;
-  font-weight: 650;
+  font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--text-muted);
@@ -511,7 +585,7 @@ code {
   text-decoration: none;
   font-size: 0.92rem;
   padding-block: 0.2rem;
-  transition: color 0.15s ease;
+  transition: color 120ms ease;
 }
 
 .footer nav a:hover {
@@ -521,13 +595,13 @@ code {
 .footer-bottom {
   margin-top: 2.5rem;
   padding-top: 1.25rem;
-  border-top: 1px solid var(--border);
+  border-top: 1px solid var(--border-light);
 }
 
 .footer-bottom p {
   margin: 0;
   font-size: 0.85rem;
-  color: var(--text-muted);
+  color: var(--text-tertiary);
 }
 
 @media (max-width: 560px) {
