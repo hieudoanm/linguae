@@ -1,0 +1,7 @@
+/* TEAM */
+Project: Linguae — Local-first language identification
+Role: Character-level CNN trained from scratch with Candle, served by a Rust CLI
+Repository: https://github.com/hieudoanm/linguae
+
+/* THANKS */
+Built with HTML and CSS. Model trained with Candle.

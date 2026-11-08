@@ -8,14 +8,31 @@
       name="description"
       content="Linguae detects the language of any text with a character-level CNN trained from scratch in Rust. No cloud calls, no pretrained weights — your text never leaves your machine."
     />
-    <link rel="icon" href="svg/favicon.svg" type="image/svg+xml" />
+    <link rel="canonical" href="https://hieudoanm.github.io/linguae/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Linguae" />
+    <meta property="og:title" content="Linguae — Local-first language identification" />
+    <meta
+      property="og:description"
+      content="Detect the language of any text, entirely offline. A character-level CNN trained from scratch in Rust — no cloud calls, no pretrained weights."
+    />
+    <meta property="og:url" content="https://hieudoanm.github.io/linguae/" />
+    <meta property="og:image" content="https://hieudoanm.github.io/linguae/og.svg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Linguae — Local-first language identification" />
+    <meta
+      name="twitter:description"
+      content="Detect the language of any text, entirely offline. Trained from scratch in Rust — no cloud calls, no pretrained weights."
+    />
+    <meta name="twitter:image" content="https://hieudoanm.github.io/linguae/og.svg" />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body id="top">
     <header class="nav">
       <div class="container nav-inner">
         <a class="brand" href="#top" aria-label="Linguae home">
-          <img class="logo" src="svg/logo.svg" alt="" width="30" height="30" />
+          <img class="logo" src="logo.svg" alt="" width="30" height="30" />
           <span class="brand-name">Linguae</span>
         </a>
         <nav class="nav-links" aria-label="Sections">
@@ -66,10 +83,9 @@
           <figure class="terminal-card hero-demo">
             <div class="terminal-bar">
               <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
-              <span class="terminal-title">linguae — zsh</span>
+              <span class="terminal-title">linguae --confidence "Hello world, this is a longer English text to test language detection"</span>
             </div>
-            <pre class="terminal"><code><span class="prompt">$</span> linguae --confidence "Hello world, this is a longer English text to test language detection"
-<span class="ok">eng</span>  0.6114
+            <pre class="terminal"><code><span class="ok">eng</span>  0.6114
 spa  0.1981
 fra  0.0872</code></pre>
           </figure>
@@ -157,18 +173,16 @@ fra  0.0872</code></pre>
             <figure class="demo terminal-card">
               <div class="terminal-bar">
                 <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
-                <span class="terminal-title">Single string</span>
+                <span class="terminal-title">linguae "Bonjour tout le monde, comment allez-vous ?"</span>
               </div>
-              <pre class="terminal"><code><span class="prompt">$</span> linguae "Bonjour tout le monde, comment allez-vous ?"
-<span class="ok">fra</span></code></pre>
+              <pre class="terminal"><code><span class="ok">fra</span></code></pre>
             </figure>
             <figure class="demo terminal-card">
               <div class="terminal-bar">
                 <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
-                <span class="terminal-title">JSON output</span>
+                <span class="terminal-title">linguae --format json "Это тестовый пример текста"</span>
               </div>
-              <pre class="terminal"><code><span class="prompt">$</span> linguae --format json "Это тестовый пример текста"
-{
+              <pre class="terminal"><code>{
   <span class="key">"language"</span>: <span class="str">"rus"</span>,
   <span class="key">"confidence"</span>: <span class="num">0.98</span>
 }</code></pre>
@@ -176,10 +190,9 @@ fra  0.0872</code></pre>
             <figure class="demo terminal-card">
               <div class="terminal-bar">
                 <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
-                <span class="terminal-title">Batch file</span>
+                <span class="terminal-title">linguae --file texts.txt</span>
               </div>
-              <pre class="terminal"><code><span class="prompt">$</span> linguae --file texts.txt
-<span class="ok">fra</span>
+              <pre class="terminal"><code><span class="ok">fra</span>
 <span class="ok">eng</span>
 <span class="ok">rus</span>
 <span class="ok">deu</span></code></pre>
@@ -261,11 +274,26 @@ fra  0.0872</code></pre>
       </section>
     </main>
 
+    <section class="cta-band">
+      <div class="container cta-inner">
+        <h2>Identify languages without sending data anywhere.</h2>
+        <p>One Rust binary. MIT licensed. Runs anywhere Rust runs.</p>
+        <a
+          class="btn btn-light"
+          href="https://github.com/hieudoanm/linguae"
+          target="_blank"
+          rel="noreferrer"
+        >
+          View on GitHub
+        </a>
+      </div>
+    </section>
+
     <footer class="footer">
       <div class="container footer-grid">
         <div class="footer-brand">
           <a class="brand" href="#top" aria-label="Linguae home">
-            <img class="logo" src="svg/logo.svg" alt="" width="26" height="26" />
+            <img class="logo" src="logo.svg" alt="" width="26" height="26" />
             <span class="brand-name">Linguae</span>
           </a>
           <p>Local-first language identification, written in Rust.</p>
