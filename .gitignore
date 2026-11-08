@@ -4,3 +4,6 @@ zip/
 
 # macOS
 .DS_Store
+
+# Tracers
+.tracers-cache
