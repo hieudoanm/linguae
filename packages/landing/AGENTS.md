@@ -1,9 +1,46 @@
-<!-- BEGIN:nextjs-agent-rules -->
+# AGENTS.md — packages/landing
 
-## This is NOT the Next.js you know
+Static marketing page for Linguae. **No build step, no package.json, no
+JavaScript.** The entire site is `index.html` + `styles.css` + `svg/` assets.
 
-This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+## Layout
 
-This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+```
+landing/
+├── index.html    # Single-page markup: nav, hero, features, demo, how-it-works, install, footer
+├── styles.css    # All styling — design tokens + components, hand-written
+├── svg/          # Logo, favicon, OG images (referenced with relative paths)
+└── README.md
+```
 
-<!-- END:nextjs-agent-rules -->
+## Rules
+
+- **Keep it static.** Do not add frameworks, bundlers, npm packages, or
+  `<script>` tags. If interactivity is ever needed, prefer CSS-only solutions.
+- **Relative paths only.** Assets are referenced as `svg/...`, `styles.css` —
+  never absolute `/...` paths, so the page works under any base path
+  (GitHub Pages serves it at `/linguae/`).
+- **Light theme only.** The page palette is light; terminal mockups
+  (`.terminal`) intentionally stay dark in all contexts. Do not add a
+  `prefers-color-scheme` dark theme.
+- **Design tokens live in `:root`** at the top of `styles.css` — colors,
+  radii, fonts, spacing. Reuse them; don't hardcode new hex values in
+  components.
+- **Unslop design rules** apply (see `notes/ai-unslop-design.md` in the
+  hieudoanm notes repo): no filler badges, monospace only for code/terminals,
+  consistent icon family (24px viewBox, 1.5px stroke, `currentColor`), teal
+  `--accent` for CTAs/accents only, real CLI output in demos — no mock
+  illustrations, `tabular-nums` for numbers, `text-wrap: balance` on headings.
+- No gradients, no pure `#000`/`#fff` — use the gray-shaded palette.
+
+## Verify
+
+There is no test/build tooling. Sanity-check by serving the directory and
+opening `index.html`:
+
+```bash
+python3 -m http.server 8080 -d packages/landing
+```
+
+Deployed automatically to GitHub Pages by `landing-deploy` in
+`.github/workflows/ci.yaml` on `master` pushes.

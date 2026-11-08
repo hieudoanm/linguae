@@ -1,24 +1,13 @@
-# @linguae/landing
+# Linguae landing
 
-Marketing landing page for [Linguae](https://github.com/hieudoanm/linguae),
-built with Next.js, Tailwind CSS, and daisyUI.
-
-## Stack
-
-- Next.js 16 (App Router, static export)
-- Tailwind CSS 4 + daisyUI 5 with custom `linguae` / `linguae-dark` themes
-  (light/dark, no gradients)
-- Vitest + Testing Library for unit tests
-- Prettier with `prettier-plugin-tailwindcss`
-
-## Commands
+Static landing page for Linguae. No build step, no dependencies, no
+JavaScript — just open `index.html` or serve the directory:
 
 ```bash
-pnpm dev            # next dev
-pnpm build          # static export to out/
-pnpm test:run       # vitest run (single pass)
-pnpm test:coverage  # vitest run --coverage
-pnpm lint           # eslint src
-pnpm format         # prettier --write .
-pnpm format:check   # prettier --check .
+python3 -m http.server 8080 -d packages/landing
 ```
+
+All asset paths are relative, so the page works at any mount point (e.g.
+GitHub Pages at `/linguae/`). Light theme only; terminal mockups stay dark.
+Deployed to GitHub Pages by the `landing-deploy` job in
+`.github/workflows/ci.yaml` on pushes to `master`.

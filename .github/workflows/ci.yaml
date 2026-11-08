@@ -102,70 +102,15 @@ jobs:
           path: packages/desktop/out
           retention-days: 1
 
-  landing-build:
-    name: Landing - Build
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: packages/landing
-    steps:
-      - uses: actions/checkout@v7.0.1
-
-      - name: Cache pnpm store
-        uses: actions/cache@v6.1.0
-        with:
-          path: ~/.local/share/pnpm/store
-          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: ${{ runner.os }}-pnpm-
-
-      - name: Set up pnpm
-        uses: pnpm/action-setup@v6.1.1
-        with:
-          version: "12.18.0"
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v7.1.0
-        with:
-          node-version: "26.13.0"
-          cache: "pnpm"
-
-      - name: Install dependencies
-        run: |
-          pnpm install
-
-      - name: Run lint
-        run: |
-          pnpm run lint
-
-      - name: Run tests
-        run: |
-          pnpm run test:run
-
-      - name: Build landing
-        run: |
-          pnpm run build
-
-      - name: Upload landing out artifact
-        uses: actions/upload-artifact@v7.0.2
-        with:
-          name: landing-out
-          path: packages/landing/out
-          retention-days: 1
-
   landing-deploy:
     name: Landing - Deploy
-    needs: [landing-build]
     if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     permissions:
       pages: write
       id-token: write
     steps:
-      - name: Download landing out artifact
-        uses: actions/download-artifact@v8.0.2
-        with:
-          name: landing-out
-          path: packages/landing/out
+      - uses: actions/checkout@v7.0.1
 
       - name: Configure Pages
         uses: actions/configure-pages@v6.0.0
@@ -173,7 +118,7 @@ jobs:
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v5.0.0
         with:
-          path: packages/landing/out
+          path: packages/landing
 
       - name: Deploy to GitHub Pages
         id: deployment
