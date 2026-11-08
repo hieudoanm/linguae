@@ -3,25 +3,35 @@ root = true
 [*]
 charset = utf-8
 end_of_line = lf
-insert_final_newline = true
-trim_trailing_whitespace = true
 indent_style = space
 indent_size = 2
+insert_final_newline = true
+trim_trailing_whitespace = true
 
-[*.ts]
-indent_size = 2
-
-[*.tsx]
-indent_size = 2
-
-[*.py]
-indent_size = 4
-
-[Makefile]
-indent_style = tab
-
+# Markdown: allow trailing spaces (for line breaks)
 [*.md]
 trim_trailing_whitespace = false
 
-[*.{json,yml,yaml,toml}]
+# YAML often prefers 2 spaces, but be explicit
+[*.{yml,yaml}]
 indent_size = 2
+
+# JSON / config files
+[*.json]
+indent_size = 2
+
+# Makefiles require tabs
+[Makefile]
+indent_style = tab
+
+# Shell scripts
+[*.sh]
+indent_size = 2
+
+# Python
+[*.py]
+indent_size = 4
+
+# Rust (rustfmt default)
+[*.rs]
+indent_size = 4
