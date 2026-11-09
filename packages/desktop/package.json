@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "@tauri-apps/api": "2.12.4",
-    "next": "16.4.5",
+    "next": "16.4.6",
     "react": "19.3.1",
     "react-dom": "19.3.1"
   },
@@ -36,7 +36,7 @@
     "@vitejs/plugin-react": "6.3.0",
     "@vitest/coverage-v8": "5.1.0",
     "eslint": "10.14.0",
-    "eslint-config-next": "16.4.5",
+    "eslint-config-next": "16.4.6",
     "eslint-config-prettier": "10.1.8",
     "jsdom": "31.0.0",
     "prettier": "3.9.10",
