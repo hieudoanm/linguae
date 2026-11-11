@@ -1,5 +1,8 @@
 # Linguae
 
+[![CI](https://github.com/hieudoanm/linguae/actions/workflows/ci.yaml/badge.svg?branch=master)](https://github.com/hieudoanm/linguae/actions/workflows/ci.yaml?branch=master)  [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
+
 **Detect the language of text with a local character-level model — no cloud, no pretrained weights, no network calls.**
 
 Linguae is a local-first language identification project. It trains a
