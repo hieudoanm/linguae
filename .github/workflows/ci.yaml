@@ -195,7 +195,7 @@ jobs:
       - name: Build macOS bundles
         if: runner.os == 'macOS'
         working-directory: packages/desktop
-        run: pnpm exec tauri build --bundles dmg
+        run: pnpm exec tauri build --bundles app,dmg
 
       - name: Zip macOS app bundle
         if: runner.os == 'macOS'
