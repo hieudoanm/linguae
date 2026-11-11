@@ -192,6 +192,18 @@ jobs:
           name: desktop-out
           path: packages/desktop/out
 
+      - name: Typecheck
+        working-directory: packages/desktop
+        run: pnpm run typecheck
+
+      - name: Lint
+        working-directory: packages/desktop
+        run: pnpm run lint
+
+      - name: Test
+        working-directory: packages/desktop
+        run: pnpm run test:run
+
       - name: Build macOS bundles
         if: runner.os == 'macOS'
         working-directory: packages/desktop
