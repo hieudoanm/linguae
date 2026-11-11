@@ -93,8 +93,22 @@ jobs:
           path: packages/desktop/out
           retention-days: 1
 
+  landing-build:
+    name: Landing - Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7.0.1
+
+      - name: Upload Pages artifact
+        if: github.ref == 'refs/heads/master'
+        uses: actions/upload-pages-artifact@v5.0.0
+        with:
+          path: packages/landing
+
   landing-deploy:
     name: Landing - Deploy
+    needs: landing-build
     if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     permissions:
@@ -102,19 +116,7 @@ jobs:
       pages: write
       id-token: write
     steps:
-      - name: Checkout
-        uses: actions/checkout@v7.0.1
-
-      - name: Configure Pages
-        uses: actions/configure-pages@v6.0.0
-
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v5.0.0
-        with:
-          path: packages/landing
-
       - name: Deploy to GitHub Pages
-        id: deployment
         uses: actions/deploy-pages@v5.0.1
 
   desktop-tauri:
