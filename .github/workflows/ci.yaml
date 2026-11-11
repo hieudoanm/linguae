@@ -4,9 +4,14 @@ on:
   push:
     branches: [master]
   pull_request:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
 
 concurrency:
-  group: ci-${{ github.workflow }}-${{ github.ref }}
+  group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -26,14 +31,7 @@ jobs:
           components: clippy, rustfmt
 
       - name: Cache cargo
-        uses: actions/cache@v6.1.0
-        with:
-          path: |
-            ~/.cargo/registry
-            ~/.cargo/git
-            crates/target
-          key: ${{ runner.os }}-cargo-${{ hashFiles('crates/Cargo.lock') }}
-          restore-keys: ${{ runner.os }}-cargo-
+        uses: Swatinem/rust-cache@v2.9.3
 
       - name: Lint
         run: |
@@ -63,22 +61,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v7.0.1
 
-      - name: Cache pnpm store
-        uses: actions/cache@v6.1.0
-        with:
-          path: ~/.local/share/pnpm/store
-          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: ${{ runner.os }}-pnpm-
-
       - name: Set up pnpm
         uses: pnpm/action-setup@v6.1.1
-        with:
-          version: "12.18.0"
 
       - name: Set up Node.js
         uses: actions/setup-node@v7.1.0
         with:
-          node-version: "26.13.0"
+          node-version-file: .nvmrc
           cache: "pnpm"
 
       - name: Install dependencies
@@ -109,6 +98,7 @@ jobs:
     if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     permissions:
+      contents: read
       pages: write
       id-token: write
     steps:
@@ -141,27 +131,18 @@ jobs:
 
       - name: Set up pnpm
         uses: pnpm/action-setup@v6.1.1
-        with:
-          version: "12.18.0"
 
       - name: Set up Node.js
         uses: actions/setup-node@v7.1.0
         with:
-          node-version: "26.13.0"
+          node-version-file: .nvmrc
           cache: "pnpm"
 
       - name: Set up Rust
         uses: dtolnay/rust-toolchain@stable
 
       - name: Cache cargo
-        uses: actions/cache@v6.1.0
-        with:
-          path: |
-            ~/.cargo/registry
-            ~/.cargo/git
-            packages/desktop/src-tauri/target
-          key: ${{ runner.os }}-cargo-${{ hashFiles('packages/desktop/src-tauri/Cargo.lock') }}
-          restore-keys: ${{ runner.os }}-cargo-
+        uses: Swatinem/rust-cache@v2.9.3
 
       - name: Install Linux dependencies
         if: matrix.os == 'ubuntu-latest'
