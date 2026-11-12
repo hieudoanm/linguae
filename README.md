@@ -2,6 +2,8 @@
 
 [![CI](https://github.com/hieudoanm/linguae/actions/workflows/ci.yaml/badge.svg?branch=master)](https://github.com/hieudoanm/linguae/actions/workflows/ci.yaml?branch=master)  [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
+keywords: `language-detection`, `rust`, `candle`, `machine-learning`, `cli`, `fastapi`
+
 
 **Detect the language of text with a local character-level model — no cloud, no pretrained weights, no network calls.**
 
@@ -10,6 +12,10 @@ character-level CNN from scratch with Candle on the Tatoeba (short sentences),
 WiLI-2018 (long paragraphs), and per-language WiLI word datasets and ships a
 standalone command-line tool that predicts exactly one language per input
 string. Everything runs on your own machine.
+
+**Live demo:** <https://hieudoanm.github.io/linguae/>
+
+![linguae demo](assets/demo/gif/demo.gif)
 
 ## Table of Contents
 
