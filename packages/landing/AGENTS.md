@@ -1,7 +1,7 @@
 # AGENTS.md — packages/landing
 
 Static marketing page for Linguae. **No build step, no package.json, no
-JavaScript.** The entire site is flat files — `index.html` + `styles.css` +
+JavaScript except a tiny year-injection snippet.** The entire site is flat files — `index.html` + `styles.css` +
 assets at the root, no subdirectories.
 
 ## Layout
@@ -24,7 +24,7 @@ landing/
 ## Rules
 
 - **Keep it flat.** No subdirectories — all assets live at the root. Do not
-  add frameworks, bundlers, npm packages, or `<script>` tags. If
+  add frameworks, bundlers, npm packages, or `<script>` tags beyond the footer year snippet. If
   interactivity is ever needed, prefer CSS-only solutions.
 - **Relative paths only.** Assets are referenced as `logo.svg`,
   `styles.css` — never absolute `/...` paths, so the page works under any
@@ -60,3 +60,11 @@ Deployed automatically to GitHub Pages by `landing-deploy` in
 ## Conventions
 
 - **Fonts:** Inter (sans) loaded via the Google Fonts `<link>` in `index.html`; mono stack `ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace`. Tokens: `--font-sans` / `--font-mono`. Do not add other typefaces.
+
+## Footer
+
+The footer follows the shared contract: `© {year} {repo-name}` (lowercase
+repo name, dynamic year via `<span id="year">` + the year script), a
+one-line tagline/license descriptor, and a right-aligned `<nav
+aria-label="Footer">` with exactly two links — `GitHub` (repo root) and
+`README` (`<repo>#readme`), both `target="_blank" rel="noreferrer"`.
