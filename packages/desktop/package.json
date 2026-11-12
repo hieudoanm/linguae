@@ -9,7 +9,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint src",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "next typegen && tsc --noEmit",
     "lint:fix": "eslint src --fix",
     "format": "prettier --cache --write src",
     "format:check": "prettier --cache --check src",
