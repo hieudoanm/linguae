@@ -15,8 +15,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  cli:
-    name: CLI
+  cli-check:
+    name: CLI check
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -44,6 +44,10 @@ jobs:
   cli-build:
     name: CLI build (${{ matrix.os }})
     runs-on: ${{ matrix.os }}
+    # Release binaries are only needed for the master-branch release job;
+    # PRs are covered by the `cli-check` job.
+    if: github.event_name != 'pull_request'
+    needs: cli-check
     defaults:
       run:
         working-directory: crates
@@ -81,8 +85,43 @@ jobs:
           if-no-files-found: error
           retention-days: 7
 
+  desktop-check:
+    name: Desktop check
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packages/desktop
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7.0.1
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v6.1.1
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7.1.0
+        with:
+          node-version-file: .nvmrc
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Typecheck
+        run: pnpm run typecheck
+
+      - name: Lint
+        run: pnpm run lint
+
+      - name: Test
+        run: pnpm run test:run
+
   desktop:
     name: Desktop - Build
+    needs: desktop-check
+    # The `out/` bundle is only needed by `desktop-build` for releases;
+    # PRs are covered by the `desktop-check` job.
+    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -103,14 +142,6 @@ jobs:
       - name: Install dependencies
         run: |
           pnpm install
-
-      - name: Run lint
-        run: |
-          pnpm run lint
-
-      - name: Run tests
-        run: |
-          pnpm run test:run
 
       - name: Build desktop
         run: |
@@ -152,6 +183,9 @@ jobs:
   desktop-build:
     name: Desktop build (${{ matrix.os }})
     needs: [desktop]
+    # Release bundles are only needed for the master-branch release job;
+    # PRs are covered by the `desktop-check` job.
+    if: github.event_name != 'pull_request'
     strategy:
       fail-fast: false
       matrix:
@@ -191,18 +225,6 @@ jobs:
         with:
           name: desktop-out
           path: packages/desktop/out
-
-      - name: Typecheck
-        working-directory: packages/desktop
-        run: pnpm run typecheck
-
-      - name: Lint
-        working-directory: packages/desktop
-        run: pnpm run lint
-
-      - name: Test
-        working-directory: packages/desktop
-        run: pnpm run test:run
 
       - name: Build macOS bundles
         if: runner.os == 'macOS'
