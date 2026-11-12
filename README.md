@@ -1,4 +1,4 @@
-# Linguae
+# linguae
 
 [![CI](https://github.com/hieudoanm/linguae/actions/workflows/ci.yaml/badge.svg?branch=master)](https://github.com/hieudoanm/linguae/actions/workflows/ci.yaml?branch=master)  [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
@@ -11,9 +11,25 @@ WiLI-2018 (long paragraphs), and per-language WiLI word datasets and ships a
 standalone command-line tool that predicts exactly one language per input
 string. Everything runs on your own machine.
 
-[Documentation](AGENTS.md) · [🚀 Quick Start](#get-started) · [🔍 See It In Action](#see-it-in-action) · [CLI Usage](crates/README.md) · [Model Training](crates/linguae-train/README.md)
+## Table of Contents
 
-![Linguae](assets/og/og-light.png)
+- [The Problem](#the-problem)
+- [The Solution](#the-solution)
+- [Features](#features)
+- [See It in Action](#see-it-in-action)
+- [Get Started](#get-started)
+- [HTTP Server and Web App](#http-server-and-web-app)
+- [Use Cases](#use-cases)
+- [Why This Project?](#why-this-project)
+- [Training Visualisations](#training-visualisations)
+- [Project Status and Trust](#project-status-and-trust)
+- [Community and Contributions](#community-and-contributions)
+- [Call to Action](#call-to-action)
+- [License](#license)
+
+<p align="center">
+  <img src="assets/branding/png/og.png" alt="Linguae — detect the language of text locally" width="720">
+</p>
 
 ## The Problem
 
