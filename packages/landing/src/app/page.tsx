@@ -139,7 +139,7 @@ const HomePage: NextPage = () => (
         { value: '200+', label: 'languages' },
         { value: '0', label: 'network calls' },
       ]}>
-      <Terminal caption="Detect a language" lines={HERO_LINES} />
+      <Terminal lines={HERO_LINES} />
     </Hero>
 
     <Features
@@ -158,7 +158,6 @@ const HomePage: NextPage = () => (
           {DEMO_TERMINALS.map((t) => (
             <Terminal
               key={t.caption}
-              caption={t.caption}
               lines={t.lines}
               className={t.wide ? 'lg:col-span-2' : ''}
             />
@@ -187,7 +186,7 @@ const HomePage: NextPage = () => (
           title="Install and run"
           description="Requires Rust 1.85+. No Python runtime needed for the CLI."
         />
-        <Terminal caption="Build from source" lines={INSTALL_LINES} />
+        <Terminal lines={INSTALL_LINES} />
         <p className="text-base-content/60 mt-6 text-center text-sm">
           See the{' '}
           <a
