@@ -56,3 +56,7 @@ python3 -m http.server 8080 -d packages/landing
 
 Deployed automatically to GitHub Pages by `landing-deploy` in
 `.github/workflows/ci.yaml` on `master` pushes.
+
+## Conventions
+
+- **Fonts:** Inter (sans) loaded via the Google Fonts `<link>` in `index.html`; mono stack `ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace`. Tokens: `--font-sans` / `--font-mono`. Do not add other typefaces.
