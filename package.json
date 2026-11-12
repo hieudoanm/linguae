@@ -1,20 +1,27 @@
 {
   "name": "@linguae/workspace",
   "version": "0.0.1",
+  "private": true,
   "description": "Monorepo for Linguae",
-  "keywords": [],
-  "author": "",
   "license": "MIT",
+  "author": {
+    "name": "Hieu Doan",
+    "email": "hieu.doan.professional@gmail.com",
+    "url": "https://hieudoanm.github.io"
+  },
   "packageManager": "pnpm@12.18.0",
   "engines": {
     "node": "26.13.1"
   },
   "scripts": {
-    "dev": "turbo dev",
-    "build": "turbo build",
-    "lint": "turbo lint",
-    "format": "turbo format",
-    "test": "turbo test"
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "test": "turbo run test",
+    "test:coverage": "turbo run test:coverage",
+    "typecheck": "turbo run typecheck",
+    "format": "turbo run format",
+    "prepare": "husky || true"
   },
   "devDependencies": {
     "husky": "9.1.7",
