@@ -226,14 +226,16 @@
 
   <footer class="footer">
     <div class="container footer-inner">
-      <span>© 2026 Linguae</span>
+      <span>© <span id="year">2026</span> linguae</span>
       <span>Local-first language identification · MIT licensed</span>
-      <nav>
+      <nav aria-label="Footer">
         <a href="https://github.com/hieudoanm/linguae" target="_blank" rel="noreferrer">GitHub</a>
         <a href="https://github.com/hieudoanm/linguae#readme" target="_blank" rel="noreferrer">README</a>
-        <a href="https://github.com/hieudoanm/linguae/releases" target="_blank" rel="noreferrer">Releases</a>
       </nav>
     </div>
   </footer>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
