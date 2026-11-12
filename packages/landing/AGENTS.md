@@ -1,78 +1,41 @@
 # AGENTS.md — packages/landing
 
-Static marketing page for Linguae. **No build step, no package.json, no
-JavaScript except a tiny year-injection snippet.** The entire site is flat files — `index.html` + `styles.css` +
-assets at the root, no subdirectories.
+Next.js 16 (App Router) static-export landing page + Tailwind CSS v4 + DaisyUI
+5, deployed to GitHub Pages at `https://hieudoanm.github.io/linguae/` (project
+site — `basePath: "/linguae"`, `assetPrefix` likewise in production).
 
-## Layout
-
-```
-landing/
-├── index.html    # Single-page markup: nav, hero, features, demo, how-it-works, install, CTA, footer
-├── 404.html      # GitHub Pages 404 page, reuses styles.css
-├── styles.css    # All styling — design tokens + components, hand-written
-├── logo.svg      # Brand mark (light theme)
-├── favicon.svg   # Browser favicon
-├── og.svg        # Social share image
-├── robots.txt    # Allows all crawlers, points at sitemap.xml
-├── sitemap.xml   # Single URL: https://hieudoanm.github.io/linguae/
-├── humans.txt    # Project/team credits
-├── LICENSE       # Copy of the repo MIT license (dir is uploaded verbatim)
-└── README.md, AGENTS.md
-```
-
-## Rules
-
-- **Keep it flat.** No subdirectories — all assets live at the root. Do not
-  add frameworks, bundlers, npm packages, or `<script>` tags beyond the footer year snippet. If
-  interactivity is ever needed, prefer CSS-only solutions.
-- **Relative paths only.** Assets are referenced as `logo.svg`,
-  `styles.css` — never absolute `/...` paths, so the page works under any
-  base path (GitHub Pages serves it at `/linguae/`).
-- **One light theme only** — `#ffffff` surfaces, `#f9fafb` alt sections,
-  `#111827` text, `#e5e7eb` borders (same palette family as the llm.rs,
-  neo.bank, and transcribers landings). Terminal mockups (`.terminal`)
-  intentionally stay dark. Do not add theme variants, `prefers-color-scheme`
-  handling, or `*-light`/`*-dark` asset duplicates.
-- **Design tokens live in `:root`** at the top of `styles.css` — colors,
-  radii, fonts, spacing, shadows. Reuse them; don't hardcode new hex values
-  in components.
-- **Unslop design rules** apply (see `notes/ai-unslop-design.md` in the
-  hieudoanm notes repo): no filler badges, monospace only for code/terminals,
-  consistent icon family (24px viewBox, 1.5px stroke, `currentColor`), teal
-  `--accent` for CTAs/accents only, real CLI output in demos — no mock
-  illustrations, `tabular-nums` for numbers, `text-wrap: balance` on headings.
-- No gradients. Accent is teal (`--accent` family); reserve it for CTAs,
-  icons, and small highlights.
-
-## Verify
-
-There is no test/build tooling. Sanity-check by serving the directory and
-opening `index.html`:
+## Commands
 
 ```bash
-python3 -m http.server 8080 -d packages/landing
+pnpm install
+pnpm run dev      # dev server (basePath applies)
+pnpm run build    # static export → out/ (uploaded to Pages by CI)
+pnpm run lint
 ```
 
-Deployed automatically to GitHub Pages by `landing-deploy` in
-`.github/workflows/ci.yaml` on `master` pushes.
+## Structure
+
+- `src/app/layout.tsx` — metadata, fonts, and the global `Navbar`/`Footer` (all
+  content passed as props).
+- `src/app/page.tsx` — page content as data passed to the shared components.
+- `src/components/molecules/` — shared components (`Navbar`, `Hero`, `Features`,
+  `CTA`, `Footer`, `SectionHead`, `Terminal`). These files are **byte-identical
+  across all `hieudoanm/*/packages/landing` repos** — do not fork them; pass
+  content via props instead.
+- `src/app/globals.css` — Tailwind v4 imports + the custom DaisyUI `linguae`
+  light theme.
+- `public/` — `favicon.ico`, `favicon.svg`, `logo.*`, `og.png`, `robots.txt`,
+  `sitemap.xml`, `humans.txt`, served under `/linguae/` in production.
 
 ## Conventions
 
-- **Fonts:** Inter (sans) loaded via the Google Fonts `<link>` in `index.html`; mono stack `ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace`. Tokens: `--font-sans` / `--font-mono`. Do not add other typefaces.
-
-## Footer
-
-The footer follows the shared contract: `© {year} {repo-name}` (lowercase
-repo name, dynamic year via `<span id="year">` + the year script), a
-one-line tagline/license descriptor, and a right-aligned `<nav
-aria-label="Footer">` with exactly two links — `GitHub` (repo root) and
-`README` (`<repo>#readme`), both `target="_blank" rel="noreferrer"`.
-
-## Features & CTA sections
-
-`#features` and `#install` follow the shared template: centered
-`.section-head` (h2 + one supporting paragraph), a `.grid-3` card grid
-(`article.card` = `.card-icon` + h3 + p), and a closing CTA section on the
-alt background (`.section-alt`, `.container-narrow`) ending in a
-`.cta-row` with a primary `btn-lg` action plus at most one ghost button.
+- Keep `output: "export"` in `next.config.ts` — the site must build to static
+  HTML in `out/`; no server features or API routes.
+- `basePath`/`assetPrefix` are `/linguae` in production builds; `next/link` and
+  metadata get it automatically, raw `<img src>` paths must include it (see the
+  `LOGO` constant in `layout.tsx`).
+- Theme is light-only via `data-theme="linguae"` on `<html>`; accent colours
+  differ per repo but every theme is light.
+- Fonts: Inter via `next/font`; mono stack for terminal/code only.
+- Design follows the "AI unslop" rules: no filler badges, monospace only for
+  code/commands, real CLI output in demos.
