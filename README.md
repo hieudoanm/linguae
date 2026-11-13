@@ -19,23 +19,32 @@ string. Everything runs on your own machine.
 
 ## Table of Contents
 
-- [The Problem](#the-problem)
-- [The Solution](#the-solution)
-- [Features](#features)
-- [See It in Action](#see-it-in-action)
-- [Get Started](#get-started)
-- [HTTP Server and Web App](#http-server-and-web-app)
-- [Use Cases](#use-cases)
-- [Why This Project?](#why-this-project)
-- [Training Visualisations](#training-visualisations)
-- [Project Status and Trust](#project-status-and-trust)
-- [Community and Contributions](#community-and-contributions)
-- [Call to Action](#call-to-action)
-- [License](#license)
+- [linguae](#linguae)
+  - [Table of Contents](#table-of-contents)
+  - [The Problem](#the-problem)
+  - [The Solution](#the-solution)
+  - [Features](#features)
+  - [See It in Action](#see-it-in-action)
+  - [Get Started](#get-started)
+    - [Prerequisites](#prerequisites)
+    - [Install the CLI](#install-the-cli)
+    - [Train the model (optional)](#train-the-model-optional)
+    - [Run](#run)
+  - [HTTP Server and Web App](#http-server-and-web-app)
+    - [Install and Run](#install-and-run)
+    - [Endpoints](#endpoints)
+    - [Examples](#examples)
+    - [Configuration](#configuration)
+    - [Middlewares](#middlewares)
+  - [Use Cases](#use-cases)
+  - [Why This Project?](#why-this-project)
+  - [Training Visualisations](#training-visualisations)
+  - [Project Status and Trust](#project-status-and-trust)
+  - [Community and Contributions](#community-and-contributions)
+  - [Call to Action](#call-to-action)
+  - [License](#license)
 
-<p align="center">
-  <img src="assets/branding/png/og.png" alt="Linguae — detect the language of text locally" width="720">
-</p>
+![Linguae — detect the language of text locally](assets/branding/png/og.png)
 
 ## The Problem
 
@@ -190,18 +199,18 @@ curl -X POST http://127.0.0.1:8000/detect/file \
 
 All settings are overridable via environment variables (see `packages/app/server/README.md`):
 
-| Variable                      | Default                       | Description                |
-| ----------------------------- | ----------------------------- | -------------------------- |
-| `LINGUAE_SERVER_HOST`         | `0.0.0.0`                     | Bind host                  |
-| `LINGUAE_SERVER_PORT`         | `8000`                        | Bind port                  |
-| `LINGUAE_ARTIFACT_DIR`        | `crates/linguae-train/artifacts/linguae` | Artifact directory |
-| `LINGUAE_DEVICE`              | `cpu`                         | Torch device               |
-| `LINGUAE_RATE_LIMIT`          | `true`                        | Enable rate limiting       |
-| `LINGUAE_RATE_LIMIT_REQUESTS` | `60`                          | Max requests per window    |
-| `LINGUAE_RATE_LIMIT_WINDOW`   | `60`                          | Window size in seconds     |
-| `LINGUAE_CORS`                | `true`                        | Enable CORS                |
-| `LINGUAE_CORS_ORIGINS`        | `*`                           | Comma-separated origins    |
-| `LINGUAE_TIMEOUT`             | `30.0`                        | Request timeout in seconds |
+| Variable                      | Default                                  | Description                |
+| ----------------------------- | ---------------------------------------- | -------------------------- |
+| `LINGUAE_SERVER_HOST`         | `0.0.0.0`                                | Bind host                  |
+| `LINGUAE_SERVER_PORT`         | `8000`                                   | Bind port                  |
+| `LINGUAE_ARTIFACT_DIR`        | `crates/linguae-train/artifacts/linguae` | Artifact directory         |
+| `LINGUAE_DEVICE`              | `cpu`                                    | Torch device               |
+| `LINGUAE_RATE_LIMIT`          | `true`                                   | Enable rate limiting       |
+| `LINGUAE_RATE_LIMIT_REQUESTS` | `60`                                     | Max requests per window    |
+| `LINGUAE_RATE_LIMIT_WINDOW`   | `60`                                     | Window size in seconds     |
+| `LINGUAE_CORS`                | `true`                                   | Enable CORS                |
+| `LINGUAE_CORS_ORIGINS`        | `*`                                      | Comma-separated origins    |
+| `LINGUAE_TIMEOUT`             | `30.0`                                   | Request timeout in seconds |
 
 ### Middlewares
 

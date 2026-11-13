@@ -16,7 +16,7 @@ separately.
 
 ## Structure
 
-```
+```text
 data/
 ├── csv/
 │   ├── languages.csv          # ISO 639-3 code → name + family lookup (WiLI)
@@ -37,7 +37,7 @@ data/
 
 ## Pipeline
 
-```
+```text
 data/txt/wili-2018/*.txt
   → crates/linguae-data wili
   → data/csv/wili-2018.csv            (long: text, language)
@@ -132,18 +132,18 @@ variables.
 
 ## Key Files
 
-| File                                            | Description                                                 |
-| ----------------------------------------------- | ----------------------------------------------------------- |
-| `csv/languages.csv`                             | WiLI ISO 639-3 code → language name + family lookup         |
-| `csv/wili-2018.csv`                             | Long-text dataset: one row per text with its language label |
-| `csv/tatoeba.tsv`                               | Short-text dataset: headerless `id`, `language`, `text`     |
-| `csv/tatoeba.csv`                               | Converted short-text dataset: `id`, `language`, `text`      |
-| `csv/wili-2018-words.csv`                       | Frequent words per language: `text`, `language`, `count`    |
-| `processed/labels.json`                         | Label index map written by the trainer                      |
-| `crates/linguae-train/artifacts/images/training_curves.svg` | Training/validation loss and accuracy over epochs  |
-| `crates/linguae-train/artifacts/images/confusion_matrix.svg` | Per-class confusion matrix heatmap                |
-| `crates/linguae-train/artifacts/images/dataset_quality.svg` | Per-source length distribution and class balance   |
-| `crates/linguae-train/artifacts/images/accuracy_by_length.svg` | Accuracy stratified by text length             |
+| File                                                           | Description                                                 |
+| -------------------------------------------------------------- | ----------------------------------------------------------- |
+| `csv/languages.csv`                                            | WiLI ISO 639-3 code → language name + family lookup         |
+| `csv/wili-2018.csv`                                            | Long-text dataset: one row per text with its language label |
+| `csv/tatoeba.tsv`                                              | Short-text dataset: headerless `id`, `language`, `text`     |
+| `csv/tatoeba.csv`                                              | Converted short-text dataset: `id`, `language`, `text`      |
+| `csv/wili-2018-words.csv`                                      | Frequent words per language: `text`, `language`, `count`    |
+| `processed/labels.json`                                        | Label index map written by the trainer                      |
+| `crates/linguae-train/artifacts/images/training_curves.svg`    | Training/validation loss and accuracy over epochs           |
+| `crates/linguae-train/artifacts/images/confusion_matrix.svg`   | Per-class confusion matrix heatmap                          |
+| `crates/linguae-train/artifacts/images/dataset_quality.svg`    | Per-source length distribution and class balance            |
+| `crates/linguae-train/artifacts/images/accuracy_by_length.svg` | Accuracy stratified by text length                          |
 
 ## Notes
 
