@@ -7,7 +7,7 @@ string.
 
 The workspace contains four crates:
 
-```
+```text
 crates/
 ├── linguae-core/   # artifact loading, text preprocessing, CharCNN forward pass
 ├── linguae-cli/    # `linguae` binary (clap)
@@ -61,16 +61,16 @@ line so it pipes cleanly into `jq`.
 
 ## Options
 
-| Option | Description |
-| --- | --- |
-| `TEXT` | Text to classify. When omitted, stdin is read. |
-| `--file, -f PATH` | Classify each non-empty line of a UTF-8 file. |
-| `--artifact, -a PATH` | Artifact directory. Defaults to `crates/linguae-train/artifacts/linguae`. |
-| `--device TEXT` | Inference device: `cpu` (default), `cuda`, or `metal` (`mps` is an alias for `metal`). |
-| `--top-k, -k INT` | Number of alternatives included in JSON output (1–20, default 3). |
-| `--confidence, -c` | Append the confidence score in plain-text output. |
-| `--json` | Emit JSON Lines with text, language, confidence and alternatives. |
-| `--version, -V` | Print the CLI version. |
+| Option                | Description                                                                            |
+| --------------------- | -------------------------------------------------------------------------------------- |
+| `TEXT`                | Text to classify. When omitted, stdin is read.                                         |
+| `--file, -f PATH`     | Classify each non-empty line of a UTF-8 file.                                          |
+| `--artifact, -a PATH` | Artifact directory. Defaults to `crates/linguae-train/artifacts/linguae`.              |
+| `--device TEXT`       | Inference device: `cpu` (default), `cuda`, or `metal` (`mps` is an alias for `metal`). |
+| `--top-k, -k INT`     | Number of alternatives included in JSON output (1–20, default 3).                      |
+| `--confidence, -c`    | Append the confidence score in plain-text output.                                      |
+| `--json`              | Emit JSON Lines with text, language, confidence and alternatives.                      |
+| `--version, -V`       | Print the CLI version.                                                                 |
 
 The artifact directory can also be set with `LINGUAE_ARTIFACT_DIR`. The model
 performs **single-label classification per string**; it does not detect
@@ -97,11 +97,11 @@ cargo run --release -p linguae-data -- words
 cargo run --release -p linguae-data -- all
 ```
 
-| Subcommand | Input | Output |
-| --- | --- | --- |
-| `wili` | `linguae-data/data/txt/wili-2018/{x,y}_{train,test}.txt` | `linguae-data/data/csv/wili-2018.csv` (`text,language`) |
-| `tatoeba` | `linguae-data/data/csv/tatoeba.tsv` | `linguae-data/data/csv/tatoeba.csv` (`id,language,text`) |
-| `words` | WiLI train + test splits | `linguae-data/data/csv/wili-2018-words.csv` (`text,language,count`) |
+| Subcommand | Input                                                    | Output                                                              |
+| ---------- | -------------------------------------------------------- | ------------------------------------------------------------------- |
+| `wili`     | `linguae-data/data/txt/wili-2018/{x,y}_{train,test}.txt` | `linguae-data/data/csv/wili-2018.csv` (`text,language`)             |
+| `tatoeba`  | `linguae-data/data/csv/tatoeba.tsv`                      | `linguae-data/data/csv/tatoeba.csv` (`id,language,text`)            |
+| `words`    | WiLI train + test splits                                 | `linguae-data/data/csv/wili-2018-words.csv` (`text,language,count`) |
 
 `words` keeps up to 100,000 of the most frequent words per language, ordered by
 language, then descending frequency, then word. Pass `--max-words N` to change
