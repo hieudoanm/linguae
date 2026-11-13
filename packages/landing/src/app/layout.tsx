@@ -16,6 +16,7 @@ const NAV_LINKS = [
   { label: 'Demo', href: '#demo' },
   { label: 'How it works', href: '#how-it-works' },
   { label: 'Install', href: '#install' },
+  { label: 'Docs', href: '/docs/' },
 ];
 
 const DESCRIPTION =
