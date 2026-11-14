@@ -6,6 +6,7 @@ import Hero from '@/components/molecules/Hero';
 import SectionHead from '@/components/molecules/SectionHead';
 import Terminal from '@/components/molecules/Terminal';
 import {
+  LuBot,
   LuChartBar,
   LuBrainCircuit,
   LuFileInput,
@@ -49,6 +50,11 @@ const FEATURES: Feature[] = [
     icon: LuFileInput,
     title: 'Batch processing',
     body: 'Detect languages across whole files or streams line by line — built for corpus-scale workloads.',
+  },
+  {
+    icon: LuBot,
+    title: 'MCP server',
+    body: 'linguae mcp gives agents language detection as a tool — pipe text in, get an ISO 639-3 code and confidence scores back.',
   },
 ];
 
