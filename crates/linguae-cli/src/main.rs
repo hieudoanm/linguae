@@ -1,5 +1,7 @@
 //! Command-line interface for the Linguae language detector.
 
+mod mcp;
+
 use std::io::{IsTerminal, Read};
 use std::path::PathBuf;
 
@@ -56,6 +58,15 @@ struct Cli {
 }
 
 fn main() -> std::process::ExitCode {
+    if std::env::args().nth(1).as_deref() == Some("mcp") {
+        return match mcp::run() {
+            Ok(()) => std::process::ExitCode::SUCCESS,
+            Err(error) => {
+                eprintln!("mcp: {error}");
+                std::process::ExitCode::FAILURE
+            }
+        };
+    }
     let cli = Cli::parse();
     match run(&cli) {
         Ok(()) => std::process::ExitCode::SUCCESS,
