@@ -1,0 +1,1152 @@
+category,subcategory,eng
+People,Identity,person
+People,Identity,man
+People,Identity,woman
+People,Identity,people
+People,Identity,child
+People,Identity,boy
+People,Identity,girl
+People,Identity,baby
+People,Identity,adult
+People,Identity,men
+People,Identity,women
+People,Identity,children
+People,Family Members,mother
+People,Family Members,father
+People,Family Members,brother
+People,Family Members,sister
+People,Family Members,parent
+People,Family Members,parents
+People,Family Members,son
+People,Family Members,daughter
+People,Family Members,husband
+People,Family Members,wife
+People,Family Members,spouse
+People,Family Members,family
+People,Family Members,relative
+People,Family Members,sibling
+People,Occupations,teacher
+People,Occupations,doctor
+People,Occupations,nurse
+People,Occupations,driver
+People,Occupations,artist
+People,Occupations,writer
+People,Occupations,singer
+People,Occupations,actor
+People,Occupations,worker
+People,Occupations,farmer
+People,Occupations,chef
+People,Occupations,lawyer
+People,Occupations,engineer
+People,Occupations,photographer
+People,Social Roles,neighbor
+People,Social Roles,stranger
+People,Social Roles,hero
+People,Social Roles,leader
+People,Social Roles,member
+People,Social Roles,king
+People,Social Roles,queen
+People,Social Roles,citizen
+People,Social Roles,gentleman
+People,Social Roles,lady
+People,Social Roles,host
+People,Social Roles,guest
+Body,Anatomy,head
+Body,Anatomy,hand
+Body,Anatomy,arm
+Body,Anatomy,leg
+Body,Anatomy,foot
+Body,Anatomy,face
+Body,Anatomy,eye
+Body,Anatomy,ear
+Body,Anatomy,nose
+Body,Anatomy,mouth
+Body,Anatomy,neck
+Body,Anatomy,shoulder
+Body,Anatomy,finger
+Body,Anatomy,toe
+Body,Anatomy,hair
+Body,Anatomy,skin
+Body,Anatomy,chest
+Body,Anatomy,back
+Body,Anatomy,elbow
+Body,Anatomy,wrist
+Body,Anatomy,knee
+Body,Anatomy,ankle
+Body,Anatomy,forehead
+Body,Anatomy,cheek
+Body,Anatomy,chin
+Body,Organs,brain
+Body,Organs,heart
+Body,Organs,lung
+Body,Organs,liver
+Body,Organs,kidney
+Body,Organs,stomach
+Body,Organs,intestine
+Body,Organs,spleen
+Body,Organs,pancreas
+Body,Organs,bladder
+Body,Organs,appendix
+Body,Organs,gallbladder
+Body,Organs,bone
+Body,Organs,blood
+Body,Organs,muscle
+Body,Organs,nerve
+Body,Organs,vein
+Body,Organs,artery
+Body,Organs,rib
+Body,Organs,skull
+Body,Organs,spine
+Body,Organs,joint
+Body,Organs,organ
+Body,Senses,sight
+Body,Senses,hearing
+Body,Senses,smell
+Body,Senses,taste
+Body,Senses,touch
+Body,Senses,vision
+Body,Senses,sense
+Body,Senses,sensation
+Body,Senses,perception
+Body,Senses,balance
+Body,Senses,pain
+Body,Senses,instinct
+Body,Body Functions,breathe
+Body,Body Functions,digest
+Body,Body Functions,bleed
+Body,Body Functions,sweat
+Body,Body Functions,blink
+Body,Body Functions,cough
+Body,Body Functions,sneeze
+Body,Body Functions,yawn
+Body,Body Functions,swallow
+Body,Body Functions,chew
+Body,Body Functions,beat
+Body,Body Functions,pump
+Family & Relationships,Family Bonds,grandmother
+Family & Relationships,Family Bonds,grandfather
+Family & Relationships,Family Bonds,uncle
+Family & Relationships,Family Bonds,aunt
+Family & Relationships,Family Bonds,cousin
+Family & Relationships,Family Bonds,nephew
+Family & Relationships,Family Bonds,niece
+Family & Relationships,Family Bonds,grandson
+Family & Relationships,Family Bonds,granddaughter
+Family & Relationships,Family Bonds,stepmother
+Family & Relationships,Family Bonds,stepfather
+Family & Relationships,Family Bonds,twin
+Family & Relationships,Family Bonds,stepbrother
+Family & Relationships,Family Bonds,stepsister
+Family & Relationships,Family Bonds,stepdaughter
+Family & Relationships,Family Bonds,stepson
+Family & Relationships,Family Bonds,ancestor
+Family & Relationships,Family Bonds,descendant
+Family & Relationships,Romantic Relationships,love
+Family & Relationships,Romantic Relationships,partner
+Family & Relationships,Romantic Relationships,boyfriend
+Family & Relationships,Romantic Relationships,girlfriend
+Family & Relationships,Romantic Relationships,romance
+Family & Relationships,Romantic Relationships,kiss
+Family & Relationships,Romantic Relationships,hug
+Family & Relationships,Romantic Relationships,wedding
+Family & Relationships,Romantic Relationships,marriage
+Family & Relationships,Romantic Relationships,dating
+Family & Relationships,Romantic Relationships,anniversary
+Family & Relationships,Romantic Relationships,embrace
+Family & Relationships,Romantic Relationships,proposal
+Family & Relationships,Romantic Relationships,honeymoon
+Family & Relationships,Romantic Relationships,affection
+Family & Relationships,Friendships,friend
+Family & Relationships,Friendships,friendship
+Family & Relationships,Friendships,buddy
+Family & Relationships,Friendships,pal
+Family & Relationships,Friendships,companion
+Family & Relationships,Friendships,mate
+Family & Relationships,Friendships,ally
+Family & Relationships,Friendships,teammate
+Family & Relationships,Friendships,classmate
+Family & Relationships,Friendships,coworker
+Family & Relationships,Friendships,confidante
+Family & Relationships,Friendships,acquaintance
+Family & Relationships,Relationship Concepts,relationship
+Family & Relationships,Relationship Concepts,couple
+Family & Relationships,Relationship Concepts,trust
+Family & Relationships,Relationship Concepts,respect
+Family & Relationships,Relationship Concepts,care
+Family & Relationships,Relationship Concepts,bond
+Family & Relationships,Relationship Concepts,connection
+Family & Relationships,Relationship Concepts,harmony
+Family & Relationships,Relationship Concepts,support
+Family & Relationships,Relationship Concepts,loyalty
+Family & Relationships,Relationship Concepts,commitment
+Family & Relationships,Relationship Concepts,intimacy
+Family & Relationships,Relationship Concepts,devotion
+Family & Relationships,Relationship Concepts,solidarity
+Home,Rooms,kitchen
+Home,Rooms,bathroom
+Home,Rooms,bedroom
+Home,Rooms,hallway
+Home,Rooms,garage
+Home,Rooms,basement
+Home,Rooms,attic
+Home,Rooms,closet
+Home,Rooms,porch
+Home,Rooms,patio
+Home,Rooms,yard
+Home,Rooms,garden
+Home,Rooms,pantry
+Home,Rooms,foyer
+Home,Furniture,bed
+Home,Furniture,sofa
+Home,Furniture,desk
+Home,Furniture,shelf
+Home,Furniture,chair
+Home,Furniture,table
+Home,Furniture,wardrobe
+Home,Furniture,bench
+Home,Furniture,stool
+Home,Furniture,cabinet
+Home,Furniture,bookcase
+Home,Furniture,armchair
+Home,Furniture,dresser
+Home,Furniture,crib
+Home,Appliances,refrigerator
+Home,Appliances,washer
+Home,Appliances,dryer
+Home,Appliances,dishwasher
+Home,Appliances,oven
+Home,Appliances,stove
+Home,Appliances,microwave
+Home,Appliances,toaster
+Home,Appliances,blender
+Home,Appliances,vacuum
+Home,Appliances,fan
+Home,Appliances,iron
+Home,Appliances,freezer
+Home,Appliances,kettle
+Home,Household Items,pillow
+Home,Household Items,blanket
+Home,Household Items,sheet
+Home,Household Items,towel
+Home,Household Items,soap
+Home,Household Items,mirror
+Home,Household Items,curtain
+Home,Household Items,carpet
+Home,Household Items,lamp
+Home,Household Items,broom
+Home,Household Items,brush
+Home,Household Items,hanger
+Home,Household Items,toothbrush
+Home,Household Items,toothpaste
+Home,Household Items,detergent
+Home,Household Items,shampoo
+Home,Household Items,clock
+Food & Drink,Fruits,apple
+Food & Drink,Fruits,banana
+Food & Drink,Fruits,orange
+Food & Drink,Fruits,grape
+Food & Drink,Fruits,strawberry
+Food & Drink,Fruits,mango
+Food & Drink,Fruits,peach
+Food & Drink,Fruits,pear
+Food & Drink,Fruits,cherry
+Food & Drink,Fruits,lemon
+Food & Drink,Fruits,pineapple
+Food & Drink,Fruits,blueberry
+Food & Drink,Fruits,watermelon
+Food & Drink,Fruits,apricot
+Food & Drink,Vegetables,potato
+Food & Drink,Vegetables,tomato
+Food & Drink,Vegetables,carrot
+Food & Drink,Vegetables,onion
+Food & Drink,Vegetables,lettuce
+Food & Drink,Vegetables,cucumber
+Food & Drink,Vegetables,pepper
+Food & Drink,Vegetables,broccoli
+Food & Drink,Vegetables,spinach
+Food & Drink,Vegetables,cabbage
+Food & Drink,Vegetables,celery
+Food & Drink,Vegetables,corn
+Food & Drink,Vegetables,pea
+Food & Drink,Vegetables,bean
+Food & Drink,Vegetables,garlic
+Food & Drink,Vegetables,radish
+Food & Drink,Vegetables,pumpkin
+Food & Drink,Vegetables,squash
+Food & Drink,Meals,breakfast
+Food & Drink,Meals,lunch
+Food & Drink,Meals,dinner
+Food & Drink,Meals,meal
+Food & Drink,Meals,snack
+Food & Drink,Meals,dessert
+Food & Drink,Meals,sandwich
+Food & Drink,Meals,pizza
+Food & Drink,Meals,pasta
+Food & Drink,Meals,salad
+Food & Drink,Meals,soup
+Food & Drink,Meals,cake
+Food & Drink,Meals,cookie
+Food & Drink,Meals,barbecue
+Food & Drink,Beverages,water
+Food & Drink,Beverages,milk
+Food & Drink,Beverages,coffee
+Food & Drink,Beverages,tea
+Food & Drink,Beverages,juice
+Food & Drink,Beverages,soda
+Food & Drink,Beverages,beer
+Food & Drink,Beverages,wine
+Food & Drink,Beverages,smoothie
+Food & Drink,Beverages,cocoa
+Food & Drink,Beverages,lemonade
+Food & Drink,Beverages,cocktail
+Food & Drink,Beverages,milkshake
+Food & Drink,Beverages,champagne
+Nature,Plants,tree
+Nature,Plants,flower
+Nature,Plants,grass
+Nature,Plants,leaf
+Nature,Plants,branch
+Nature,Plants,root
+Nature,Plants,seed
+Nature,Plants,plant
+Nature,Plants,bush
+Nature,Plants,vine
+Nature,Plants,moss
+Nature,Plants,fern
+Nature,Geography,river
+Nature,Geography,mountain
+Nature,Geography,ocean
+Nature,Geography,sea
+Nature,Geography,lake
+Nature,Geography,pond
+Nature,Geography,beach
+Nature,Geography,island
+Nature,Geography,desert
+Nature,Geography,valley
+Nature,Geography,hill
+Nature,Geography,cliff
+Nature,Geography,glacier
+Nature,Geography,cave
+Nature,Geography,meadow
+Nature,Geography,rock
+Nature,Weather,rain
+Nature,Weather,snow
+Nature,Weather,wind
+Nature,Weather,storm
+Nature,Weather,thunder
+Nature,Weather,lightning
+Nature,Weather,fog
+Nature,Weather,cloud
+Nature,Weather,rainbow
+Nature,Weather,hail
+Nature,Weather,breeze
+Nature,Weather,sunshine
+Nature,Weather,sun
+Nature,Weather,moon
+Nature,Weather,star
+Nature,Weather,sky
+Nature,Environment,environment
+Nature,Environment,nature
+Nature,Environment,air
+Nature,Environment,earth
+Nature,Environment,ground
+Nature,Environment,land
+Nature,Environment,atmosphere
+Nature,Environment,wilderness
+Nature,Environment,habitat
+Nature,Environment,ecosystem
+Nature,Environment,climate
+Nature,Environment,pollution
+Nature,Environment,fire
+Nature,Environment,world
+Animals,Mammals,dog
+Animals,Mammals,cat
+Animals,Mammals,horse
+Animals,Mammals,cow
+Animals,Mammals,pig
+Animals,Mammals,sheep
+Animals,Mammals,goat
+Animals,Mammals,lion
+Animals,Mammals,tiger
+Animals,Mammals,bear
+Animals,Mammals,wolf
+Animals,Mammals,fox
+Animals,Mammals,whale
+Animals,Mammals,dolphin
+Animals,Mammals,bat
+Animals,Mammals,mouse
+Animals,Mammals,rabbit
+Animals,Mammals,deer
+Animals,Mammals,monkey
+Animals,Mammals,elephant
+Animals,Mammals,giraffe
+Animals,Mammals,zebra
+Animals,Mammals,camel
+Animals,Mammals,kangaroo
+Animals,Mammals,panda
+Animals,Birds,bird
+Animals,Birds,chicken
+Animals,Birds,duck
+Animals,Birds,goose
+Animals,Birds,owl
+Animals,Birds,eagle
+Animals,Birds,hawk
+Animals,Birds,crow
+Animals,Birds,parrot
+Animals,Birds,penguin
+Animals,Birds,swan
+Animals,Birds,flamingo
+Animals,Birds,sparrow
+Animals,Birds,robin
+Animals,Fish,fish
+Animals,Fish,shark
+Animals,Fish,salmon
+Animals,Fish,tuna
+Animals,Fish,trout
+Animals,Fish,goldfish
+Animals,Fish,eel
+Animals,Fish,sardine
+Animals,Fish,herring
+Animals,Fish,pike
+Animals,Fish,carp
+Animals,Fish,marlin
+Animals,Fish,cod
+Animals,Fish,anchovy
+Animals,Insects,butterfly
+Animals,Insects,bee
+Animals,Insects,ant
+Animals,Insects,mosquito
+Animals,Insects,fly
+Animals,Insects,beetle
+Animals,Insects,ladybug
+Animals,Insects,grasshopper
+Animals,Insects,dragonfly
+Animals,Insects,cockroach
+Animals,Insects,moth
+Animals,Insects,wasp
+Animals,Insects,flea
+Animals,Insects,termite
+Places,Countries,France
+Places,Countries,Spain
+Places,Countries,Germany
+Places,Countries,Italy
+Places,Countries,Japan
+Places,Countries,China
+Places,Countries,Brazil
+Places,Countries,Canada
+Places,Countries,Australia
+Places,Countries,India
+Places,Countries,Egypt
+Places,Countries,Mexico
+Places,Countries,Russia
+Places,Countries,United States
+Places,Cities,Paris
+Places,Cities,London
+Places,Cities,Tokyo
+Places,Cities,Berlin
+Places,Cities,Madrid
+Places,Cities,Rome
+Places,Cities,Moscow
+Places,Cities,Beijing
+Places,Cities,Sydney
+Places,Cities,Cairo
+Places,Cities,Toronto
+Places,Cities,Istanbul
+Places,Cities,New York
+Places,Cities,Dubai
+Places,Buildings,house
+Places,Buildings,building
+Places,Buildings,church
+Places,Buildings,temple
+Places,Buildings,castle
+Places,Buildings,palace
+Places,Buildings,tower
+Places,Buildings,hotel
+Places,Buildings,apartment
+Places,Buildings,cottage
+Places,Buildings,stadium
+Places,Buildings,mall
+Places,Buildings,cathedral
+Places,Buildings,mosque
+Places,Buildings,skyscraper
+Places,Buildings,cabin
+Places,Institutions,school
+Places,Institutions,hospital
+Places,Institutions,bank
+Places,Institutions,court
+Places,Institutions,university
+Places,Institutions,library
+Places,Institutions,museum
+Places,Institutions,embassy
+Places,Institutions,prison
+Places,Institutions,factory
+Places,Institutions,restaurant
+Places,Institutions,theater
+Places,Institutions,police
+Places,Institutions,cinema
+Time,Calendar,Monday
+Time,Calendar,Tuesday
+Time,Calendar,Wednesday
+Time,Calendar,Thursday
+Time,Calendar,Friday
+Time,Calendar,Saturday
+Time,Calendar,Sunday
+Time,Calendar,holiday
+Time,Calendar,weekend
+Time,Calendar,birthday
+Time,Calendar,calendar
+Time,Calendar,date
+Time,Seasons,spring
+Time,Seasons,summer
+Time,Seasons,autumn
+Time,Seasons,fall
+Time,Seasons,winter
+Time,Seasons,season
+Time,Seasons,monsoon
+Time,Seasons,solstice
+Time,Seasons,equinox
+Time,Seasons,harvest
+Time,Time Units,second
+Time,Time Units,minute
+Time,Time Units,hour
+Time,Time Units,day
+Time,Time Units,week
+Time,Time Units,month
+Time,Time Units,year
+Time,Time Units,decade
+Time,Time Units,century
+Time,Time Units,moment
+Time,Time Units,instant
+Time,Time Concepts,morning
+Time,Time Concepts,night
+Time,Time Concepts,today
+Time,Time Concepts,tomorrow
+Time,Time Concepts,yesterday
+Time,Time Concepts,tonight
+Time,Time Concepts,now
+Time,Time Concepts,soon
+Time,Time Concepts,later
+Time,Time Concepts,midnight
+Time,Time Concepts,noon
+Time,Time Concepts,dawn
+Time,Time Concepts,dusk
+Time,Time Concepts,past
+Time,Time Concepts,present
+Time,Time Concepts,future
+Time,Time Concepts,always
+Time,Time Concepts,never
+Movement,Walking,walk
+Movement,Walking,step
+Movement,Walking,stroll
+Movement,Walking,hike
+Movement,Walking,march
+Movement,Walking,wander
+Movement,Walking,roam
+Movement,Walking,pace
+Movement,Walking,trek
+Movement,Walking,trudge
+Movement,Walking,tiptoe
+Movement,Walking,stride
+Movement,Running,run
+Movement,Running,jog
+Movement,Running,sprint
+Movement,Running,race
+Movement,Running,dash
+Movement,Running,bolt
+Movement,Running,gallop
+Movement,Running,skip
+Movement,Running,hop
+Movement,Running,rush
+Movement,Running,charge
+Movement,Running,flee
+Movement,Direction,left
+Movement,Direction,right
+Movement,Direction,up
+Movement,Direction,down
+Movement,Direction,forward
+Movement,Direction,backward
+Movement,Direction,north
+Movement,Direction,south
+Movement,Direction,east
+Movement,Direction,west
+Movement,Direction,inward
+Movement,Direction,outward
+Movement,Direction,sideways
+Movement,Direction,diagonal
+Movement,Transportation,car
+Movement,Transportation,bus
+Movement,Transportation,train
+Movement,Transportation,plane
+Movement,Transportation,boat
+Movement,Transportation,ship
+Movement,Transportation,taxi
+Movement,Transportation,bike
+Movement,Transportation,truck
+Movement,Transportation,subway
+Movement,Transportation,helicopter
+Movement,Transportation,motorcycle
+Movement,Transportation,van
+Movement,Transportation,ferry
+Actions,Creation,make
+Actions,Creation,build
+Actions,Creation,create
+Actions,Creation,produce
+Actions,Creation,invent
+Actions,Creation,compose
+Actions,Creation,construct
+Actions,Creation,assemble
+Actions,Creation,bake
+Actions,Creation,cook
+Actions,Creation,grow
+Actions,Creation,design
+Actions,Destruction,break
+Actions,Destruction,destroy
+Actions,Destruction,smash
+Actions,Destruction,crush
+Actions,Destruction,demolish
+Actions,Destruction,ruin
+Actions,Destruction,wreck
+Actions,Destruction,burn
+Actions,Destruction,cut
+Actions,Destruction,tear
+Actions,Destruction,shatter
+Actions,Destruction,explode
+Actions,Possession,take
+Actions,Possession,give
+Actions,Possession,get
+Actions,Possession,keep
+Actions,Possession,hold
+Actions,Possession,bring
+Actions,Possession,buy
+Actions,Possession,sell
+Actions,Possession,acquire
+Actions,Possession,receive
+Actions,Possession,grab
+Actions,Possession,steal
+Actions,Change,change
+Actions,Change,become
+Actions,Change,improve
+Actions,Change,worsen
+Actions,Change,increase
+Actions,Change,decrease
+Actions,Change,transform
+Actions,Change,evolve
+Actions,Change,adapt
+Actions,Change,develop
+Actions,Change,vary
+Actions,Change,alter
+Objects,Tools,hammer
+Objects,Tools,wrench
+Objects,Tools,screwdriver
+Objects,Tools,scissors
+Objects,Tools,knife
+Objects,Tools,saw
+Objects,Tools,drill
+Objects,Tools,pliers
+Objects,Tools,axe
+Objects,Tools,tool
+Objects,Tools,ladder
+Objects,Tools,shovel
+Objects,Tools,pen
+Objects,Tools,pencil
+Objects,Electronics,phone
+Objects,Electronics,computer
+Objects,Electronics,camera
+Objects,Electronics,radio
+Objects,Electronics,speaker
+Objects,Electronics,television
+Objects,Electronics,screen
+Objects,Electronics,keyboard
+Objects,Electronics,monitor
+Objects,Electronics,printer
+Objects,Electronics,charger
+Objects,Electronics,battery
+Objects,Electronics,laptop
+Objects,Electronics,tablet
+Objects,Clothing,shirt
+Objects,Clothing,pants
+Objects,Clothing,dress
+Objects,Clothing,jacket
+Objects,Clothing,shoe
+Objects,Clothing,hat
+Objects,Clothing,coat
+Objects,Clothing,sweater
+Objects,Clothing,jeans
+Objects,Clothing,skirt
+Objects,Clothing,socks
+Objects,Clothing,tie
+Objects,Clothing,boots
+Objects,Clothing,gloves
+Objects,Materials,wood
+Objects,Materials,metal
+Objects,Materials,plastic
+Objects,Materials,glass
+Objects,Materials,leather
+Objects,Materials,fabric
+Objects,Materials,cotton
+Objects,Materials,steel
+Objects,Materials,stone
+Objects,Materials,rubber
+Objects,Materials,paper
+Objects,Materials,cardboard
+Objects,Materials,wool
+Objects,Materials,silk
+Emotions,Happiness,happy
+Emotions,Happiness,glad
+Emotions,Happiness,pleased
+Emotions,Happiness,delighted
+Emotions,Happiness,content
+Emotions,Happiness,joy
+Emotions,Happiness,excited
+Emotions,Happiness,thrilled
+Emotions,Happiness,cheerful
+Emotions,Happiness,proud
+Emotions,Happiness,grateful
+Emotions,Happiness,amused
+Emotions,Sadness,sad
+Emotions,Sadness,unhappy
+Emotions,Sadness,depressed
+Emotions,Sadness,lonely
+Emotions,Sadness,bored
+Emotions,Sadness,disappointed
+Emotions,Sadness,gloomy
+Emotions,Sadness,tearful
+Emotions,Sadness,miserable
+Emotions,Sadness,homesick
+Emotions,Sadness,weary
+Emotions,Sadness,grief
+Emotions,Fear,fear
+Emotions,Fear,afraid
+Emotions,Fear,scared
+Emotions,Fear,frightened
+Emotions,Fear,terrified
+Emotions,Fear,panic
+Emotions,Fear,dread
+Emotions,Fear,alarmed
+Emotions,Fear,timid
+Emotions,Fear,nervous
+Emotions,Fear,worried
+Emotions,Fear,anxious
+Emotions,Anger,anger
+Emotions,Anger,angry
+Emotions,Anger,mad
+Emotions,Anger,annoyed
+Emotions,Anger,frustrated
+Emotions,Anger,irritated
+Emotions,Anger,rage
+Emotions,Anger,fury
+Emotions,Anger,bitter
+Emotions,Anger,resentful
+Emotions,Anger,irate
+Emotions,Anger,hostile
+Thinking,Memory,memory
+Thinking,Memory,remember
+Thinking,Memory,forget
+Thinking,Memory,recall
+Thinking,Memory,memorize
+Thinking,Memory,nostalgia
+Thinking,Memory,recollect
+Thinking,Memory,flashback
+Thinking,Memory,hindsight
+Thinking,Memory,remembrance
+Thinking,Learning,learn
+Thinking,Learning,study
+Thinking,Learning,practice
+Thinking,Learning,coach
+Thinking,Learning,educate
+Thinking,Learning,lesson
+Thinking,Learning,skill
+Thinking,Learning,homework
+Thinking,Learning,textbook
+Thinking,Learning,schooling
+Thinking,Learning,mastery
+Thinking,Reasoning,think
+Thinking,Reasoning,reason
+Thinking,Reasoning,analyze
+Thinking,Reasoning,examine
+Thinking,Reasoning,investigate
+Thinking,Reasoning,consider
+Thinking,Reasoning,reflect
+Thinking,Reasoning,decide
+Thinking,Reasoning,evaluate
+Thinking,Reasoning,compare
+Thinking,Reasoning,infer
+Thinking,Reasoning,deduce
+Thinking,Attention,know
+Thinking,Attention,understand
+Thinking,Attention,believe
+Thinking,Attention,doubt
+Thinking,Attention,guess
+Thinking,Attention,imagine
+Thinking,Attention,focus
+Thinking,Attention,concentrate
+Thinking,Attention,observe
+Thinking,Attention,notice
+Thinking,Attention,realize
+Thinking,Attention,recognize
+Communication,Language,language
+Communication,Language,word
+Communication,Language,sentence
+Communication,Language,phrase
+Communication,Language,vocabulary
+Communication,Language,grammar
+Communication,Language,dialect
+Communication,Language,alphabet
+Communication,Language,spelling
+Communication,Language,translation
+Communication,Language,synonym
+Communication,Language,accent
+Communication,Speech,speak
+Communication,Speech,say
+Communication,Speech,talk
+Communication,Speech,tell
+Communication,Speech,ask
+Communication,Speech,answer
+Communication,Speech,reply
+Communication,Speech,call
+Communication,Speech,shout
+Communication,Speech,whisper
+Communication,Speech,scream
+Communication,Speech,voice
+Communication,Writing,write
+Communication,Writing,letter
+Communication,Writing,poem
+Communication,Writing,story
+Communication,Writing,text
+Communication,Writing,note
+Communication,Writing,essay
+Communication,Writing,article
+Communication,Writing,report
+Communication,Writing,novel
+Communication,Writing,chapter
+Communication,Writing,draft
+Communication,Information,read
+Communication,Information,message
+Communication,Information,email
+Communication,Information,chat
+Communication,Information,conversation
+Communication,Information,announcement
+Communication,Information,statement
+Communication,Information,comment
+Communication,Information,request
+Communication,Information,instruction
+Communication,Information,promise
+Communication,Information,apology
+Communication,Information,greeting
+Communication,Information,news
+Communication,Information,noise
+Society,Politics,government
+Society,Politics,law
+Society,Politics,politics
+Society,Politics,nation
+Society,Politics,state
+Society,Politics,policy
+Society,Politics,election
+Society,Politics,vote
+Society,Politics,president
+Society,Politics,parliament
+Society,Politics,minister
+Society,Politics,senator
+Society,Economy,money
+Society,Economy,economy
+Society,Economy,business
+Society,Economy,industry
+Society,Economy,job
+Society,Economy,career
+Society,Economy,market
+Society,Economy,price
+Society,Economy,cost
+Society,Economy,wealth
+Society,Economy,poverty
+Society,Economy,tax
+Society,Economy,trade
+Society,Economy,profit
+Society,Economy,salary
+Society,Culture,society
+Society,Culture,culture
+Society,Culture,tradition
+Society,Culture,history
+Society,Culture,art
+Society,Culture,media
+Society,Culture,community
+Society,Culture,religion
+Society,Culture,festival
+Society,Culture,custom
+Society,Culture,ceremony
+Society,Culture,heritage
+Society,Culture,ritual
+Society,Culture,folklore
+Society,Culture,song
+Society,Education,education
+Society,Education,class
+Society,Education,course
+Society,Education,degree
+Society,Education,diploma
+Society,Education,exam
+Society,Education,grade
+Society,Education,lecture
+Society,Education,curriculum
+Society,Education,semester
+Society,Education,scholarship
+Society,Education,tutorial
+Science & Technology,Biology,biology
+Science & Technology,Biology,organism
+Science & Technology,Biology,cell
+Science & Technology,Biology,species
+Science & Technology,Biology,gene
+Science & Technology,Biology,DNA
+Science & Technology,Biology,evolution
+Science & Technology,Biology,virus
+Science & Technology,Biology,bacteria
+Science & Technology,Biology,ecology
+Science & Technology,Biology,genetics
+Science & Technology,Biology,tissue
+Science & Technology,Physics,physics
+Science & Technology,Physics,energy
+Science & Technology,Physics,electricity
+Science & Technology,Physics,force
+Science & Technology,Physics,gravity
+Science & Technology,Physics,motion
+Science & Technology,Physics,light
+Science & Technology,Physics,sound
+Science & Technology,Physics,magnet
+Science & Technology,Physics,atom
+Science & Technology,Physics,universe
+Science & Technology,Physics,velocity
+Science & Technology,Chemistry,chemistry
+Science & Technology,Chemistry,element
+Science & Technology,Chemistry,molecule
+Science & Technology,Chemistry,compound
+Science & Technology,Chemistry,reaction
+Science & Technology,Chemistry,acid
+Science & Technology,Chemistry,base
+Science & Technology,Chemistry,gas
+Science & Technology,Chemistry,liquid
+Science & Technology,Chemistry,solid
+Science & Technology,Chemistry,alloy
+Science & Technology,Chemistry,mixture
+Science & Technology,Computing,technology
+Science & Technology,Computing,data
+Science & Technology,Computing,software
+Science & Technology,Computing,hardware
+Science & Technology,Computing,program
+Science & Technology,Computing,algorithm
+Science & Technology,Computing,database
+Science & Technology,Computing,network
+Science & Technology,Computing,internet
+Science & Technology,Computing,website
+Science & Technology,Computing,server
+Science & Technology,Computing,browser
+Science & Technology,Computing,app
+Science & Technology,Computing,code
+Science & Technology,Computing,robot
+Science & Technology,Computing,automation
+Abstract Concepts,Existence,existence
+Abstract Concepts,Existence,life
+Abstract Concepts,Existence,creature
+Abstract Concepts,Existence,essence
+Abstract Concepts,Existence,entity
+Abstract Concepts,Existence,substance
+Abstract Concepts,Existence,presence
+Abstract Concepts,Existence,absence
+Abstract Concepts,Existence,void
+Abstract Concepts,Existence,infinity
+Abstract Concepts,Existence,matter
+Abstract Concepts,Reality,reality
+Abstract Concepts,Reality,truth
+Abstract Concepts,Reality,fact
+Abstract Concepts,Reality,fiction
+Abstract Concepts,Reality,actuality
+Abstract Concepts,Reality,illusion
+Abstract Concepts,Reality,fantasy
+Abstract Concepts,Reality,myth
+Abstract Concepts,Reality,mirage
+Abstract Concepts,Reality,legend
+Abstract Concepts,Knowledge,knowledge
+Abstract Concepts,Knowledge,idea
+Abstract Concepts,Knowledge,meaning
+Abstract Concepts,Knowledge,wisdom
+Abstract Concepts,Knowledge,understanding
+Abstract Concepts,Knowledge,awareness
+Abstract Concepts,Knowledge,notion
+Abstract Concepts,Knowledge,concept
+Abstract Concepts,Knowledge,insight
+Abstract Concepts,Knowledge,intelligence
+Abstract Concepts,Knowledge,theory
+Abstract Concepts,Knowledge,opinion
+Abstract Concepts,Philosophy,philosophy
+Abstract Concepts,Philosophy,ethics
+Abstract Concepts,Philosophy,morality
+Abstract Concepts,Philosophy,logic
+Abstract Concepts,Philosophy,principle
+Abstract Concepts,Philosophy,value
+Abstract Concepts,Philosophy,virtue
+Abstract Concepts,Philosophy,justice
+Abstract Concepts,Philosophy,freedom
+Abstract Concepts,Philosophy,equality
+Abstract Concepts,Philosophy,conscience
+Abstract Concepts,Philosophy,destiny
+Descriptions,Size,big
+Descriptions,Size,small
+Descriptions,Size,large
+Descriptions,Size,huge
+Descriptions,Size,tiny
+Descriptions,Size,little
+Descriptions,Size,great
+Descriptions,Size,grand
+Descriptions,Size,vast
+Descriptions,Size,enormous
+Descriptions,Size,immense
+Descriptions,Size,miniature
+Descriptions,Shape,shape
+Descriptions,Shape,round
+Descriptions,Shape,square
+Descriptions,Shape,flat
+Descriptions,Shape,circle
+Descriptions,Shape,triangle
+Descriptions,Shape,oval
+Descriptions,Shape,rectangle
+Descriptions,Shape,curve
+Descriptions,Shape,spiral
+Descriptions,Shape,straight
+Descriptions,Shape,crooked
+Descriptions,Colour,colour
+Descriptions,Colour,red
+Descriptions,Colour,blue
+Descriptions,Colour,green
+Descriptions,Colour,yellow
+Descriptions,Colour,purple
+Descriptions,Colour,pink
+Descriptions,Colour,brown
+Descriptions,Colour,black
+Descriptions,Colour,white
+Descriptions,Colour,gray
+Descriptions,Colour,golden
+Descriptions,Texture,texture
+Descriptions,Texture,soft
+Descriptions,Texture,hard
+Descriptions,Texture,rough
+Descriptions,Texture,smooth
+Descriptions,Texture,sharp
+Descriptions,Texture,silky
+Descriptions,Texture,fuzzy
+Descriptions,Texture,sticky
+Descriptions,Texture,slippery
+Descriptions,Texture,bumpy
+Descriptions,Texture,even
+Grammar & Function Words,Nouns,thing
+Grammar & Function Words,Nouns,stuff
+Grammar & Function Words,Nouns,item
+Grammar & Function Words,Nouns,part
+Grammar & Function Words,Nouns,piece
+Grammar & Function Words,Nouns,bit
+Grammar & Function Words,Nouns,lot
+Grammar & Function Words,Nouns,kind
+Grammar & Function Words,Nouns,sort
+Grammar & Function Words,Nouns,type
+Grammar & Function Words,Nouns,form
+Grammar & Function Words,Nouns,example
+Grammar & Function Words,Verbs,be
+Grammar & Function Words,Verbs,is
+Grammar & Function Words,Verbs,are
+Grammar & Function Words,Verbs,was
+Grammar & Function Words,Verbs,were
+Grammar & Function Words,Verbs,been
+Grammar & Function Words,Verbs,being
+Grammar & Function Words,Verbs,have
+Grammar & Function Words,Verbs,has
+Grammar & Function Words,Verbs,had
+Grammar & Function Words,Verbs,do
+Grammar & Function Words,Verbs,does
+Grammar & Function Words,Verbs,did
+Grammar & Function Words,Verbs,will
+Grammar & Function Words,Verbs,would
+Grammar & Function Words,Verbs,can
+Grammar & Function Words,Verbs,could
+Grammar & Function Words,Verbs,shall
+Grammar & Function Words,Verbs,should
+Grammar & Function Words,Verbs,may
+Grammar & Function Words,Verbs,might
+Grammar & Function Words,Verbs,must
+Grammar & Function Words,Adjectives,good
+Grammar & Function Words,Adjectives,bad
+Grammar & Function Words,Adjectives,new
+Grammar & Function Words,Adjectives,old
+Grammar & Function Words,Adjectives,wrong
+Grammar & Function Words,Adjectives,true
+Grammar & Function Words,Adjectives,false
+Grammar & Function Words,Adjectives,real
+Grammar & Function Words,Adjectives,whole
+Grammar & Function Words,Adjectives,same
+Grammar & Function Words,Adjectives,different
+Grammar & Function Words,Adjectives,possible
+Grammar & Function Words,Function Words,the
+Grammar & Function Words,Function Words,a
+Grammar & Function Words,Function Words,an
+Grammar & Function Words,Function Words,of
+Grammar & Function Words,Function Words,to
+Grammar & Function Words,Function Words,in
+Grammar & Function Words,Function Words,on
+Grammar & Function Words,Function Words,at
+Grammar & Function Words,Function Words,for
+Grammar & Function Words,Function Words,with
+Grammar & Function Words,Function Words,by
+Grammar & Function Words,Function Words,from
+Grammar & Function Words,Function Words,as
+Grammar & Function Words,Function Words,but
+Grammar & Function Words,Function Words,or
+Grammar & Function Words,Function Words,so
+Grammar & Function Words,Function Words,if
+Grammar & Function Words,Function Words,that
+Grammar & Function Words,Function Words,this
+Grammar & Function Words,Function Words,these
+Grammar & Function Words,Function Words,those
+Grammar & Function Words,Function Words,there
+Grammar & Function Words,Function Words,it
+Grammar & Function Words,Function Words,its
+Grammar & Function Words,Function Words,they
+Grammar & Function Words,Function Words,them
+Grammar & Function Words,Function Words,we
+Grammar & Function Words,Function Words,us
+Grammar & Function Words,Function Words,you
+Grammar & Function Words,Function Words,your
+Grammar & Function Words,Function Words,he
+Grammar & Function Words,Function Words,him
+Grammar & Function Words,Function Words,his
+Grammar & Function Words,Function Words,she
+Grammar & Function Words,Function Words,her
+Grammar & Function Words,Function Words,who
+Grammar & Function Words,Function Words,which
+Grammar & Function Words,Function Words,what
+Grammar & Function Words,Function Words,how
+Grammar & Function Words,Function Words,why
+Grammar & Function Words,Function Words,where
+Grammar & Function Words,Function Words,when
+Grammar & Function Words,Function Words,not
+Grammar & Function Words,Function Words,no
+Grammar & Function Words,Function Words,yes
+Grammar & Function Words,Function Words,all
+Grammar & Function Words,Function Words,any
+Grammar & Function Words,Function Words,some
+Grammar & Function Words,Function Words,every
+Grammar & Function Words,Function Words,each
+Grammar & Function Words,Function Words,own
+Grammar & Function Words,Function Words,such
+Grammar & Function Words,Function Words,only
+Grammar & Function Words,Function Words,very
+Grammar & Function Words,Function Words,too
+Grammar & Function Words,Function Words,also
+Grammar & Function Words,Function Words,just
+Grammar & Function Words,Function Words,more
+Grammar & Function Words,Function Words,most
+Grammar & Function Words,Function Words,much
+Grammar & Function Words,Function Words,many
+Grammar & Function Words,Function Words,other
+Grammar & Function Words,Function Words,another
+Grammar & Function Words,Function Words,both
+Grammar & Function Words,Function Words,either
+Grammar & Function Words,Function Words,neither
+Grammar & Function Words,Function Words,because
+Grammar & Function Words,Function Words,until
+Grammar & Function Words,Function Words,while
+Grammar & Function Words,Function Words,than
