@@ -1,0 +1,23 @@
+# Linguae
+
+> Linguae detects the language of any text with a character-level CNN trained from scratch in Rust. No cloud calls, no pretrained weights — your text never leaves your machine.
+
+- Repository: https://github.com/hieudoanm/linguae
+- Site: https://hieudoanm.github.io/linguae/
+
+## Documentation
+
+### concepts
+
+- [Model and architecture](https://hieudoanm.github.io/linguae/docs/concepts/model-and-architecture/)
+### getting-started
+
+- [Installation](https://hieudoanm.github.io/linguae/docs/getting-started/installation/)
+- [Train and run](https://hieudoanm.github.io/linguae/docs/getting-started/train-and-run/)
+### guides
+
+- [HTTP server and web app](https://hieudoanm.github.io/linguae/docs/guides/http-server/)
+- [MCP server](https://hieudoanm.github.io/linguae/docs/guides/mcp-server/)
+### overview
+
+- [linguae documentation](https://hieudoanm.github.io/linguae/docs/)

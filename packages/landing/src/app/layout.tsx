@@ -29,6 +29,18 @@ export const metadata: Metadata = {
     template: '%s — Linguae',
   },
   description: DESCRIPTION,
+  keywords: [
+    'language identification',
+    'langdetect',
+    'local-first',
+    'Rust',
+    'CLI',
+    'HTTP server',
+    'MCP server',
+    'privacy',
+  ],
+  authors: [{ name: 'hieudoan', url: 'https://github.com/hieudoanm/linguae' }],
+  category: 'software',
   openGraph: {
     siteName: 'Linguae',
     type: 'website',
@@ -46,6 +58,28 @@ export const metadata: Metadata = {
   },
 };
 
+
+const JSON_LD = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebSite',
+      name: 'Linguae',
+      url: 'https://hieudoanm.github.io/linguae/',
+      description: 'Linguae detects the language of any text with a character-level CNN trained from scratch in Rust. No cloud calls, no pretrained weights — your text never leaves your machine.',
+    },
+    {
+      '@type': 'SoftwareApplication',
+      name: 'Linguae',
+      applicationCategory: 'UtilitiesApplication',
+      description: 'Linguae detects the language of any text with a character-level CNN trained from scratch in Rust. No cloud calls, no pretrained weights — your text never leaves your machine.',
+      url: 'https://hieudoanm.github.io/linguae/',
+      codeRepository: 'https://github.com/hieudoanm/linguae',
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    },
+  ]
+};
+
 interface RootLayoutProps {
   children: ReactNode;
 }
@@ -56,6 +90,10 @@ const RootLayout: FC<RootLayoutProps> = ({ children }) => (
     data-theme="linguae"
     className={`scroll-smooth antialiased motion-reduce:scroll-auto ${inter.className}`}>
     <body className="bg-base-100 text-base-content m-0 leading-relaxed">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(JSON_LD) }}
+      />
       <Navbar
         name="Linguae"
         logoSrc={LOGO}
