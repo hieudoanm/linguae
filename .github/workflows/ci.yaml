@@ -334,7 +334,7 @@ jobs:
           path: bundles
 
       - name: Prepare release notes
-        run: cp README.md release_notes_final.md
+        run: cp RELEASE.md release_notes_final.md
 
       - name: Remove old release assets
         env:
@@ -349,7 +349,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh release delete latest --yes --cleanup-tag 2>/dev/null || true
-          gh release create latest --title "Linguae (latest)" --notes-file README.md --prerelease=false
+          gh release create latest --title "Linguae (latest)" --notes-file RELEASE.md --prerelease=false
 
       - name: Upload bundles to release
         env:
