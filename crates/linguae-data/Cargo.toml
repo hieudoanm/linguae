@@ -12,7 +12,7 @@ name = "linguae-data"
 path = "src/main.rs"
 
 [dependencies]
-clap = { version = "=4.6.7", features = ["derive", "env"] }
+clap = { version = "=4.6.8", features = ["derive", "env"] }
 csv = "=1.4.0"
 env_logger = "=0.11.11"
 log = "=0.4.35"
