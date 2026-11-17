@@ -85,6 +85,12 @@ fn tools_list() -> Value {
             {
                 "name": "detect_language",
                 "description": "Detect the language of text (ISO 639-3 code) using the local Linguae model",
+                "annotations": {
+                    "readOnlyHint": true,
+                    "destructiveHint": false,
+                    "idempotentHint": true,
+                    "openWorldHint": false
+                },
                 "inputSchema": {
                     "type": "object",
                     "properties": {
@@ -174,4 +180,33 @@ pub fn run() -> std::io::Result<()> {
         }
     }
     Ok(())
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn tools_list_exposes_detect_language_with_annotations() {
+        let list = tools_list();
+        let tools = list["tools"].as_array().expect("tools array");
+        assert_eq!(tools.len(), 1);
+        let tool = &tools[0];
+        assert_eq!(tool["name"], "detect_language");
+        let annotations = &tool["annotations"];
+        for hint in [
+            "readOnlyHint",
+            "destructiveHint",
+            "idempotentHint",
+            "openWorldHint",
+        ] {
+            assert!(
+                annotations.get(hint).is_some_and(Value::is_boolean),
+                "missing boolean annotation {hint}"
+            );
+        }
+        assert_eq!(annotations["readOnlyHint"], json!(true));
+        assert_eq!(annotations["idempotentHint"], json!(true));
+        assert_eq!(annotations["openWorldHint"], json!(false));
+    }
 }
