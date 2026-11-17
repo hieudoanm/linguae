@@ -39,3 +39,12 @@ The model artifact resolves exactly as on the CLI (`--artifact`,
 `top_k`, `device`, and `artifact`. Output is always JSON Lines, one prediction
 per line. See [Train and run](../getting-started/train-and-run.md) for model
 basics.
+
+
+### Streamable HTTP
+
+`linguae mcp --http 127.0.0.1:8080` also accepts `--http <addr>` (and `--token <token>`, or the
+`MCP_AUTH_TOKEN` environment variable) to serve the same MCP surface over
+streamable HTTP at `http://<addr>/mcp` — the transport used by ChatGPT
+connectors and remote Claude clients. When a token is configured, every
+request must carry `Authorization: Bearer <token>`.

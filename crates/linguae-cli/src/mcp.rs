@@ -8,7 +8,7 @@ use std::io::{BufRead, Write};
 use std::process::Command;
 
 const SERVER_INFO: &str = "linguae-mcp";
-const PROTOCOL_VERSION: &str = "2024-11-05";
+const PROTOCOL_VERSION: &str = "2025-11-25";
 
 fn arg(params: &Value, key: &str) -> Option<String> {
     params
@@ -107,6 +107,35 @@ fn tools_list() -> Value {
     })
 }
 
+/// Human-readable display title derived from the tool name
+/// (`pick_meal` -> `Pick Meal`). MCP hosts show `title` in pickers.
+fn titleize(name: &str) -> String {
+    name.split(['_', '-'])
+        .filter(|part| !part.is_empty())
+        .map(|part| {
+            let mut chars = part.chars();
+            match chars.next() {
+                Some(first) => first.to_uppercase().chain(chars).collect::<String>(),
+                None => String::new(),
+            }
+        })
+        .collect::<Vec<_>>()
+        .join(" ")
+}
+
+fn with_titles(mut result: Value) -> Value {
+    if let Some(tools) = result["tools"].as_array_mut() {
+        for tool in tools {
+            if tool.get("title").is_none() {
+                if let Some(name) = tool["name"].as_str() {
+                    tool["title"] = json!(titleize(name));
+                }
+            }
+        }
+    }
+    result
+}
+
 fn handle_request(request: &Value) -> Option<Value> {
     let method = request.get("method").and_then(Value::as_str).unwrap_or("");
     let id = request.get("id").cloned().unwrap_or(Value::Null);
@@ -119,7 +148,7 @@ fn handle_request(request: &Value) -> Option<Value> {
             "serverInfo": {"name": SERVER_INFO, "version": env!("CARGO_PKG_VERSION")}
         }),
         "ping" => Value::Null,
-        "tools/list" => tools_list(),
+        "tools/list" => with_titles(tools_list()),
         "tools/call" => {
             let params = request.get("params").cloned().unwrap_or(Value::Null);
             let name = params.get("name").and_then(Value::as_str).unwrap_or("");
@@ -151,6 +180,26 @@ fn handle_request(request: &Value) -> Option<Value> {
 }
 
 /// Run the MCP server on stdin/stdout until EOF.
+/// Run the MCP server over streamable HTTP on `addr` until the process exits.
+/// `token` (when set) requires `Authorization: Bearer <token>` on every request.
+pub fn run_http(addr: &str, token: Option<String>) -> std::io::Result<()> {
+    crate::mcp_http::serve(addr, token, |body: &str| {
+        match serde_json::from_str::<Value>(body) {
+            Ok(request) => {
+                handle_request(&request).and_then(|response| serde_json::to_string(&response).ok())
+            }
+            Err(err) => Some(
+                serde_json::to_string(&json!({
+                    "jsonrpc": "2.0",
+                    "id": Value::Null,
+                    "error": {"code": -32700, "message": format!("Parse error: {err}")}
+                }))
+                .unwrap_or_default(),
+            ),
+        }
+    })
+}
+
 pub fn run() -> std::io::Result<()> {
     let stdin = std::io::stdin();
     let mut stdout = std::io::stdout();
