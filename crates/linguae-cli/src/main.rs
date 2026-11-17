@@ -1,6 +1,7 @@
 //! Command-line interface for the Linguae language detector.
 
 mod mcp;
+mod mcp_http;
 
 use std::io::{IsTerminal, Read};
 use std::path::PathBuf;
@@ -57,9 +58,37 @@ struct Cli {
     json: bool,
 }
 
+/// Extract `--http <addr>`/`--http=<addr>` and `--token <t>`/`--token=<t>`
+/// from the arguments following `mcp`.
+fn mcp_flag_args(args: impl Iterator<Item = String>) -> (Option<String>, Option<String>) {
+    let mut http = None;
+    let mut token = None;
+    let mut args = args.peekable();
+    while let Some(arg) = args.next() {
+        if arg == "--http" {
+            http = args.next();
+        } else if let Some(value) = arg.strip_prefix("--http=") {
+            http = Some(value.to_string());
+        } else if arg == "--token" {
+            token = args.next();
+        } else if let Some(value) = arg.strip_prefix("--token=") {
+            token = Some(value.to_string());
+        }
+    }
+    (http, token)
+}
+
 fn main() -> std::process::ExitCode {
     if std::env::args().nth(1).as_deref() == Some("mcp") {
-        return match mcp::run() {
+        let (http, token) = mcp_flag_args(std::env::args().skip(2));
+        let result = match http {
+            Some(addr) => mcp::run_http(
+                &addr,
+                token.or_else(|| std::env::var("MCP_AUTH_TOKEN").ok()),
+            ),
+            None => mcp::run(),
+        };
+        return match result {
             Ok(()) => std::process::ExitCode::SUCCESS,
             Err(error) => {
                 eprintln!("mcp: {error}");
