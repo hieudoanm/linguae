@@ -6,7 +6,7 @@ edition = "2021"
 description = "A local-first language detection desktop app built with Tauri"
 
 [dependencies]
-tauri = { version = "=2.12.6", features = [] }
+tauri = { version = "=2.12.7", features = [] }
 tauri-plugin-opener = "=2.7.3"
 serde = { version = "=1.0.229", features = ["derive"] }
 linguae-core = { path = "../../../crates/linguae-core" }
@@ -21,4 +21,4 @@ codegen-units = 1
 opt-level = "s"
 
 [build-dependencies]
-tauri-build = { version = "=2.7.5", features = [] }
+tauri-build = { version = "=2.7.6", features = [] }
