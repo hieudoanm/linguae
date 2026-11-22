@@ -302,8 +302,6 @@ digraph tracers {
   "external:rust:candle_nn::VarBuilder" [label="VarBuilder\nexternal_symbol", color="lightgray"];
   "external:rust:candle_nn::VarMap" [label="VarMap\nexternal_symbol", color="lightgray"];
   "external:rust:common::Fixture" [label="Fixture\nexternal_symbol", color="lightgray"];
-  "external:rust:crate::Error.Dataset" [label="Dataset\nexternal_symbol", color="lightgray"];
-  "external:rust:crate::Error.Training" [label="Training\nexternal_symbol", color="lightgray"];
   "external:rust:csv.StringRecord" [label="StringRecord\nexternal_symbol", color="lightgray"];
   "external:rust:csv::ReaderBuilder.new" [label="new\nexternal_symbol", color="lightgray"];
   "external:rust:csv::ReaderBuilder::new.delimiter" [label="delimiter\nexternal_symbol", color="lightgray"];
@@ -1840,7 +1838,6 @@ digraph tracers {
   "unresolved:javascript:respondWith" [label="respondWith\nunknown", color="black"];
   "unresolved:javascript:skipWaiting" [label="skipWaiting\nunknown", color="black"];
   "unresolved:javascript:waitUntil" [label="waitUntil\nunknown", color="black"];
-  "unresolved:rust:Artifact" [label="Artifact\nunknown", color="black"];
   "unresolved:rust:Cartesian2d" [label="Cartesian2d\nunknown", color="black"];
   "unresolved:rust:ChartContext" [label="ChartContext\nunknown", color="black"];
   "unresolved:rust:DB" [label="DB\nunknown", color="black"];
@@ -1883,8 +1880,6 @@ digraph tracers {
   "unresolved:rust:convert_tatoeba" [label="convert_tatoeba\nunknown", color="black"];
   "unresolved:rust:convert_wili" [label="convert_wili\nunknown", color="black"];
   "unresolved:rust:copy" [label="copy\nunknown", color="black"];
-  "unresolved:rust:crate::metrics::ConfusionMatrix" [label="crate::metrics::ConfusionMatrix\nunknown", color="black"];
-  "unresolved:rust:crate::metrics::LengthClassificationMetrics" [label="crate::metrics::LengthClassificationMetrics\nunknown", color="black"];
   "unresolved:rust:create_dir_all" [label="create_dir_all\nunknown", color="black"];
   "unresolved:rust:cross_entropy" [label="cross_entropy\nunknown", color="black"];
   "unresolved:rust:csv_dir" [label="csv_dir\nunknown", color="black"];
@@ -1934,9 +1929,6 @@ digraph tracers {
   "unresolved:rust:label" [label="label\nunknown", color="black"];
   "unresolved:rust:leaked" [label="leaked\nunknown", color="black"];
   "unresolved:rust:legend" [label="legend\nunknown", color="black"];
-  "unresolved:rust:linguae_data::TatoebaReport" [label="linguae_data::TatoebaReport\nunknown", color="black"];
-  "unresolved:rust:linguae_data::WiliReport" [label="linguae_data::WiliReport\nunknown", color="black"];
-  "unresolved:rust:linguae_data::WordReport" [label="linguae_data::WordReport\nunknown", color="black"];
   "unresolved:rust:ln" [label="ln\nunknown", color="black"];
   "unresolved:rust:load" [label="load\nunknown", color="black"];
   "unresolved:rust:local_addr" [label="local_addr\nunknown", color="black"];
@@ -6148,13 +6140,13 @@ digraph tracers {
   "function:crates/linguae-data/src/main.rs::main" -> "external:rust:std::ExitCode" [label="uses_type", style="dotted"];
   "function:crates/linguae-data/src/main.rs::print_tatoeba" -> "external:rust:std::println" [label="calls", style="bold"];
   "function:crates/linguae-data/src/main.rs::print_tatoeba" -> "struct:crates/linguae-data/src/tatoeba.rs::TatoebaOptions" [label="uses_type", style="dotted"];
-  "function:crates/linguae-data/src/main.rs::print_tatoeba" -> "unresolved:rust:linguae_data::TatoebaReport" [label="uses_type", style="dotted"];
+  "function:crates/linguae-data/src/main.rs::print_tatoeba" -> "struct:crates/linguae-data/src/tatoeba.rs::TatoebaReport" [label="uses_type", style="dotted"];
   "function:crates/linguae-data/src/main.rs::print_wili" -> "external:rust:std::println" [label="calls", style="bold"];
   "function:crates/linguae-data/src/main.rs::print_wili" -> "struct:crates/linguae-data/src/wili.rs::WiliOptions" [label="uses_type", style="dotted"];
-  "function:crates/linguae-data/src/main.rs::print_wili" -> "unresolved:rust:linguae_data::WiliReport" [label="uses_type", style="dotted"];
+  "function:crates/linguae-data/src/main.rs::print_wili" -> "struct:crates/linguae-data/src/wili.rs::WiliReport" [label="uses_type", style="dotted"];
   "function:crates/linguae-data/src/main.rs::print_words" -> "external:rust:std::println" [label="calls", style="bold"];
   "function:crates/linguae-data/src/main.rs::print_words" -> "struct:crates/linguae-data/src/words.rs::WordOptions" [label="uses_type", style="dotted"];
-  "function:crates/linguae-data/src/main.rs::print_words" -> "unresolved:rust:linguae_data::WordReport" [label="uses_type", style="dotted"];
+  "function:crates/linguae-data/src/main.rs::print_words" -> "struct:crates/linguae-data/src/words.rs::WordReport" [label="uses_type", style="dotted"];
   "function:crates/linguae-data/src/main.rs::run" -> "external:rust:std::Ok" [label="calls", style="bold"];
   "function:crates/linguae-data/src/main.rs::run" -> "external:rust:std::as_deref" [label="calls", style="bold"];
   "function:crates/linguae-data/src/main.rs::run" -> "external:rust:std::clone" [label="calls", style="bold"];
@@ -6795,9 +6787,9 @@ digraph tracers {
   "function:crates/linguae-train/src/convert.rs::write_json" -> "external:rust:std::Path" [label="uses_type", style="dotted"];
   "function:crates/linguae-train/src/convert.rs::write_json" -> "unresolved:rust:Error::Json" [label="uses_type", style="dotted"];
   "function:crates/linguae-train/src/convert.rs::write_json" -> "unresolved:rust:Error::Write" [label="uses_type", style="dotted"];
+  "function:crates/linguae-train/src/data.rs::prepare_batch" -> "constant:crates/linguae-train/src/error.rs::Error.Training" [label="calls", style="bold"];
   "function:crates/linguae-train/src/data.rs::prepare_batch" -> "external:rust:Tensor.from_vec" [label="calls", style="bold"];
   "function:crates/linguae-train/src/data.rs::prepare_batch" -> "external:rust:Vec.with_capacity" [label="calls", style="bold"];
-  "function:crates/linguae-train/src/data.rs::prepare_batch" -> "external:rust:crate::Error.Training" [label="calls", style="bold"];
   "function:crates/linguae-train/src/data.rs::prepare_batch" -> "external:rust:std::Err" [label="calls", style="bold"];
   "function:crates/linguae-train/src/data.rs::prepare_batch" -> "external:rust:std::Ok" [label="calls", style="bold"];
   "function:crates/linguae-train/src/data.rs::prepare_batch" -> "external:rust:std::copied" [label="calls", style="bold"];
@@ -7501,6 +7493,8 @@ digraph tracers {
   "function:crates/linguae-train/src/plots.rs::confusion_matrix_plot" -> "external:rust:std::push" [label="calls", style="bold"];
   "function:crates/linguae-train/src/plots.rs::confusion_matrix_plot" -> "external:rust:std::to_string" [label="calls", style="bold"];
   "function:crates/linguae-train/src/plots.rs::confusion_matrix_plot" -> "external:rust:std::unwrap_or_default" [label="calls", style="bold"];
+  "function:crates/linguae-train/src/plots.rs::confusion_matrix_plot" -> "method:crates/linguae-train/src/metrics.rs::ConfusionMatrix.get" [label="calls", style="bold"];
+  "function:crates/linguae-train/src/plots.rs::confusion_matrix_plot" -> "method:crates/linguae-train/src/metrics.rs::ConfusionMatrix.max" [label="calls", style="bold"];
   "function:crates/linguae-train/src/plots.rs::confusion_matrix_plot" -> "unresolved:rust:RGBColor" [label="calls", style="dotted"];
   "function:crates/linguae-train/src/plots.rs::confusion_matrix_plot" -> "unresolved:rust:build_cartesian_2d" [label="calls", style="dotted"];
   "function:crates/linguae-train/src/plots.rs::confusion_matrix_plot" -> "unresolved:rust:caption" [label="calls", style="dotted"];
@@ -7525,7 +7519,7 @@ digraph tracers {
   "function:crates/linguae-train/src/plots.rs::confusion_matrix_plot" -> "unresolved:rust:y_label_formatter" [label="calls", style="dotted"];
   "function:crates/linguae-train/src/plots.rs::confusion_matrix_plot" -> "unresolved:rust:y_labels" [label="calls", style="dotted"];
   "function:crates/linguae-train/src/plots.rs::confusion_matrix_plot" -> "external:rust:std::Path" [label="uses_type", style="dotted"];
-  "function:crates/linguae-train/src/plots.rs::confusion_matrix_plot" -> "unresolved:rust:crate::metrics::ConfusionMatrix" [label="uses_type", style="dotted"];
+  "function:crates/linguae-train/src/plots.rs::confusion_matrix_plot" -> "struct:crates/linguae-train/src/metrics.rs::ConfusionMatrix" [label="uses_type", style="dotted"];
   "function:crates/linguae-train/src/plots.rs::dataset_quality" -> "constant:crates/linguae-train/src/error.rs::Error.Plot" [label="calls", style="bold"];
   "function:crates/linguae-train/src/plots.rs::dataset_quality" -> "external:rust:BTreeMap.new" [label="calls", style="bold"];
   "function:crates/linguae-train/src/plots.rs::dataset_quality" -> "external:rust:ChartBuilder.on" [label="calls", style="bold"];
@@ -8520,9 +8514,9 @@ digraph tracers {
   "method:crates/linguae-train/src/config.rs::Config.validate" -> "external:rust:std::sum" [label="calls", style="bold"];
   "method:crates/linguae-train/src/config.rs::Config.validate" -> "unresolved:rust:abs" [label="calls", style="dotted"];
   "method:crates/linguae-train/src/config.rs::Config.validate" -> "unresolved:rust:windows" [label="calls", style="dotted"];
+  "method:crates/linguae-train/src/data.rs::EncodedSplit.from_records" -> "constant:crates/linguae-train/src/error.rs::Error.Dataset" [label="calls", style="bold"];
   "method:crates/linguae-train/src/data.rs::EncodedSplit.from_records" -> "external:rust:Self" [label="calls", style="bold"];
   "method:crates/linguae-train/src/data.rs::EncodedSplit.from_records" -> "external:rust:Vec.with_capacity" [label="calls", style="bold"];
-  "method:crates/linguae-train/src/data.rs::EncodedSplit.from_records" -> "external:rust:crate::Error.Dataset" [label="calls", style="bold"];
   "method:crates/linguae-train/src/data.rs::EncodedSplit.from_records" -> "external:rust:std::Ok" [label="calls", style="bold"];
   "method:crates/linguae-train/src/data.rs::EncodedSplit.from_records" -> "external:rust:std::chars" [label="calls", style="bold"];
   "method:crates/linguae-train/src/data.rs::EncodedSplit.from_records" -> "external:rust:std::count" [label="calls", style="bold"];
@@ -8910,7 +8904,7 @@ digraph tracers {
   "module:crates/linguae-core/src/error.rs" -> "constant:crates/linguae-core/src/error.rs::Error.UnsupportedDevice" [label="defines", style="solid"];
   "module:crates/linguae-core/src/error.rs" -> "enum:crates/linguae-core/src/error.rs::Error" [label="defines", style="solid"];
   "module:crates/linguae-core/src/error.rs" -> "type:crates/linguae-core/src/error.rs::Result" [label="defines", style="solid"];
-  "module:crates/linguae-core/src/lib.rs" -> "unresolved:rust:Artifact" [label="uses_type", style="dotted"];
+  "module:crates/linguae-core/src/lib.rs" -> "struct:crates/linguae-core/src/artifact.rs::Artifact" [label="uses_type", style="dotted"];
   "module:crates/linguae-core/src/lib.rs" -> "constant:crates/linguae-core/src/lib.rs::DEFAULT_BATCH_SIZE" [label="defines", style="solid"];
   "module:crates/linguae-core/src/lib.rs" -> "method:crates/linguae-core/src/lib.rs::Artifact.predict_batch" [label="defines", style="solid"];
   "module:crates/linguae-core/src/lib.rs" -> "method:crates/linguae-core/src/lib.rs::Artifact.predict_text" [label="defines", style="solid"];
@@ -10988,8 +10982,8 @@ digraph tracers {
   "struct:crates/linguae-train/src/export.rs::Evaluation" -> "struct:crates/linguae-train/src/metrics.rs::ConfusionMatrix" [label="uses_type", style="dotted"];
   "struct:crates/linguae-train/src/export.rs::Evaluation" -> "struct:crates/linguae-train/src/metrics.rs::LengthBucket" [label="uses_type", style="dotted"];
   "struct:crates/linguae-train/src/export.rs::Evaluation" -> "struct:crates/linguae-train/src/metrics.rs::LengthBucketBySource" [label="uses_type", style="dotted"];
+  "struct:crates/linguae-train/src/export.rs::Evaluation" -> "struct:crates/linguae-train/src/metrics.rs::LengthClassificationMetrics" [label="uses_type", style="dotted"];
   "struct:crates/linguae-train/src/export.rs::Evaluation" -> "struct:crates/linguae-train/src/metrics.rs::PerLanguageMetrics" [label="uses_type", style="dotted"];
-  "struct:crates/linguae-train/src/export.rs::Evaluation" -> "unresolved:rust:crate::metrics::LengthClassificationMetrics" [label="uses_type", style="dotted"];
   "struct:crates/linguae-train/src/export.rs::SourceMetrics" -> "external:rust:std::BTreeMap" [label="uses_type", style="dotted"];
   "struct:crates/linguae-train/src/main.rs::Cli" -> "enum:crates/linguae-train/src/main.rs::Command" [label="uses_type", style="dotted"];
   "struct:crates/linguae-train/src/main.rs::ConvertArgs" -> "external:rust:std::PathBuf" [label="uses_type", style="dotted"];

@@ -5435,18 +5435,6 @@
       "language": "rust"
     },
     {
-      "id": "external:rust:crate::Error.Dataset",
-      "kind": "external_symbol",
-      "name": "Dataset",
-      "language": "rust"
-    },
-    {
-      "id": "external:rust:crate::Error.Training",
-      "kind": "external_symbol",
-      "name": "Training",
-      "language": "rust"
-    },
-    {
       "id": "external:rust:csv.StringRecord",
       "kind": "external_symbol",
       "name": "StringRecord",
@@ -29267,12 +29255,6 @@
       "language": "javascript"
     },
     {
-      "id": "unresolved:rust:Artifact",
-      "kind": "unknown",
-      "name": "Artifact",
-      "language": "rust"
-    },
-    {
       "id": "unresolved:rust:Cartesian2d",
       "kind": "unknown",
       "name": "Cartesian2d",
@@ -29522,18 +29504,6 @@
       "id": "unresolved:rust:copy",
       "kind": "unknown",
       "name": "copy",
-      "language": "rust"
-    },
-    {
-      "id": "unresolved:rust:crate::metrics::ConfusionMatrix",
-      "kind": "unknown",
-      "name": "crate::metrics::ConfusionMatrix",
-      "language": "rust"
-    },
-    {
-      "id": "unresolved:rust:crate::metrics::LengthClassificationMetrics",
-      "kind": "unknown",
-      "name": "crate::metrics::LengthClassificationMetrics",
       "language": "rust"
     },
     {
@@ -29828,24 +29798,6 @@
       "id": "unresolved:rust:legend",
       "kind": "unknown",
       "name": "legend",
-      "language": "rust"
-    },
-    {
-      "id": "unresolved:rust:linguae_data::TatoebaReport",
-      "kind": "unknown",
-      "name": "linguae_data::TatoebaReport",
-      "language": "rust"
-    },
-    {
-      "id": "unresolved:rust:linguae_data::WiliReport",
-      "kind": "unknown",
-      "name": "linguae_data::WiliReport",
-      "language": "rust"
-    },
-    {
-      "id": "unresolved:rust:linguae_data::WordReport",
-      "kind": "unknown",
-      "name": "linguae_data::WordReport",
       "language": "rust"
     },
     {
@@ -85634,9 +85586,9 @@
     },
     {
       "source": "function:crates/linguae-data/src/main.rs::print_tatoeba",
-      "target": "unresolved:rust:linguae_data::TatoebaReport",
+      "target": "struct:crates/linguae-data/src/tatoeba.rs::TatoebaReport",
       "kind": "uses_type",
-      "status": "unresolved",
+      "status": "resolved_internal",
       "origin": "syntax",
       "sites": [
         {
@@ -85697,9 +85649,9 @@
     },
     {
       "source": "function:crates/linguae-data/src/main.rs::print_wili",
-      "target": "unresolved:rust:linguae_data::WiliReport",
+      "target": "struct:crates/linguae-data/src/wili.rs::WiliReport",
       "kind": "uses_type",
-      "status": "unresolved",
+      "status": "resolved_internal",
       "origin": "syntax",
       "sites": [
         {
@@ -85760,9 +85712,9 @@
     },
     {
       "source": "function:crates/linguae-data/src/main.rs::print_words",
-      "target": "unresolved:rust:linguae_data::WordReport",
+      "target": "struct:crates/linguae-data/src/words.rs::WordReport",
       "kind": "uses_type",
-      "status": "unresolved",
+      "status": "resolved_internal",
       "origin": "syntax",
       "sites": [
         {
@@ -102677,6 +102629,39 @@
     },
     {
       "source": "function:crates/linguae-train/src/data.rs::prepare_batch",
+      "target": "constant:crates/linguae-train/src/error.rs::Error.Training",
+      "kind": "calls",
+      "status": "resolved_internal",
+      "origin": "lexical",
+      "sites": [
+        {
+          "start": {
+            "line": 66,
+            "column": 20,
+            "byte": 1859
+          },
+          "end": {
+            "line": 66,
+            "column": 64,
+            "byte": 1903
+          }
+        },
+        {
+          "start": {
+            "line": 69,
+            "column": 20,
+            "byte": 1973
+          },
+          "end": {
+            "line": 73,
+            "column": 11,
+            "byte": 2134
+          }
+        }
+      ]
+    },
+    {
+      "source": "function:crates/linguae-train/src/data.rs::prepare_batch",
       "target": "external:rust:Tensor.from_vec",
       "kind": "calls",
       "status": "resolved_external",
@@ -102749,39 +102734,6 @@
             "line": 84,
             "column": 64,
             "byte": 2431
-          }
-        }
-      ]
-    },
-    {
-      "source": "function:crates/linguae-train/src/data.rs::prepare_batch",
-      "target": "external:rust:crate::Error.Training",
-      "kind": "calls",
-      "status": "resolved_external",
-      "origin": "lexical",
-      "sites": [
-        {
-          "start": {
-            "line": 66,
-            "column": 20,
-            "byte": 1859
-          },
-          "end": {
-            "line": 66,
-            "column": 64,
-            "byte": 1903
-          }
-        },
-        {
-          "start": {
-            "line": 69,
-            "column": 20,
-            "byte": 1973
-          },
-          "end": {
-            "line": 73,
-            "column": 11,
-            "byte": 2134
           }
         }
       ]
@@ -122589,18 +122541,6 @@
             "column": 34,
             "byte": 12312
           }
-        },
-        {
-          "start": {
-            "line": 389,
-            "column": 25,
-            "byte": 12657
-          },
-          "end": {
-            "line": 389,
-            "column": 56,
-            "byte": 12688
-          }
         }
       ]
     },
@@ -122702,18 +122642,6 @@
             "line": 357,
             "column": 40,
             "byte": 11677
-          }
-        },
-        {
-          "start": {
-            "line": 385,
-            "column": 15,
-            "byte": 12508
-          },
-          "end": {
-            "line": 385,
-            "column": 27,
-            "byte": 12520
           }
         },
         {
@@ -122849,6 +122777,48 @@
             "line": 377,
             "column": 63,
             "byte": 12341
+          }
+        }
+      ]
+    },
+    {
+      "source": "function:crates/linguae-train/src/plots.rs::confusion_matrix_plot",
+      "target": "method:crates/linguae-train/src/metrics.rs::ConfusionMatrix.get",
+      "kind": "calls",
+      "status": "resolved_internal",
+      "origin": "lexical",
+      "sites": [
+        {
+          "start": {
+            "line": 389,
+            "column": 25,
+            "byte": 12657
+          },
+          "end": {
+            "line": 389,
+            "column": 56,
+            "byte": 12688
+          }
+        }
+      ]
+    },
+    {
+      "source": "function:crates/linguae-train/src/plots.rs::confusion_matrix_plot",
+      "target": "method:crates/linguae-train/src/metrics.rs::ConfusionMatrix.max",
+      "kind": "calls",
+      "status": "resolved_internal",
+      "origin": "lexical",
+      "sites": [
+        {
+          "start": {
+            "line": 385,
+            "column": 15,
+            "byte": 12508
+          },
+          "end": {
+            "line": 385,
+            "column": 27,
+            "byte": 12520
           }
         }
       ]
@@ -123383,9 +123353,9 @@
     },
     {
       "source": "function:crates/linguae-train/src/plots.rs::confusion_matrix_plot",
-      "target": "unresolved:rust:crate::metrics::ConfusionMatrix",
+      "target": "struct:crates/linguae-train/src/metrics.rs::ConfusionMatrix",
       "kind": "uses_type",
-      "status": "unresolved",
+      "status": "resolved_internal",
       "origin": "syntax",
       "sites": [
         {
@@ -150806,6 +150776,27 @@
     },
     {
       "source": "method:crates/linguae-train/src/data.rs::EncodedSplit.from_records",
+      "target": "constant:crates/linguae-train/src/error.rs::Error.Dataset",
+      "kind": "calls",
+      "status": "resolved_internal",
+      "origin": "lexical",
+      "sites": [
+        {
+          "start": {
+            "line": 32,
+            "column": 17,
+            "byte": 922
+          },
+          "end": {
+            "line": 35,
+            "column": 19,
+            "byte": 1075
+          }
+        }
+      ]
+    },
+    {
+      "source": "method:crates/linguae-train/src/data.rs::EncodedSplit.from_records",
       "target": "external:rust:Self",
       "kind": "calls",
       "status": "resolved_external",
@@ -150866,27 +150857,6 @@
             "line": 27,
             "column": 60,
             "byte": 784
-          }
-        }
-      ]
-    },
-    {
-      "source": "method:crates/linguae-train/src/data.rs::EncodedSplit.from_records",
-      "target": "external:rust:crate::Error.Dataset",
-      "kind": "calls",
-      "status": "resolved_external",
-      "origin": "lexical",
-      "sites": [
-        {
-          "start": {
-            "line": 32,
-            "column": 17,
-            "byte": 922
-          },
-          "end": {
-            "line": 35,
-            "column": 19,
-            "byte": 1075
           }
         }
       ]
@@ -155840,9 +155810,9 @@
     },
     {
       "source": "module:crates/linguae-core/src/lib.rs",
-      "target": "unresolved:rust:Artifact",
+      "target": "struct:crates/linguae-core/src/artifact.rs::Artifact",
       "kind": "uses_type",
-      "status": "unresolved",
+      "status": "resolved_internal",
       "origin": "syntax",
       "sites": [
         {
@@ -176104,6 +176074,27 @@
     },
     {
       "source": "struct:crates/linguae-train/src/export.rs::Evaluation",
+      "target": "struct:crates/linguae-train/src/metrics.rs::LengthClassificationMetrics",
+      "kind": "uses_type",
+      "status": "resolved_internal",
+      "origin": "syntax",
+      "sites": [
+        {
+          "start": {
+            "line": 31,
+            "column": 36,
+            "byte": 1139
+          },
+          "end": {
+            "line": 31,
+            "column": 79,
+            "byte": 1182
+          }
+        }
+      ]
+    },
+    {
+      "source": "struct:crates/linguae-train/src/export.rs::Evaluation",
       "target": "struct:crates/linguae-train/src/metrics.rs::PerLanguageMetrics",
       "kind": "uses_type",
       "status": "resolved_internal",
@@ -176119,27 +176110,6 @@
             "line": 27,
             "column": 45,
             "byte": 970
-          }
-        }
-      ]
-    },
-    {
-      "source": "struct:crates/linguae-train/src/export.rs::Evaluation",
-      "target": "unresolved:rust:crate::metrics::LengthClassificationMetrics",
-      "kind": "uses_type",
-      "status": "unresolved",
-      "origin": "syntax",
-      "sites": [
-        {
-          "start": {
-            "line": 31,
-            "column": 36,
-            "byte": 1139
-          },
-          "end": {
-            "line": 31,
-            "column": 79,
-            "byte": 1182
           }
         }
       ]
@@ -176646,15 +176616,15 @@
   "statistics": {
     "files": 124,
     "packages": 3,
-    "nodes": 2814,
-    "edges": 8187,
+    "nodes": 2806,
+    "edges": 8189,
     "symbols": 1827,
-    "unresolvedEdges": 632,
+    "unresolvedEdges": 626,
     "diagnostics": 7,
     "byNodeKind": {
       "constant": 206,
       "enum": 7,
-      "external_symbol": 455,
+      "external_symbol": 453,
       "file": 124,
       "framework": 14,
       "function": 305,
@@ -176666,11 +176636,11 @@
       "repository": 1,
       "struct": 58,
       "type": 6,
-      "unknown": 220,
+      "unknown": 214,
       "variable": 766
     },
     "byEdgeKind": {
-      "calls": 2879,
+      "calls": 2881,
       "contains": 2179,
       "defines": 1873,
       "exports": 441,
@@ -176682,15 +176652,15 @@
       "bash": 12,
       "javascript": 48,
       "markdown": 42,
-      "rust": 2115,
+      "rust": 2107,
       "tsx": 453,
       "typescript": 126
     },
     "byStatus": {
       "ambiguous": 4,
-      "resolved_external": 2190,
-      "resolved_internal": 5365,
-      "unresolved": 628
+      "resolved_external": 2188,
+      "resolved_internal": 5375,
+      "unresolved": 622
     },
     "byFramework": {
       "chrono": 1,
