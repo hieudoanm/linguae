@@ -133,11 +133,39 @@
   ],
   "frameworks": [
     {
+      "name": "chrono",
+      "displayName": "chrono",
+      "family": "rust",
+      "version": null,
+      "confidence": "high"
+    },
+    {
       "name": "clap.rs",
       "displayName": "clap.rs",
       "family": "rust",
       "version": null,
+      "confidence": "high"
+    },
+    {
+      "name": "config-rs",
+      "displayName": "config-rs",
+      "family": "rust",
+      "version": null,
       "confidence": "medium"
+    },
+    {
+      "name": "csv",
+      "displayName": "csv",
+      "family": "rust",
+      "version": null,
+      "confidence": "medium"
+    },
+    {
+      "name": "log",
+      "displayName": "log",
+      "family": "rust",
+      "version": null,
+      "confidence": "high"
     },
     {
       "name": "nextjs",
@@ -151,6 +179,55 @@
       "displayName": "React",
       "family": "ecmascript",
       "version": "tailwindcss",
+      "confidence": "high"
+    },
+    {
+      "name": "serde",
+      "displayName": "Serde",
+      "family": "rust",
+      "version": null,
+      "confidence": "high"
+    },
+    {
+      "name": "tailwindcss",
+      "displayName": "Tailwind CSS",
+      "family": "ecmascript",
+      "version": "tauri-apps",
+      "confidence": "medium"
+    },
+    {
+      "name": "tauri",
+      "displayName": "Tauri",
+      "family": "ecmascript",
+      "version": "tailwindcss",
+      "confidence": "medium"
+    },
+    {
+      "name": "thiserror",
+      "displayName": "thiserror",
+      "family": "rust",
+      "version": null,
+      "confidence": "medium"
+    },
+    {
+      "name": "turborepo",
+      "displayName": "Turborepo",
+      "family": "ecmascript",
+      "version": "commitlint",
+      "confidence": "medium"
+    },
+    {
+      "name": "vite",
+      "displayName": "Vite",
+      "family": "ecmascript",
+      "version": "tauri-apps",
+      "confidence": "medium"
+    },
+    {
+      "name": "vitest",
+      "displayName": "Vitest",
+      "family": "ecmascript",
+      "version": "tauri-apps",
       "confidence": "high"
     }
   ],
@@ -6668,13 +6745,53 @@
       "language": "bash"
     },
     {
+      "id": "framework:chrono",
+      "kind": "framework",
+      "name": "chrono",
+      "metadata": {
+        "confidence": "high",
+        "family": "rust",
+        "framework": "chrono"
+      }
+    },
+    {
       "id": "framework:clap.rs",
       "kind": "framework",
       "name": "clap.rs",
       "metadata": {
-        "confidence": "medium",
+        "confidence": "high",
         "family": "rust",
         "framework": "clap.rs"
+      }
+    },
+    {
+      "id": "framework:config-rs",
+      "kind": "framework",
+      "name": "config-rs",
+      "metadata": {
+        "confidence": "medium",
+        "family": "rust",
+        "framework": "config-rs"
+      }
+    },
+    {
+      "id": "framework:csv",
+      "kind": "framework",
+      "name": "csv",
+      "metadata": {
+        "confidence": "medium",
+        "family": "rust",
+        "framework": "csv"
+      }
+    },
+    {
+      "id": "framework:log",
+      "kind": "framework",
+      "name": "log",
+      "metadata": {
+        "confidence": "high",
+        "family": "rust",
+        "framework": "log"
       }
     },
     {
@@ -6695,6 +6812,76 @@
         "confidence": "high",
         "family": "ecmascript",
         "framework": "react"
+      }
+    },
+    {
+      "id": "framework:serde",
+      "kind": "framework",
+      "name": "Serde",
+      "metadata": {
+        "confidence": "high",
+        "family": "rust",
+        "framework": "serde"
+      }
+    },
+    {
+      "id": "framework:tailwindcss:tauri-apps",
+      "kind": "framework",
+      "name": "Tailwind CSS",
+      "metadata": {
+        "confidence": "medium",
+        "family": "ecmascript",
+        "framework": "tailwindcss"
+      }
+    },
+    {
+      "id": "framework:tauri:tailwindcss",
+      "kind": "framework",
+      "name": "Tauri",
+      "metadata": {
+        "confidence": "medium",
+        "family": "ecmascript",
+        "framework": "tauri"
+      }
+    },
+    {
+      "id": "framework:thiserror",
+      "kind": "framework",
+      "name": "thiserror",
+      "metadata": {
+        "confidence": "medium",
+        "family": "rust",
+        "framework": "thiserror"
+      }
+    },
+    {
+      "id": "framework:turborepo:commitlint",
+      "kind": "framework",
+      "name": "Turborepo",
+      "metadata": {
+        "confidence": "medium",
+        "family": "ecmascript",
+        "framework": "turborepo"
+      }
+    },
+    {
+      "id": "framework:vite:tauri-apps",
+      "kind": "framework",
+      "name": "Vite",
+      "metadata": {
+        "confidence": "medium",
+        "family": "ecmascript",
+        "framework": "vite"
+      }
+    },
+    {
+      "id": "framework:vitest:tauri-apps",
+      "kind": "framework",
+      "name": "Vitest",
+      "metadata": {
+        "confidence": "high",
+        "family": "ecmascript",
+        "framework": "vitest"
       }
     },
     {
@@ -176152,7 +176339,35 @@
     },
     {
       "source": "repository:.",
+      "target": "framework:chrono",
+      "kind": "uses_framework",
+      "status": "resolved_internal",
+      "origin": "syntax"
+    },
+    {
+      "source": "repository:.",
       "target": "framework:clap.rs",
+      "kind": "uses_framework",
+      "status": "resolved_internal",
+      "origin": "syntax"
+    },
+    {
+      "source": "repository:.",
+      "target": "framework:config-rs",
+      "kind": "uses_framework",
+      "status": "resolved_internal",
+      "origin": "syntax"
+    },
+    {
+      "source": "repository:.",
+      "target": "framework:csv",
+      "kind": "uses_framework",
+      "status": "resolved_internal",
+      "origin": "syntax"
+    },
+    {
+      "source": "repository:.",
+      "target": "framework:log",
       "kind": "uses_framework",
       "status": "resolved_internal",
       "origin": "syntax"
@@ -176167,6 +176382,55 @@
     {
       "source": "repository:.",
       "target": "framework:react:tailwindcss",
+      "kind": "uses_framework",
+      "status": "resolved_internal",
+      "origin": "syntax"
+    },
+    {
+      "source": "repository:.",
+      "target": "framework:serde",
+      "kind": "uses_framework",
+      "status": "resolved_internal",
+      "origin": "syntax"
+    },
+    {
+      "source": "repository:.",
+      "target": "framework:tailwindcss:tauri-apps",
+      "kind": "uses_framework",
+      "status": "resolved_internal",
+      "origin": "syntax"
+    },
+    {
+      "source": "repository:.",
+      "target": "framework:tauri:tailwindcss",
+      "kind": "uses_framework",
+      "status": "resolved_internal",
+      "origin": "syntax"
+    },
+    {
+      "source": "repository:.",
+      "target": "framework:thiserror",
+      "kind": "uses_framework",
+      "status": "resolved_internal",
+      "origin": "syntax"
+    },
+    {
+      "source": "repository:.",
+      "target": "framework:turborepo:commitlint",
+      "kind": "uses_framework",
+      "status": "resolved_internal",
+      "origin": "syntax"
+    },
+    {
+      "source": "repository:.",
+      "target": "framework:vite:tauri-apps",
+      "kind": "uses_framework",
+      "status": "resolved_internal",
+      "origin": "syntax"
+    },
+    {
+      "source": "repository:.",
+      "target": "framework:vitest:tauri-apps",
       "kind": "uses_framework",
       "status": "resolved_internal",
       "origin": "syntax"
@@ -178080,8 +178344,8 @@
   "statistics": {
     "files": 124,
     "packages": 3,
-    "nodes": 2898,
-    "edges": 8159,
+    "nodes": 2909,
+    "edges": 8170,
     "symbols": 1804,
     "unresolvedEdges": 2493,
     "diagnostics": 4,
@@ -178090,7 +178354,7 @@
       "enum": 7,
       "external_symbol": 244,
       "file": 124,
-      "framework": 3,
+      "framework": 14,
       "function": 305,
       "interface": 26,
       "method": 49,
@@ -178109,7 +178373,7 @@
       "defines": 1850,
       "exports": 408,
       "imports": 345,
-      "uses_framework": 3,
+      "uses_framework": 14,
       "uses_type": 505
     },
     "byLanguage": {
@@ -178123,13 +178387,24 @@
     "byStatus": {
       "ambiguous": 4,
       "resolved_external": 572,
-      "resolved_internal": 5094,
+      "resolved_internal": 5105,
       "unresolved": 2489
     },
     "byFramework": {
+      "chrono": 1,
       "clap.rs": 1,
+      "config-rs": 1,
+      "csv": 1,
+      "log": 1,
       "nextjs": 1,
-      "react": 1
+      "react": 1,
+      "serde": 1,
+      "tailwindcss": 1,
+      "tauri": 1,
+      "thiserror": 1,
+      "turborepo": 1,
+      "vite": 1,
+      "vitest": 1
     }
   }
 }
