@@ -6,13 +6,13 @@ import Hero from '@/components/molecules/Hero';
 import SectionHead from '@/components/molecules/SectionHead';
 import Terminal from '@/components/molecules/Terminal';
 import {
-  LuBot,
-  LuChartBar,
-  LuBrainCircuit,
-  LuFileInput,
-  LuLock,
-  LuZap,
-} from 'react-icons/lu';
+  PiRobot,
+  PiChartBar,
+  PiBrain,
+  PiFileArrowUp,
+  PiLock,
+  PiLightning,
+} from 'react-icons/pi';
 
 export const metadata: Metadata = {
   alternates: { canonical: '/' },
@@ -22,37 +22,37 @@ const GITHUB = 'https://github.com/hieudoanm/linguae';
 
 const FEATURES: Feature[] = [
   {
-    icon: LuLock,
+    icon: PiLock,
     title: 'Runs fully offline',
     body: 'Inference happens in-process inside the Rust binary. No sockets, no telemetry, no accounts — safe for air-gapped machines.',
   },
   {
-    icon: LuBrainCircuit,
+    icon: PiBrain,
     title: 'Trained from scratch',
     body: 'A character-level CNN trained with Candle on Tatoeba, WiLI-2018, and a curated word dataset. No pretrained weights to trust or audit.',
   },
   {
-    icon: LuZap,
+    icon: PiLightning,
     title: 'Fast and small',
     body: 'Character-level encoding keeps the model compact. Detection of a sentence completes in milliseconds on CPU.',
   },
   {
-    icon: LuFileInput,
+    icon: PiFileArrowUp,
     title: 'Flexible input',
     body: 'Pass text as an argument, a file with --file, or pipe it through stdin — it composes with standard Unix tools.',
   },
   {
-    icon: LuChartBar,
+    icon: PiChartBar,
     title: 'Confidence and JSON',
     body: '--confidence prints per-language scores and --format json emits structured output for scripts.',
   },
   {
-    icon: LuFileInput,
+    icon: PiFileArrowUp,
     title: 'Batch processing',
     body: 'Detect languages across whole files or streams line by line — built for corpus-scale workloads.',
   },
   {
-    icon: LuBot,
+    icon: PiRobot,
     title: 'MCP server',
     body: 'linguae mcp gives agents language detection as a tool — pipe text in, get an ISO 639-3 code and confidence scores back.',
   },

@@ -8,6 +8,7 @@ import './globals.css';
 const inter = Inter({ subsets: ['latin'] });
 
 const GITHUB = 'https://github.com/hieudoanm/linguae';
+const BASE = process.env.NODE_ENV === 'production' ? '/linguae' : '';
 const LOGO =
   process.env.NODE_ENV === 'production' ? '/linguae/logo.svg' : '/logo.svg';
 
@@ -53,8 +54,8 @@ export const metadata: Metadata = {
   twitter: { card: 'summary_large_image', images: ['/og.png'] },
   icons: {
     icon: [
-      { url: '/favicon.ico', sizes: 'any' },
-      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: `${BASE}/favicon.ico`, sizes: 'any' },
+      { url: `${BASE}/favicon.svg`, type: 'image/svg+xml' },
     ],
   },
 };
