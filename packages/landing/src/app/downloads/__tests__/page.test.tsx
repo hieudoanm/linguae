@@ -22,6 +22,7 @@ describe('downloads page', () => {
   it('renders the expected sections', () => {
     expect(html).toContain('CLI</h2>');
     expect(html).toContain('Desktop</h2>');
+    expect(html).toContain('Models</h2>');
   });
 
   it('hides sections that have no assets', () => {
@@ -30,6 +31,10 @@ describe('downloads page', () => {
   });
 
   it('links every release asset', () => {
+    expect(html).toContain(`${RELEASES}/model-linguae.joblib`);
+    expect(html).toContain(`${RELEASES}/model-linguae.pkl`);
+    expect(html).toContain(`${RELEASES}/model-linguae.pt`);
+    expect(html).toContain(`${RELEASES}/cli-linguae-model.zip`);
     expect(html).toContain(`${RELEASES}/cli-linguae-aarch64-apple-darwin`);
     expect(html).toContain(`${RELEASES}/cli-linguae-x86_64-apple-darwin`);
     expect(html).toContain(
