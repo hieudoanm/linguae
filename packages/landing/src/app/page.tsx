@@ -210,12 +210,8 @@ const HomePage: NextPage = () => (
     <CTA
       title="Ready to identify languages?"
       description="One binary, fully offline — build linguae and start detecting."
-      primary={{ label: 'View on GitHub', href: GITHUB, external: true }}
-      secondary={{
-        label: 'Read the README',
-        href: `${GITHUB}#readme`,
-        external: true,
-      }}
+      primary={{ label: 'Download', href: '/downloads/' }}
+      secondary={{ label: 'View Docs', href: '/docs/' }}
     />
   </main>
 );
