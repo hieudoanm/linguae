@@ -26,7 +26,7 @@ case "$OS" in
     *)      TRIPLE="x86_64-pc-windows-msvc" ;;
 esac
 
-BINARY_URL="https://github.com/${REPO}/releases/latest/download/linguae-${TRIPLE}"
+BINARY_URL="https://github.com/${REPO}/releases/latest/download/cli-linguae-${TRIPLE}"
 [[ "$OS" != "linux" && "$OS" != "darwin" ]] && BINARY_URL="${BINARY_URL}.exe"
 
 if command -v curl >/dev/null 2>&1; then
