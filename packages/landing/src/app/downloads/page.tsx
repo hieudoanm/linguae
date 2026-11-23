@@ -263,6 +263,23 @@ const Downloads: FC = () => (
           </Section>
         )}
 
+        <div className="border-base-300 bg-base-200/50 mt-12 rounded-2xl border p-6">
+          <h2 className="text-base-content m-0 mb-2 flex items-center gap-2 text-lg leading-tight">
+            <FaApple className="text-primary h-5 w-5" />
+            macOS: unsigned app workaround
+          </h2>
+          <p className="text-base-content/60 mb-4 text-sm">
+            The macOS builds are not signed or notarized, so Gatekeeper will
+            block the first launch. Either right-click the app and choose{' '}
+            <strong>Open</strong>, or remove the quarantine attribute:
+          </p>
+          <pre className="bg-base-300 overflow-x-auto rounded-lg p-4 font-mono text-sm">
+            <code>
+              xattr -dr com.apple.quarantine /Applications/Linguae.app
+            </code>
+          </pre>
+        </div>
+
         <div className="border-base-300 bg-base-200/50 rounded-2xl border p-6">
           <h2 className="text-base-content m-0 mb-2 flex items-center gap-2 text-lg leading-tight">
             <FaTerminal className="text-primary h-5 w-5" />
