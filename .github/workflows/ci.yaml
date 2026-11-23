@@ -293,14 +293,13 @@ jobs:
       - name: Set up uv
         uses: astral-sh/setup-uv@v6.8.0
         with:
-          python-version: '3.13'
           enable-cache: true
 
       - name: Export model formats
-        working-directory: crates/linguae-train/scripts
+        working-directory: crates/linguae-train/export
         env:
           UV_TORCH_BACKEND: cpu
-        run: uv run --python 3.13 python export_models.py
+        run: uv run python export_models.py
 
       - name: Upload model exports
         uses: actions/upload-artifact@v7.0.2
