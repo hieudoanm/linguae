@@ -76,8 +76,16 @@ const DESKTOP: Platform[] = [
         href: `${RELEASES}/desktop-linguae-aarch64-apple-darwin.dmg`,
       },
       {
-        label: '.app.zip',
+        label: '.app.zip (Apple Silicon)',
         href: `${RELEASES}/desktop-linguae-aarch64-apple-darwin.app.zip`,
+      },
+      {
+        label: '.dmg (Intel)',
+        href: `${RELEASES}/desktop-linguae-x86_64-apple-darwin.dmg`,
+      },
+      {
+        label: '.app.zip (Intel)',
+        href: `${RELEASES}/desktop-linguae-x86_64-apple-darwin.app.zip`,
       },
     ],
   },
