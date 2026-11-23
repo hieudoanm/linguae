@@ -82,4 +82,28 @@ else
     esac
 fi
 
+# --- Model exports ------------------------------------------------------------
+# The release ships model-linguae.{joblib,pkl,pt} and cli-linguae-model.zip
+# (the artifact bundle the CLI loads). Reproduce the exports locally when the
+# training artifact is present so the installed CLI can run offline.
+MODELS_DIR="$REPO_ROOT/crates/linguae-train/artifacts/models"
+ARTIFACT_DIR="$REPO_ROOT/crates/linguae-train/artifacts/linguae"
+if [[ -f "$ARTIFACT_DIR/model.safetensors" ]]; then
+    if [[ ! -f "$MODELS_DIR/linguae.joblib" ]] \
+        || [[ "$ARTIFACT_DIR/model.safetensors" -nt "$MODELS_DIR/linguae.joblib" ]]; then
+        if command -v uv >/dev/null 2>&1; then
+            echo "Exporting model formats (joblib/pkl/pt)..."
+            (cd "$REPO_ROOT/crates/linguae-train/export" && uv run python export_models.py)
+        else
+            echo "hint: install uv to export model formats (https://docs.astral.sh/uv/)" >&2
+        fi
+    fi
+    if compgen -G "$MODELS_DIR/linguae.*" >/dev/null; then
+        echo "Model exports: $MODELS_DIR"
+        echo "  Point the CLI at the artifact with --artifact $ARTIFACT_DIR"
+    fi
+else
+    echo "hint: no trained artifact at $ARTIFACT_DIR — skipping model export" >&2
+fi
+
 "$INSTALL_DIR/linguae" --help >/dev/null

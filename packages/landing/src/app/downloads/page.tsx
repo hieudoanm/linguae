@@ -4,6 +4,7 @@ import type { IconType } from 'react-icons';
 import {
   FaApple,
   FaBoxOpen,
+  FaBrain,
   FaDownload,
   FaLinux,
   FaTerminal,
@@ -145,6 +146,35 @@ const DESKTOP: Cell[] = [
   },
 ];
 
+const MODELS: Cell[] = [
+  {
+    name: 'joblib (scikit-learn)',
+    icon: FaBrain,
+    desc: 'scikit-learn joblib export of the CharCNN weights.',
+    assets: [{ label: 'joblib', href: `${RELEASES}/model-linguae.joblib` }],
+  },
+  {
+    name: 'pkl (pickle)',
+    icon: FaBrain,
+    desc: 'Python pickle — config, numpy weights, vocab, labels.',
+    assets: [{ label: 'pickle', href: `${RELEASES}/model-linguae.pkl` }],
+  },
+  {
+    name: 'pt (PyTorch)',
+    icon: FaBrain,
+    desc: 'PyTorch checkpoint — config and state_dict.',
+    assets: [{ label: 'PyTorch', href: `${RELEASES}/model-linguae.pt` }],
+  },
+  {
+    name: 'CLI artifact',
+    icon: FaBoxOpen,
+    desc: 'Full artifact bundle the linguae CLI loads at runtime.',
+    assets: [
+      { label: 'Artifact (.zip)', href: `${RELEASES}/cli-linguae-model.zip` },
+    ],
+  },
+];
+
 function Section({
   icon: Icon,
   title,
@@ -226,6 +256,12 @@ const Downloads: FC = () => (
         <Section icon={FaBoxOpen} title="Desktop">
           <CardGrid cells={DESKTOP} cols="lg:grid-cols-4" />
         </Section>
+
+        {MODELS.length > 0 && (
+          <Section icon={FaBrain} title="Models">
+            <CardGrid cells={MODELS} cols="lg:grid-cols-3" />
+          </Section>
+        )}
 
         <div className="border-base-300 bg-base-200/50 rounded-2xl border p-6">
           <h2 className="text-base-content m-0 mb-2 flex items-center gap-2 text-lg leading-tight">
