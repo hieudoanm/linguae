@@ -69,4 +69,9 @@ describe('downloads page', () => {
       `${RELEASES}/desktop-linguae-x86_64-unknown-linux-gnu.rpm`
     );
   });
+  it('warns about the unsigned macOS build', () => {
+    expect(html).toContain('unsigned app workaround');
+    expect(html).toContain('xattr -dr com.apple.quarantine');
+    expect(html).toContain('/Applications/Linguae.app');
+  });
 });
