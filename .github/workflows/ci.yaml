@@ -92,7 +92,7 @@ jobs:
           if-no-files-found: error
           retention-days: 7
 
-  desktop-check:
+  desktop-quality:
     name: Desktop check
     runs-on: ubuntu-latest
     defaults:
@@ -123,11 +123,11 @@ jobs:
       - name: Test
         run: pnpm run test:run
 
-  desktop:
+  desktop-build:
     name: Desktop - Build
-    needs: desktop-check
+    needs: desktop-quality
     # The `out/` bundle is only needed by `desktop-build` for releases;
-    # PRs are covered by the `desktop-check` job.
+    # PRs are covered by the `desktop-quality` job.
     if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     defaults:
@@ -161,66 +161,12 @@ jobs:
           path: packages/desktop/out
           retention-days: 1
 
-  landing-build:
-    name: Landing - Build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v7.0.1
-
-      - name: Set up pnpm
-        uses: pnpm/action-setup@v6.1.1
-        with:
-          version: 12.23.0
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v7.1.0
-        with:
-          node-version-file: .nvmrc
-          cache: pnpm
-          cache-dependency-path: pnpm-lock.yaml
-
-      - name: Install landing dependencies
-        working-directory: packages/landing
-        run: pnpm install --frozen-lockfile
-
-      - name: Typecheck landing
-        working-directory: packages/landing
-        run: pnpm run typecheck
-
-      - name: Lint landing
-        working-directory: packages/landing
-        run: pnpm run lint
-
-      - name: Build landing (Next.js static export)
-        working-directory: packages/landing
-        run: pnpm run build
-
-      - name: Upload Pages artifact
-        if: github.ref == 'refs/heads/master'
-        uses: actions/upload-pages-artifact@v5.0.0
-        with:
-          path: packages/landing/out
-
-  landing-deploy:
-    name: Landing - Deploy
-    needs: landing-build
-    if: github.ref == 'refs/heads/master'
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      pages: write
-      id-token: write
-    steps:
-      - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v5.0.1
-
-  desktop-build:
+  desktop-tauri:
     name: Desktop build (${{ matrix.os }})
     needs:
-      - desktop
+      - desktop-build
     # Release bundles are only needed for the master-branch release job;
-    # PRs are covered by the `desktop-check` job.
+    # PRs are covered by the `desktop-quality` job.
     if: github.event_name != 'pull_request'
     strategy:
       fail-fast: false
@@ -337,11 +283,93 @@ jobs:
           if-no-files-found: error
           retention-days: 7
 
+  model-build:
+    name: Model - Export
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7.0.1
+
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v6
+        with:
+          python-version: '3.13'
+          enable-cache: true
+
+      - name: Export model formats
+        working-directory: crates/linguae-train/scripts
+        env:
+          UV_TORCH_BACKEND: cpu
+        run: uv run --python 3.13 python export_models.py
+
+      - name: Upload model exports
+        uses: actions/upload-artifact@v7.0.2
+        with:
+          name: linguae-models
+          path: crates/linguae-train/artifacts/models
+          if-no-files-found: error
+          retention-days: 7
+
+  landing-build:
+    name: Landing - Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7.0.1
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v6.1.1
+        with:
+          version: 12.23.0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7.1.0
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
+
+      - name: Install landing dependencies
+        working-directory: packages/landing
+        run: pnpm install --frozen-lockfile
+
+      - name: Typecheck landing
+        working-directory: packages/landing
+        run: pnpm run typecheck
+
+      - name: Lint landing
+        working-directory: packages/landing
+        run: pnpm run lint
+
+      - name: Build landing (Next.js static export)
+        working-directory: packages/landing
+        run: pnpm run build
+
+      - name: Upload Pages artifact
+        if: github.ref == 'refs/heads/master'
+        uses: actions/upload-pages-artifact@v5.0.0
+        with:
+          path: packages/landing/out
+
+  landing-deploy:
+    name: Landing - Deploy
+    needs: landing-build
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    steps:
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v5.0.1
+
   release:
     name: Release
     needs:
       - cli-build
-      - desktop-build
+      - desktop-tauri
+      - model-build
     if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     permissions:
@@ -363,6 +391,12 @@ jobs:
           pattern: linguae-desktop-*
           merge-multiple: true
           path: bundles
+
+      - name: Download model exports
+        uses: actions/download-artifact@v8.0.2
+        with:
+          name: linguae-models
+          path: crates/linguae-train/artifacts/models
 
       # Tauri bundles keep their build-time names (Linguae_0.0.1_...);
       # normalize everything to desktop-linguae-<target>.<ext>. Glob by
@@ -412,8 +446,8 @@ jobs:
         run: |
           find release-assets -type f -exec gh release upload latest {} --clobber \;
           cd crates/linguae-train/artifacts
-          zip -r linguae-artifacts.zip linguae
-          gh release upload latest linguae-artifacts.zip --clobber
+          zip -r cli-linguae-model.zip linguae models
+          gh release upload latest cli-linguae-model.zip --clobber
 
       - name: Update release notes
         env:
