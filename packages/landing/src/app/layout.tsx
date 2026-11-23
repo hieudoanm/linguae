@@ -17,6 +17,7 @@ const NAV_LINKS = [
   { label: 'How it works', href: '#how-it-works' },
   { label: 'Install', href: '#install' },
   { label: 'Docs', href: '/docs/' },
+  { label: 'Downloads', href: '/downloads/' },
 ];
 
 const DESCRIPTION =
@@ -58,7 +59,6 @@ export const metadata: Metadata = {
   },
 };
 
-
 const JSON_LD = {
   '@context': 'https://schema.org',
   '@graph': [
@@ -66,18 +66,20 @@ const JSON_LD = {
       '@type': 'WebSite',
       name: 'Linguae',
       url: 'https://hieudoanm.github.io/linguae/',
-      description: 'Linguae detects the language of any text with a character-level CNN trained from scratch in Rust. No cloud calls, no pretrained weights — your text never leaves your machine.',
+      description:
+        'Linguae detects the language of any text with a character-level CNN trained from scratch in Rust. No cloud calls, no pretrained weights — your text never leaves your machine.',
     },
     {
       '@type': 'SoftwareApplication',
       name: 'Linguae',
       applicationCategory: 'UtilitiesApplication',
-      description: 'Linguae detects the language of any text with a character-level CNN trained from scratch in Rust. No cloud calls, no pretrained weights — your text never leaves your machine.',
+      description:
+        'Linguae detects the language of any text with a character-level CNN trained from scratch in Rust. No cloud calls, no pretrained weights — your text never leaves your machine.',
       url: 'https://hieudoanm.github.io/linguae/',
       codeRepository: 'https://github.com/hieudoanm/linguae',
       offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
     },
-  ]
+  ],
 };
 
 interface RootLayoutProps {
