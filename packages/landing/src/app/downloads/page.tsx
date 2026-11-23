@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import type { FC } from 'react';
+import type { FC, ReactNode } from 'react';
 import type { IconType } from 'react-icons';
 import {
   FaApple,
@@ -20,23 +20,25 @@ export const metadata: Metadata = {
 const GITHUB = 'https://github.com/hieudoanm/linguae';
 const RELEASES = `${GITHUB}/releases/latest/download`;
 const RELEASE_PAGE = `${GITHUB}/releases/latest`;
-const INSTALL_SH = `curl -fsSL ${GITHUB}/raw/master/scripts/install.sh | bash`;
+const INSTALL_SH = `curl -fsSL ${GITHUB}/raw/master/scripts/install.sh`;
 
 interface Asset {
   label: string;
   href: string;
 }
 
-interface Platform {
+interface Cell {
   name: string;
   icon: IconType;
+  desc: string;
   assets: Asset[];
 }
 
-const CLI: Platform[] = [
+const CLI: Cell[] = [
   {
-    name: 'macOS',
+    name: 'macOS (Silicon)',
     icon: FaApple,
+    desc: 'Apple Silicon Macs — M1 and later.',
     assets: [
       {
         label: 'Apple Silicon',
@@ -45,18 +47,17 @@ const CLI: Platform[] = [
     ],
   },
   {
-    name: 'Windows',
-    icon: FaWindows,
+    name: 'macOS (Intel)',
+    icon: FaApple,
+    desc: 'Intel-based Macs.',
     assets: [
-      {
-        label: '.exe',
-        href: `${RELEASES}/cli-linguae-x86_64-pc-windows-msvc.exe`,
-      },
+      { label: 'Intel', href: `${RELEASES}/cli-linguae-x86_64-apple-darwin` },
     ],
   },
   {
     name: 'Linux',
     icon: FaLinux,
+    desc: 'x86_64 GNU/Linux distributions.',
     assets: [
       {
         label: 'x86_64',
@@ -64,34 +65,73 @@ const CLI: Platform[] = [
       },
     ],
   },
-];
-
-const DESKTOP: Platform[] = [
   {
-    name: 'macOS',
-    icon: FaApple,
+    name: 'Windows',
+    icon: FaWindows,
+    desc: 'Windows 10/11, x86_64.',
     assets: [
       {
-        label: '.dmg (Apple Silicon)',
+        label: '.exe',
+        href: `${RELEASES}/cli-linguae-x86_64-pc-windows-msvc.exe`,
+      },
+    ],
+  },
+];
+
+const DESKTOP: Cell[] = [
+  {
+    name: 'macOS (Silicon)',
+    icon: FaApple,
+    desc: 'Apple Silicon Macs — M1 and later.',
+    assets: [
+      {
+        label: '.dmg',
         href: `${RELEASES}/desktop-linguae-aarch64-apple-darwin.dmg`,
       },
       {
-        label: '.app.zip (Apple Silicon)',
+        label: '.app.zip',
         href: `${RELEASES}/desktop-linguae-aarch64-apple-darwin.app.zip`,
       },
+    ],
+  },
+  {
+    name: 'macOS (Intel)',
+    icon: FaApple,
+    desc: 'Intel-based Macs.',
+    assets: [
       {
-        label: '.dmg (Intel)',
+        label: '.dmg',
         href: `${RELEASES}/desktop-linguae-x86_64-apple-darwin.dmg`,
       },
       {
-        label: '.app.zip (Intel)',
+        label: '.app.zip',
         href: `${RELEASES}/desktop-linguae-x86_64-apple-darwin.app.zip`,
+      },
+    ],
+  },
+  {
+    name: 'Linux',
+    icon: FaLinux,
+    desc: 'x86_64 GNU/Linux distributions.',
+    assets: [
+      {
+        label: '.deb',
+        href: `${RELEASES}/desktop-linguae-x86_64-unknown-linux-gnu.deb`,
+      },
+      {
+        label: '.rpm',
+        href: `${RELEASES}/desktop-linguae-x86_64-unknown-linux-gnu.rpm`,
+      },
+      {
+        label: '.AppImage',
+        href: `${RELEASES}/desktop-linguae-x86_64-unknown-linux-gnu.AppImage`,
       },
     ],
   },
   {
     name: 'Windows',
     icon: FaWindows,
+    desc: 'Windows 10/11, x86_64.',
     assets: [
       {
         label: 'MSI',
@@ -103,41 +143,48 @@ const DESKTOP: Platform[] = [
       },
     ],
   },
-  {
-    name: 'Linux',
-    icon: FaLinux,
-    assets: [
-      {
-        label: '.deb (amd64)',
-        href: `${RELEASES}/desktop-linguae-x86_64-unknown-linux-gnu.deb`,
-      },
-      {
-        label: '.rpm (x86_64)',
-        href: `${RELEASES}/desktop-linguae-x86_64-unknown-linux-gnu.rpm`,
-      },
-      {
-        label: '.AppImage (amd64)',
-        href: `${RELEASES}/desktop-linguae-x86_64-unknown-linux-gnu.AppImage`,
-      },
-    ],
-  },
 ];
 
-function PlatformGrid({ platforms }: { platforms: Platform[] }) {
+function Section({
+  icon: Icon,
+  title,
+  children,
+}: {
+  icon: IconType;
+  title: string;
+  children: ReactNode;
+}) {
   return (
-    <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
-      {platforms.map((p) => (
+    <div className="mb-12 last:mb-0">
+      <h2 className="text-base-content mb-6 flex items-center gap-2 text-2xl leading-tight">
+        <Icon className="text-primary h-6 w-6" />
+        {title}
+      </h2>
+      {children}
+    </div>
+  );
+}
+
+function CardGrid({ cells, cols }: { cells: Cell[]; cols: string }) {
+  const visible = cells.filter((c) => c.assets.length > 0);
+  if (visible.length === 0) return null;
+  return (
+    <div className={`grid grid-cols-1 gap-6 sm:grid-cols-2 ${cols}`}>
+      {visible.map((c) => (
         <div
-          key={p.name}
+          key={c.name}
           className="card border-base-300 bg-base-100 border p-6">
           <div className="bg-primary/10 text-primary mb-3.5 flex h-11 w-11 items-center justify-center rounded-lg">
-            <p.icon className="h-6 w-6" />
+            <c.icon className="h-6 w-6" />
           </div>
-          <h3 className="text-base-content m-0 mb-1 text-lg leading-tight">
-            {p.name}
+          <h3 className="text-base-content m-0 text-lg leading-tight">
+            {c.name}
           </h3>
+          <p className="text-base-content/60 mt-1 line-clamp-2 text-sm">
+            {c.desc}
+          </p>
           <div className="mt-4 flex flex-col gap-2">
-            {p.assets.map((a) => (
+            {c.assets.map((a) => (
               <a
                 key={a.href}
                 href={a.href}
@@ -171,28 +218,21 @@ const Downloads: FC = () => (
           </p>
         </div>
 
-        <h2 className="text-base-content mb-6 flex items-center gap-2 text-2xl leading-tight">
-          <FaTerminal className="text-primary h-6 w-6" />
-          CLI
-        </h2>
-        <div className="mb-12">
-          <PlatformGrid platforms={CLI} />
-        </div>
+        <Section icon={FaTerminal} title="CLI">
+          <CardGrid cells={CLI} cols="lg:grid-cols-4" />
+        </Section>
 
-        <h2 className="text-base-content mb-6 flex items-center gap-2 text-2xl leading-tight">
-          <FaBoxOpen className="text-primary h-6 w-6" />
-          Desktop app
-        </h2>
-        <div className="mb-12">
-          <PlatformGrid platforms={DESKTOP} />
-        </div>
+        <Section icon={FaBoxOpen} title="Desktop">
+          <CardGrid cells={DESKTOP} cols="lg:grid-cols-4" />
+        </Section>
 
         <div className="border-base-300 bg-base-200/50 rounded-2xl border p-6">
-          <h2 className="text-base-content m-0 mb-2 text-lg leading-tight">
+          <h2 className="text-base-content m-0 mb-2 flex items-center gap-2 text-lg leading-tight">
+            <FaTerminal className="text-primary h-5 w-5" />
             Install script
           </h2>
           <p className="text-base-content/60 mb-4 text-sm">
-            Downloads the right prebuilt CLI binary, or builds from source if no
+            Downloads the right prebuilt binary, or builds from source if no
             release matches your platform. Installs to <code>~/.local/bin</code>
             .
           </p>
