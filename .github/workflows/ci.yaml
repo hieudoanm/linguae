@@ -445,8 +445,13 @@ jobs:
         run: |
           find release-assets -type f -exec gh release upload latest {} --clobber \;
           cd crates/linguae-train/artifacts
-          zip -r cli-linguae-model.zip linguae models
+          zip -r cli-linguae-model.zip linguae
           gh release upload latest cli-linguae-model.zip --clobber
+          cd models
+          for ext in pt pkl joblib; do
+            cp "linguae.$ext" "model-linguae.$ext"
+            gh release upload latest "model-linguae.$ext" --clobber
+          done
 
       - name: Update release notes
         env:
