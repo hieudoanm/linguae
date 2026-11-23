@@ -344,6 +344,23 @@ jobs:
           merge-multiple: true
           path: bundles
 
+      # Tauri bundles keep their build-time names (Linguae_0.0.1_...);
+      # normalize everything to desktop-linguae-<target>.<ext>.
+      - name: Normalize release asset names
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd bundles
+          shopt -s nullglob globstar
+          for f in **/*.dmg; do mv "$f" desktop-linguae-aarch64-apple-darwin.dmg; done
+          for f in **/*.zip; do mv "$f" desktop-linguae-aarch64-apple-darwin.app.zip; done
+          for f in **/*.deb; do mv "$f" desktop-linguae-x86_64-unknown-linux-gnu.deb; done
+          for f in **/*.rpm; do mv "$f" desktop-linguae-x86_64-unknown-linux-gnu.rpm; done
+          for f in **/*.AppImage; do mv "$f" desktop-linguae-x86_64-unknown-linux-gnu.AppImage; done
+          for f in **/*.msi; do mv "$f" desktop-linguae-x86_64-pc-windows-msvc.msi; done
+          for f in **/*-setup.exe; do mv "$f" desktop-linguae-x86_64-pc-windows-msvc-setup.exe; done
+          ls -1
+
       - name: Prepare release notes
         run: cp RELEASE.md release_notes_final.md
 

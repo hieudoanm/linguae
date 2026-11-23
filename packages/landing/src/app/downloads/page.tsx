@@ -73,19 +73,25 @@ const DESKTOP: Platform[] = [
     assets: [
       {
         label: '.dmg (Apple Silicon)',
-        href: `${RELEASES}/Linguae_0.0.1_aarch64.dmg`,
+        href: `${RELEASES}/desktop-linguae-aarch64-apple-darwin.dmg`,
       },
-      { label: '.app.zip', href: `${RELEASES}/Linguae.app.zip` },
+      {
+        label: '.app.zip',
+        href: `${RELEASES}/desktop-linguae-aarch64-apple-darwin.app.zip`,
+      },
     ],
   },
   {
     name: 'Windows',
     icon: FaWindows,
     assets: [
-      { label: 'MSI', href: `${RELEASES}/Linguae_0.0.1_x64_en-US.msi` },
+      {
+        label: 'MSI',
+        href: `${RELEASES}/desktop-linguae-x86_64-pc-windows-msvc.msi`,
+      },
       {
         label: 'Setup (.exe)',
-        href: `${RELEASES}/Linguae_0.0.1_x64-setup.exe`,
+        href: `${RELEASES}/desktop-linguae-x86_64-pc-windows-msvc-setup.exe`,
       },
     ],
   },
@@ -93,14 +99,17 @@ const DESKTOP: Platform[] = [
     name: 'Linux',
     icon: FaLinux,
     assets: [
-      { label: '.deb (amd64)', href: `${RELEASES}/Linguae_0.0.1_amd64.deb` },
+      {
+        label: '.deb (amd64)',
+        href: `${RELEASES}/desktop-linguae-x86_64-unknown-linux-gnu.deb`,
+      },
       {
         label: '.rpm (x86_64)',
-        href: `${RELEASES}/Linguae-0.0.1-1.x86_64.rpm`,
+        href: `${RELEASES}/desktop-linguae-x86_64-unknown-linux-gnu.rpm`,
       },
       {
         label: '.AppImage (amd64)',
-        href: `${RELEASES}/Linguae_0.0.1_amd64.AppImage`,
+        href: `${RELEASES}/desktop-linguae-x86_64-unknown-linux-gnu.AppImage`,
       },
     ],
   },
