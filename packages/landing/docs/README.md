@@ -1,10 +1,10 @@
 # linguae documentation
 
-**linguae** detects the language of text with a local character-level model —
-no cloud, no pretrained weights, no network calls. It trains a character-level
-CNN from scratch with Candle on the Tatoeba, WiLI-2018, and per-language WiLI
-word datasets, and ships a standalone CLI that predicts exactly one language
-per input string.
+**linguae** detects the language of text with a local character-level model — no
+cloud, no pretrained weights, no network calls. It trains a character-level CNN
+from scratch with Candle on the Tatoeba, WiLI-2018, and per-language WiLI word
+datasets, and ships a standalone CLI that predicts exactly one language per
+input string.
 
 An MCP server (`linguae mcp`) exposes language detection as a tool for agents —
 see [MCP server](guides/mcp-server.md).
@@ -14,3 +14,14 @@ see [MCP server](guides/mcp-server.md).
 - **Getting started** — build the CLI, train the model, run a prediction.
 - **Concepts** — the model architecture and training data.
 - **Guides** — the FastAPI HTTP server, Next.js web app, and MCP server.
+
+## Installation guides
+
+- [CLI on macOS (Apple Silicon)](guides/how-to-install-cli-macos-silicon.md)
+- [CLI on macOS (Intel)](guides/how-to-install-cli-macos-intel.md)
+- [CLI on Linux](guides/how-to-install-cli-linux.md)
+- [CLI on Windows](guides/how-to-install-cli-windows.md)
+- [Desktop on macOS (Apple Silicon)](guides/how-to-install-desktop-macos-silicon.md)
+- [Desktop on macOS (Intel)](guides/how-to-install-desktop-macos-intel.md)
+- [Desktop on Linux](guides/how-to-install-desktop-linux.md)
+- [Desktop on Windows](guides/how-to-install-desktop-windows.md)
