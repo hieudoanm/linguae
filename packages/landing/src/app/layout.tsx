@@ -5,6 +5,8 @@ import Footer from '@/components/molecules/Footer';
 import Navbar from '@/components/molecules/Navbar';
 import './globals.css';
 
+const THEME_INIT_SCRIPT = `(function(){try{var t=localStorage.getItem('linguae-theme');if(!t){t=window.matchMedia('(prefers-color-scheme: dark)').matches?'linguae-dark':'linguae';}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();`;
+
 const inter = Inter({ subsets: ['latin'] });
 
 const GITHUB = 'https://github.com/hieudoanm/linguae';
@@ -91,8 +93,10 @@ const RootLayout: FC<RootLayoutProps> = ({ children }) => (
   <html
     lang="en"
     data-theme="linguae"
+    suppressHydrationWarning
     className={`scroll-smooth antialiased motion-reduce:scroll-auto ${inter.className}`}>
     <body className="bg-base-100 text-base-content m-0 leading-relaxed">
+      <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(JSON_LD) }}
